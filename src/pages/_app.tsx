@@ -1,29 +1,19 @@
 import * as React from 'react';
-import { Provider } from 'jotai';
-import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider } from '@mui/material/styles';
-import type { AppProps } from 'next/app';
+import {Provider} from 'jotai';
+import type {AppProps} from 'next/app';
 import Head from 'next/head';
-import theme from '@styles/theme';
-import { lightTheme, darkTheme, scTheme } from '@styles/sc-theme';
-import { ThemeProvider as StyledComponentsTheme } from 'styled-components';
 
 export default function BirdCountApp(props: AppProps) {
-  const { Component, pageProps } = props;
+  const {Component, pageProps} = props;
   return (
     <Provider>
       <React.Fragment>
         <Head>
           <title>Next App</title>
-          <link href="/favicon.ico" rel="icon" />
-          <meta content="minimum-scale=1, initial-scale=1, width=device-width" name="viewport" />
+          <link href="/favicon.ico" rel="icon"/>
+          <meta content="minimum-scale=1, initial-scale=1, width=device-width" name="viewport"/>
         </Head>
-        {/* <ThemeProvider theme={theme}>
-          <StyledComponentsTheme theme={darkTheme}>
-            <CssBaseline /> */}
         <Component {...pageProps} />
-        {/* </StyledComponentsTheme>
-        </ThemeProvider> */}
       </React.Fragment>
     </Provider>
   );

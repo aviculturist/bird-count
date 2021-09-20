@@ -10,7 +10,7 @@ export function useHandleIncrement() {
   const address = contractAddress;
   const { setIsLoading } = useLoading(LOADING_KEYS.INCREMENT);
   const { handleContractCall } = useTransactionPopup();
-  const network = useNetwork();
+
 
   const onFinish = useCallback(() => {
     void setIsLoading(false);
@@ -31,7 +31,6 @@ export function useHandleIncrement() {
       postConditions: [],
       onFinish,
       onCancel,
-      network,
       stxAddress: address,
     });
   }, [
@@ -41,7 +40,6 @@ export function useHandleIncrement() {
     contractName,
     onFinish,
     onCancel,
-    network,
     address,
   ]);
 }

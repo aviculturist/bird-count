@@ -1,32 +1,14 @@
 import * as React from 'react';
-import { useEffect } from 'react';
 import LoadingBackdrop from '@components/loading-backdrop';
 import BirdCount from '@components/bird-count';
-import { NextPageContext } from 'next';
-import { withInitialQueries, GetQueries } from 'jotai-query-toolkit/nextjs';
-import { useAtom } from 'jotai';
-import { isBrowserAtom } from '@utils/constants';
-import { appProviderAtomBuilder } from 'micro-stacks/react';
-import { useAtomValue } from 'jotai/utils';
-import { StacksNetwork } from 'micro-stacks/network';
-import { networkAtom } from '@store/network';
+import {NextPage, NextPageContext} from 'next';
+import {withInitialQueries, GetQueries} from 'jotai-query-toolkit/nextjs';
+import {appProviderAtomBuilder} from 'micro-stacks/react';
+import {StacksTestnet} from 'micro-stacks/network';
 
-const useNetworkAtom = () => {
-  return useAtomValue(networkAtom);
-};
-
-const atoms = appProviderAtomBuilder({
-  network: 'testnet', // TODO useNetworkAtom,
-  authOptions: {
-    appDetails: {
-      name: 'micro-stacks <> next.js',
-      icon: '/icon.png',
-    },
-  },
-});
 
 // the queries array
-const getQueries: GetQueries = (ctx: NextPageContext) => [
+const getQueries: GetQueries = (_ctx: NextPageContext) => [
   [
     'bird-count', // the query key we're using
     async () => {
@@ -36,24 +18,20 @@ const getQueries: GetQueries = (ctx: NextPageContext) => [
 ];
 
 // https://blog.hao.dev/render-client-side-only-component-in-next-js
-const Index = props => {
-  const [isBrowser, setIsBrowser] = useAtom(isBrowserAtom);
-
-  useEffect(() => {
-    setIsBrowser(true);
-    console.log(`client isbrowser ${isBrowser}`);
-  }, [isBrowser, setIsBrowser]);
-
-  if (!isBrowser) {
-    console.log(`server isbrowser ${isBrowser}`);
-    return 'loading';
-  }
-
+const Index: NextPage<any> = () => {
   return (
     <>
-      <BirdCount />
-      <LoadingBackdrop />
+      <BirdCount/>
+      <LoadingBackdrop/>
     </>
   );
 };
-export default withInitialQueries(Index, atoms)(getQueries);
+export default withInitialQueries(Index, appProviderAtomBuilder({
+  network: new StacksTestnet({url: 'http://localhost:3999'}),
+  authOptions: {
+    appDetails: {
+      name: 'micro-stacks <> next.js',
+      icon: '/icon.png',
+    },
+  },
+}))(getQueries);

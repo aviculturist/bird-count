@@ -1,9 +1,6 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
-// import ButtonGroup from '@mui/material/ButtonGroup';
-// import AddIcon from '@mui/icons-material/Add';
-// import RemoveIcon from '@mui/icons-material/Remove';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import Badge from '@mui/material/Badge';
@@ -13,12 +10,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
-//import { createTheme, ThemeProvider } from '@mui/material/styles';
-// import { useConnect } from '@stacks/connect-react';
-// import { useUserSession } from '@hooks/use-usersession';
-// import { useUser } from '@hooks/use-user';
-// import { useLoading } from '@hooks/use-loading';
-// import { LOADING_KEYS } from '@store/loading';
+
 import { useDrawer } from '@hooks/use-drawer';
 import DrawerFeed from '@components/drawer-feed';
 import BirdCountButtonGroup from '@components/bird-count-buttongroup';
@@ -37,29 +29,11 @@ function Copyright() {
   );
 }
 
-//const theme = createTheme();
+
 
 export default function BirdCount(): JSX.Element {
-  // const { doOpenAuth } = useConnect();
-  // const userSession = useUserSession();
-  // const { user, setUser } = useUser();
-  // const { isLoading, setIsLoading } = useLoading(LOADING_KEYS.AUTH);
+
   const { isDrawer, setIsDrawer } = useDrawer();
-
-  // const handleConnect = (event: React.MouseEvent<HTMLElement>) => {
-  //   setIsLoading(true);
-  //   doOpenAuth();
-  // };
-
-  // const handleDisconnect = (event: React.MouseEvent<HTMLElement>) => {
-  //   userSession.signUserOut();
-  //   void setUser(undefined);
-  // };
-
-  // const handleCountBird = (event: React.MouseEvent<HTMLElement>) => {
-  //   userSession.signUserOut();
-  //   void setUser(undefined);
-  // };
 
   const handleToggleDrawer = (event: React.MouseEvent<HTMLElement>) => {
     void setIsDrawer(true);
@@ -80,15 +54,6 @@ export default function BirdCount(): JSX.Element {
               </Badge>
             </Button>
             <WalletConnectButton />
-            {/* {user ? (
-              <Button color="inherit" onClick={handleDisconnect}>
-                Log Out
-              </Button>
-            ) : (
-              <Button color="inherit" onClick={handleConnect}>
-                Sign up / Log in
-              </Button>
-            )} */}
           </Toolbar>
         </AppBar>
       </Box>
@@ -117,16 +82,6 @@ export default function BirdCount(): JSX.Element {
             <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
               <WalletConnectButton />
               <BirdCountButtonGroup />
-
-              {/* {user ? (
-                <Button variant="contained" onClick={handleCountBird}>
-                  Count a bird
-                </Button>
-              ) : (
-                <Button variant="contained" onClick={handleConnect}>
-                  Sign up / Log in <BirdCountButtonGroup />
-                </Button>
-              )} */}
             </Stack>
           </Container>
         </Box>
