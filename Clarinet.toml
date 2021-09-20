@@ -1,0 +1,7 @@
+[project]
+name = "bird-count"
+requirements = []
+
+[contracts.bird-count]
+path = "contracts/bird-count.clar"
+depends_on = []
