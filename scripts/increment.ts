@@ -1,6 +1,6 @@
 import { NodeProvider, NodeTransaction } from '@clarigen/node';
 import { WebTransactionReceipt } from '@clarigen/core';
-import { contracts } from '../src/utils/clarigen';
+import { contracts } from '@contracts';
 import { StacksMocknet } from '@stacks/network';
 
 // wallet_1 private key

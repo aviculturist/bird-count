@@ -81,6 +81,7 @@
     "proxy-memoize": "^0.3.7",
     "ts-jest": "^27.0.5",
     "ts-node": "^10.2.1",
+    "tsconfig-paths": "^3.11.0",
     "typescript": "4.4.3"
   }
 }
