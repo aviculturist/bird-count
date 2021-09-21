@@ -31,7 +31,6 @@ export function useHandleIncrement() {
       postConditions: [],
       onFinish,
       onCancel,
-      stxAddress: address,
     });
   }, [
     setIsLoading,
@@ -40,6 +39,5 @@ export function useHandleIncrement() {
     contractName,
     onFinish,
     onCancel,
-    address,
   ]);
 }
