@@ -365,15 +365,17 @@
   resolved "https://registry.yarnpkg.com/@blockstack/stacks-blockchain-api-types/-/stacks-blockchain-api-types-0.34.2.tgz#de65f6556f8b988784718aca0d8e14284a81d914"
   integrity sha512-VNZcattjf5+7HigJhW+tLthlDbS++7y3S0drVCL5uyqmiRvXKeaN6pF1f9yDQ5B19m7xizCQPO15ZOtHf7fFqw==
 
-"@clarigen/cli@^0.2.5":
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/@clarigen/cli/-/cli-0.2.5.tgz#fdb61780f9a20e2030466e07326929e33ad9a899"
-  integrity sha512-CVePr09pcvMGom6jtlsFBe1NIrlatySAJqDR9vXuPZjCYOKQgcLrC4YhO5ETXtx9CYJvPiZ9JVHvCWGPkV4YNA==
+"@clarigen/cli@^0.2.7":
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/@clarigen/cli/-/cli-0.2.7.tgz#25d4e73d4c4d5a2a634b23b718a807b01ac9516c"
+  integrity sha512-/moHlUipd6FWnIW7ifhlnwqkwFyQal+h6f1qXGQzoVe6xGqyQdEZZBA+Y/p+wi04XTFkNtDS0LtUMmPrJ0XDqQ==
   dependencies:
     "@clarigen/core" "0.2.3"
-    "@clarigen/native-bin" "0.2.3"
+    "@clarigen/native-bin" "0.2.7"
     "@ltd/j-toml" "1.12.2"
     "@oclif/command" "^1.8.0"
+    "@oclif/config" "^1.17.0"
+    "@oclif/plugin-help" "3.2.3"
     "@stacks/wallet-sdk" "1.0.0-wallet-sdk.4"
     chalk "4.1.0"
     chokidar "3.5.1"
@@ -387,10 +389,10 @@
     "@stacks/transactions" "^1.3.3"
     neverthrow "4.2.1"
 
-"@clarigen/native-bin@0.2.3":
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/@clarigen/native-bin/-/native-bin-0.2.3.tgz#bb47cbb8b3207e8db23ce0a81fff14b06cc3e036"
-  integrity sha512-bHmht0kfTOpAEe8CuIrGI+QiXNHCUGmVIaF9IheZlAWgFMrAlVSdqe3pMcHcEoFk8TD+e4vIG6V4SSRIZhQBsA==
+"@clarigen/native-bin@0.2.7":
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/@clarigen/native-bin/-/native-bin-0.2.7.tgz#380d81145beafd77141dd1556ed7b8fe7b6d67e6"
+  integrity sha512-MA0wiSnlX0FYBGr1hOTiwkyySPXoWnmHC3H7VYVMi6sMR9CqDOwsebxkMJzpJm8rSO+GtXeIbijx2kSKIfKEeg==
   dependencies:
     "@clarigen/core" "0.2.3"
     fs-extra "^10.0.0"
@@ -406,13 +408,13 @@
     "@stacks/blockchain-api-client" "^0.55.2"
     "@stacks/transactions" "^1.3.3"
 
-"@clarigen/test@^0.2.3":
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/@clarigen/test/-/test-0.2.6.tgz#da98d335b0ba43afe3b69ede74f34bd7e2b962aa"
-  integrity sha512-M9j8MBuwqFWAr1Wz3nEphGtTOhWM7ZsZSfsK3xohmmk5+PaPC0092hpGpkMUJPprJtmrS+I0xYLqYOfDXETaUA==
+"@clarigen/test@^0.2.7":
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/@clarigen/test/-/test-0.2.7.tgz#5ba9e282ebd2afc4ec78ab3fb12d0be397a36dc2"
+  integrity sha512-3X96BHhASXljrGnyFOSTFhPpO9UAre4a3Xuz90Pu9JCKD3UwLrsL13P9CIWZ3rsxM7AlnkAZui7x8+/+kqY6cQ==
   dependencies:
     "@clarigen/core" "0.2.3"
-    "@clarigen/native-bin" "0.2.3"
+    "@clarigen/native-bin" "0.2.7"
     "@stacks/transactions" "^1.3.3"
 
 "@clarigen/web@^0.2.3":
@@ -934,7 +936,7 @@
     debug "^4.1.1"
     semver "^7.3.2"
 
-"@oclif/config@^1", "@oclif/config@^1.15.1":
+"@oclif/config@^1.15.1", "@oclif/config@^1.17.0":
   version "1.17.0"
   resolved "https://registry.yarnpkg.com/@oclif/config/-/config-1.17.0.tgz#ba8639118633102a7e481760c50054623d09fcab"
   integrity sha512-Lmfuf6ubjQ4ifC/9bz1fSCHc6F6E653oyaRXxg+lgT4+bYf9bk+nqrUpAbrXyABkCqgIBiFr3J4zR/kiFdE1PA==
@@ -972,7 +974,7 @@
     chalk "^2.4.2"
     tslib "^1.9.3"
 
-"@oclif/plugin-help@^3":
+"@oclif/plugin-help@3.2.3", "@oclif/plugin-help@^3":
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/@oclif/plugin-help/-/plugin-help-3.2.3.tgz#cd24010e7eb326782843d3aa6d6b5a4affebb2c3"
   integrity sha512-l2Pd0lbOMq4u/7xsl9hqISFqyR9gWEz/8+05xmrXFr67jXyS6EUCQB+mFBa0wepltrmJu0sAFg9AvA2mLaMMqQ==

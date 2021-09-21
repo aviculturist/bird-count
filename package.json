@@ -55,10 +55,9 @@
   "prettier": "@stacks/prettier-config",
   "devDependencies": {
     "@babel/plugin-transform-react-jsx-source": "^7.14.5",
-    "@clarigen/cli": "^0.2.5",
+    "@clarigen/cli": "^0.2.7",
     "@clarigen/node": "^0.2.3",
-    "@clarigen/test": "^0.2.3",
-    "@oclif/config": "^1",
+    "@clarigen/test": "^0.2.7",
     "@stacks/eslint-config": "^1.0.9",
     "@stacks/prettier-config": "^0.0.8",
     "@stacks/stacks-blockchain-api-types": "^0.63.1",
