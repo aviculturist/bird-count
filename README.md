@@ -23,6 +23,22 @@ yarn && yarn run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to load the app.
 
+## Making changes
+
+Add or modify a Clarity contract in `./contracts`
+
+Run `clarinet check`
+
+Copy or edit `src/pages/index.tsx`, `Next.js` automatically creates routes for additional pages in that directory.
+
+Files in `src/utils/clarigen` are automatically generated with boilerplate and Clarinet account information by running `yarn clarigen`.
+
+## Theming
+
+Integrates Material UI and `styled-components`.
+
+## Testing
+
 To run the tests (both `@clarigen/test` and Clarinet examples are included), try:
 
 ```bash
@@ -53,6 +69,8 @@ test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (792m
 
 Each testing framework can also be run independently.
 
+## Scripts
+
 There's a simple `node` script that utilizes `@clarigen/node` that will call the public `increment` function within the integration environment:
 
 ```bash
@@ -62,6 +80,13 @@ $ /Projects/bird-count/node_modules/.bin/ts-node scripts/increment.ts
 http://localhost:3999/extended/v1/tx/0x10242276f35714c18ababdd36bd5a667383f4d820bdbeeb65c649808c82d74e7
 ✨  Done in 3.44s.
 ```
+
+## Potential Future Features
+
+* Integration with `@clarigen/web`
+* Deployment scripts for contracts (`regtest`, `testnet`, `mainnet`)
+* Deployment scripts and CI setup for `Next.js`
+
 
 ## About
 `bird-count` was bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and then integrated with [Clarinet](https://github.com/hirosystems/clarinet) (testing and integration) and [Clarigen](https://github.com/obylabs/clarigen) (testing and boilerplate). It utilizes [micro-stacks](https://github.com/fungible-systems/micro-stacks/) and [jotai-query-toolkit](https://github.com/fungible-systems/jotai-query-toolkit) for state management.
