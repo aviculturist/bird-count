@@ -23,7 +23,9 @@ In a different terminal, start the development server:
 yarn && yarn run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to load the app.
+Install the [Hiro Wallet](https://www.hiro.so/wallet/install-web) and add `http://localhost:3999` as the `Address`. Use `LocalDevNet` for `Name` and `2147483648` for `Key`.
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to load the app. You can connect your wallet and use the `+` button to increment the counter.
 
 ## Making changes
 
