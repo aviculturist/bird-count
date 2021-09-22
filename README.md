@@ -1,34 +1,75 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This project contains a proof of concept [Stacks](https://stacks.co) and [Next.js](https://nextjs.org/) app that implements a simple counter contract with a web front end, integration environment, testing frameworks and scripting examples.
+
+**NOTE: THIS PROJECT AND SUPPORTING LIBRARIES HAVE NOT BEEN AUDITED, IT IS IN ALPHA STATE. USE AT YOUR OWN RISK / DISCRETION**  
 
 ## Getting Started
 
-First, run the development server:
+First, install and run [Docker Desktop](https://www.docker.com/products/docker-desktop).
+
+Install Clarinet [Clarinet](https://github.com/hirosystems/clarinet)
+
+Clone this repository and boot the integration environment (Bitcoin node, Stacks node, api server and explorers):
 
 ```bash
-npm run dev
-# or
-yarn dev
+cd bird-count
+clarinet integrate
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+In a different terminal, start the development server:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn && yarn run dev
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Open [http://localhost:3000](http://localhost:3000) with your browser to load the app.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+To run the tests (both `@clarigen/test` and Clarinet examples are included), try:
+
+```bash
+$ yarn test
+yarn run v1.22.10
+$ jest && clarinet test tests/*.ts
+ PASS  tests/clarigen/bird-count.test.ts (5.563 s)
+  Counter contract
+    ✓ initial counter is 0 (28 ms)
+    ✓ increment counter (67 ms)
+    ✓ decrement counter (59 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       3 passed, 3 total
+Snapshots:   0 total
+Time:        5.7 s
+Ran all test suites.
+
+Running file:///Projects/bird-count/tests/bird-count_test.ts
+* get-bird-count returns u0 for principals that never called count-bird before ... ok (15ms)
+* count-bird counts up for the tx-sender ... ok (14ms)
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out (792ms)
+
+✨  Done in 12.22s.
+
+```
+
+Each testing framework can also be run independently.
+
+There's a simple `node` script that utilizes `@clarigen/node` that will call the public `increment` function within the integration environment:
+
+```bash
+$ yarn ts-node scripts/increment.ts
+yarn run v1.22.10
+$ /Projects/bird-count/node_modules/.bin/ts-node scripts/increment.ts
+http://localhost:3999/extended/v1/tx/0x10242276f35714c18ababdd36bd5a667383f4d820bdbeeb65c649808c82d74e7
+✨  Done in 3.44s.
+```
+
+## About
+`bird-count` was bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and then integrated with [Clarinet](https://github.com/hirosystems/clarinet) (testing and integration) and [Clarigen](https://github.com/obylabs/clarigen) (testing and boilerplate). It utilizes [micro-stacks](https://github.com/fungible-systems/micro-stacks/) and [jotai-query-toolkit] for state management.
 
 ## Learn More
-
 To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
