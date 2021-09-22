@@ -1,4 +1,4 @@
-This project contains a proof of concept [Stacks](https://stacks.co) and [Next.js](https://nextjs.org/) app that implements a simple counter contract with a web front end, integration environment, testing frameworks and scripting examples.
+This project contains a proof of concept [Stacks](https://stacks.co) and [Next.js](https://nextjs.org/) app that implements a simple [Clarity](https://clarity-lang.org/) counter contract with a web front end, testing frameworks, integration environment and scripting examples.
 
 **NOTE: THIS PROJECT AND SUPPORTING LIBRARIES HAVE NOT BEEN AUDITED, IT IS IN ALPHA STATE. USE AT YOUR OWN RISK / DISCRETION**  
 
@@ -6,7 +6,7 @@ This project contains a proof of concept [Stacks](https://stacks.co) and [Next.j
 
 First, install and run [Docker Desktop](https://www.docker.com/products/docker-desktop).
 
-Install Clarinet [Clarinet](https://github.com/hirosystems/clarinet)
+Install [Clarinet](https://github.com/hirosystems/clarinet)
 
 Clone this repository and boot the integration environment (Bitcoin node, Stacks node, api server and explorers):
 
@@ -64,7 +64,7 @@ http://localhost:3999/extended/v1/tx/0x10242276f35714c18ababdd36bd5a667383f4d820
 ```
 
 ## About
-`bird-count` was bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and then integrated with [Clarinet](https://github.com/hirosystems/clarinet) (testing and integration) and [Clarigen](https://github.com/obylabs/clarigen) (testing and boilerplate). It utilizes [micro-stacks](https://github.com/fungible-systems/micro-stacks/) and [jotai-query-toolkit] for state management.
+`bird-count` was bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and then integrated with [Clarinet](https://github.com/hirosystems/clarinet) (testing and integration) and [Clarigen](https://github.com/obylabs/clarigen) (testing and boilerplate). It utilizes [micro-stacks](https://github.com/fungible-systems/micro-stacks/) and [jotai-query-toolkit](https://github.com/fungible-systems/jotai-query-toolkit) for state management.
 
 ## Learn More
 To learn more about Next.js, take a look at the following resources:
