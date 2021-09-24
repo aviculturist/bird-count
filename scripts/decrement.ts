@@ -18,7 +18,7 @@ const deployed = NodeProvider.fromContracts(contracts, clarigenConfig);
 async function run() {
   const counter = deployed.birdCount.contract;
 
-  const incrementTx = counter.increment() as NodeTransaction<boolean, null>;
+  const incrementTx = counter.decrement() as NodeTransaction<boolean, null>;
 
   const result = (await incrementTx.submit({
     postConditions: [],

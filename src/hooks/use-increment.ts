@@ -1,28 +1,25 @@
-import { useLoading } from '@hooks/use-loading';
 import { LOADING_KEYS } from '@store/loading';
-import { useNetwork } from '@hooks/use-network';
 import { useCallback } from 'react';
 import { BIRDCOUNT_CONTRACT, INCREMENT_FUNCTION } from '@utils/constants';
 import { useTransactionPopup } from 'micro-stacks/react';
+import { loadingAtom } from '@store/loading';
+import { useAtom } from 'jotai';
 
 export function useHandleIncrement() {
   const [contractAddress, contractName] = BIRDCOUNT_CONTRACT.split('.');
-  const address = contractAddress;
-  const { setIsLoading } = useLoading(LOADING_KEYS.INCREMENT);
+  const [isWalletPopup, setIsWalletPopup] = useAtom(loadingAtom(LOADING_KEYS.WALLETPOPUP));
   const { handleContractCall } = useTransactionPopup();
 
-
   const onFinish = useCallback(() => {
-    void setIsLoading(false);
-  }, [setIsLoading]);
+    void setIsWalletPopup(false);
+  }, [setIsWalletPopup]);
 
   const onCancel = useCallback(() => {
-    void setIsLoading(false);
-  }, [setIsLoading]);
+    void setIsWalletPopup(false);
+  }, [setIsWalletPopup]);
 
   return useCallback(() => {
-    void setIsLoading(true);
-
+    void setIsWalletPopup(true);
     void handleContractCall({
       contractAddress,
       contractName,
@@ -32,12 +29,5 @@ export function useHandleIncrement() {
       onFinish,
       onCancel,
     });
-  }, [
-    setIsLoading,
-    handleContractCall,
-    contractAddress,
-    contractName,
-    onFinish,
-    onCancel,
-  ]);
+  }, [setIsWalletPopup, handleContractCall, contractAddress, contractName, onFinish, onCancel]);
 }

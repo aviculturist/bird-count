@@ -1,29 +1,35 @@
 import * as React from 'react';
-import {Provider} from 'jotai';
-import { ThemeProvider } from '@mui/material/styles';
-import { ThemeProvider as StyledComponentsTheme } from 'styled-components';
+import { Provider } from 'jotai';
+import { DarkModeProvider } from '@components/darkmode-context';
 import CssBaseline from '@mui/material/CssBaseline';
-import theme from '@styles/theme';
-import { lightTheme, darkTheme, scTheme } from '@styles/sc-theme';
-import type {AppProps} from 'next/app';
+import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import createEmotionCache from '@utils/create-emotion-cache';
+import { CacheProvider, EmotionCache } from '@emotion/react';
 
-export default function BirdCountApp(props: AppProps) {
-  const {Component, pageProps} = props;
+// Client-side cache, shared for the whole session of the user in the browser.
+const clientSideEmotionCache = createEmotionCache();
+
+interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache;
+}
+export default function BirdCountApp(props: MyAppProps): JSX.Element {
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+
   return (
     <Provider>
       <React.Fragment>
-        <Head>
-          <title>Next App</title>
-          <link href="/favicon.ico" rel="icon"/>
-          <meta content="minimum-scale=1, initial-scale=1, width=device-width" name="viewport"/>
-        </Head>
-        <ThemeProvider theme={theme}>
-          <StyledComponentsTheme theme={darkTheme}>
+        <CacheProvider value={emotionCache}>
+          <Head>
+            <title>BirdCount</title>
+            <link href="/favicon.ico" rel="icon" />
+            <meta content="minimum-scale=1, initial-scale=1, width=device-width" name="viewport" />
+          </Head>
+          <DarkModeProvider>
             <CssBaseline />
-        <Component {...pageProps} />
-        </StyledComponentsTheme>
-        </ThemeProvider>
+            <Component {...pageProps} />
+          </DarkModeProvider>
+        </CacheProvider>
       </React.Fragment>
     </Provider>
   );

@@ -5,8 +5,7 @@ import {
   SmartContractsApi,
   TransactionsApi,
 } from '@stacks/blockchain-api-client';
-import {networkAtom} from "micro-stacks/react";
-
+import { networkAtom } from 'micro-stacks/react';
 
 // set network
 const configAtom = atom(get => {

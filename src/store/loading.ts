@@ -4,6 +4,7 @@ import { atom } from 'jotai';
 export const loadingAtom = atomFamily(key => atom(false));
 
 export enum LOADING_KEYS {
-  AUTH = 'loading/AUTH',
-  INCREMENT = 'loading/INCREMENT',
+  WALLETAUTH = 'loading/WALLETAUTH',
+  WALLETPOPUP = 'loading/WALLETPOPUP',
+  TSXPENDING = 'loading/TSXPENDING',
 }

@@ -1,19 +1,18 @@
 import { createTheme } from '@mui/material/styles';
-import { red } from '@mui/material/colors';
+import { PaletteMode } from '@mui/material';
 
-// Create a theme instance.
-const theme = createTheme({
+// Create a dark theme instance.
+const darkTheme = createTheme({
   palette: {
-    primary: {
-      main: '#556cd6',
-    },
-    secondary: {
-      main: '#19857b',
-    },
-    error: {
-      main: red.A400,
-    },
+    mode: 'dark' as PaletteMode,
   },
 });
 
-export default theme;
+// Create a light theme instance.
+const lightTheme = createTheme({
+  palette: {
+    mode: 'light' as PaletteMode,
+  },
+});
+
+export {darkTheme, lightTheme};
