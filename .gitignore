@@ -39,3 +39,6 @@ yarn-error.log*
 .vercel
 
 .idea
+
+yalc.lock
+.yalc
