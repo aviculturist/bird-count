@@ -64,7 +64,7 @@ export default function DrawerFeed() {
                 }
                 secondary={
                   <React.Fragment>
-                    <Typography>{toRelativeTime(item.timestamp * 1000)}</Typography>
+                    {toRelativeTime(item.timestamp * 1000)}
                   </React.Fragment>
                 }
               />
