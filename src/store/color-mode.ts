@@ -1,4 +1,4 @@
-import { atomWithStorage } from 'jotai/utils'
+import { atomWithStorage } from 'jotai/utils';
 import React from 'react';
 
 export const colorModeAtom = atomWithStorage('darkMode', true);

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-import { useDarkModeContext } from "@components/darkmode-context";
+import { useDarkModeContext } from '@components/darkmode-context';
 
 function ToggleDarkMode(): JSX.Element | null {
   const [mount, setMount] = useState(false);
@@ -13,7 +13,7 @@ function ToggleDarkMode(): JSX.Element | null {
 
   if (!mount) return null;
   return (
-    <button type="button" onClick={toggleDarkMode} className={darkMode === true ? "dark" : "light"}>
+    <button type="button" onClick={toggleDarkMode} className={darkMode === true ? 'dark' : 'light'}>
       {darkMode === true ? <Brightness4Icon /> : <Brightness7Icon />}
       <style jsx>{`
         button {

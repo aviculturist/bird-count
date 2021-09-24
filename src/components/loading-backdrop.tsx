@@ -1,5 +1,4 @@
 import { useAtom } from 'jotai';
-import { useAuth } from 'micro-stacks/react';
 import { loadingAtom } from '@store/loading';
 import { LOADING_KEYS } from '@store/loading';
 import Typography from '@mui/material/Typography';

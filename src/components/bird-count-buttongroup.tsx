@@ -1,16 +1,16 @@
+import { useAtom } from 'jotai';
+import { useAuth } from 'micro-stacks/react';
 import Button from '@mui/material/Button';
-import LoadingButton from '@mui/lab/LoadingButton';
+//import LoadingButton from '@mui/lab/LoadingButton';
 import ButtonGroup from '@mui/material/ButtonGroup';
+import Tooltip from '@mui/material/Tooltip';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import Tooltip from '@mui/material/Tooltip';
-import { useHandleIncrement } from '@hooks/use-increment';
-import { useAtom } from 'jotai';
 import { birdCountAtom } from '@store/bird-count';
-import { useAuth } from 'micro-stacks/react';
-import { useLoading } from '@hooks/use-loading';
+//import { useLoading } from '@hooks/use-loading';
 import { LOADING_KEYS } from '@store/loading';
 import { loadingAtom } from '@store/loading';
+import { useHandleIncrement } from '@hooks/use-increment';
 
 // TODO: implement using @clarigen/web
 // import { useCallback } from 'react';

@@ -18,14 +18,11 @@
     "@babel/core": "^7.15.5",
     "@clarigen/core": "^0.2.3",
     "@clarigen/web": "^0.2.3",
-    "@emotion/react": "^11.4.1",
-    "@emotion/server": "^11.4.0",
-    "@emotion/styled": "^11.3.0",
     "@mui/icons-material": "^5.0.0-rc.0",
     "@mui/lab": "^5.0.0-alpha.48",
     "@mui/material": "^5.0.0-rc.0",
-    "@mui/styled-engine": "^5.0.1",
-    "@mui/styles": "^5.0.0-rc.0",
+    "@mui/styled-engine": "npm:@mui/styled-engine-sc@next",
+    "@mui/styled-engine-sc": "^5.0.0-rc.0",
     "@mui/system": "^5.0.0-rc.0",
     "@stacks/connect": "^6.2.0",
     "@stacks/connect-react": "^13.0.0",
@@ -41,6 +38,9 @@
     "react-is": "^17.0.2",
     "react-query": "^3.23.2",
     "styled-components": "^5.3.1"
+  },
+  "resolutions": {
+    "@mui/styled-engine": "npm:@mui/styled-engine-sc@next"
   },
   "eslintConfig": {
     "extends": [
@@ -73,6 +73,7 @@
     "@types/styled-components": "^5.1.14",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
+    "babel-plugin-styled-components": "^1.13.2",
     "eslint": "^7.32.0",
     "eslint-config-next": "11.1.2",
     "eslint-plugin-prettier": "^3.4.0",

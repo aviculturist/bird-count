@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { IconButton, Pagination, Tooltip, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -11,7 +12,6 @@ import AutorenewIcon from '@mui/icons-material/Autorenew';
 import LaunchIcon from '@mui/icons-material/Launch';
 import { useDrawer } from '@hooks/use-drawer';
 import { useFeed } from '@hooks/use-feed';
-import { IconButton, Pagination, Tooltip, Typography } from '@mui/material';
 import { toRelativeTime } from '@utils/time';
 
 export default function DrawerFeed() {
@@ -62,11 +62,7 @@ export default function DrawerFeed() {
                     </IconButton>
                   </React.Fragment>
                 }
-                secondary={
-                  <React.Fragment>
-                    {toRelativeTime(item.timestamp * 1000)}
-                  </React.Fragment>
-                }
+                secondary={<React.Fragment>{toRelativeTime(item.timestamp * 1000)}</React.Fragment>}
               />
             </Tooltip>
           </ListItem>
