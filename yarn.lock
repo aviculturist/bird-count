@@ -4601,9 +4601,10 @@ jotai-query-toolkit@^0.1.11:
   resolved "https://registry.yarnpkg.com/jotai-query-toolkit/-/jotai-query-toolkit-0.1.11.tgz#3e6ee4e36912b7f998766a884dad29ecd5d6f2ef"
   integrity sha512-sALZqsIPFmakntcziU2773UAXvI+Qa8EbLGl9GUhVf0vbFpAsi9Y+D06pE7MEXSvUjKPHJRPBHKwJ8UIO4XD+g==
 
-"jotai@https://pkg.csb.dev/pmndrs/jotai/commit/c94bf0b7/jotai":
-  version "1.3.5"
-  resolved "https://pkg.csb.dev/pmndrs/jotai/commit/c94bf0b7/jotai#d75373dc4de6bc0ce639871cb57e9477142b8cda"
+jotai@^1.3.6:
+  version "1.3.6"
+  resolved "https://registry.yarnpkg.com/jotai/-/jotai-1.3.6.tgz#830c24ed754df601d8045b9048343e84ab0f502e"
+  integrity sha512-ygZ2aVblQPSAgqWVrnuPjvVbByc4Rs2uwYLBBhyvmF8xMDrXQgS9Hstehawontk3ywUxDm6XBV8u1HemYdBnCA==
 
 js-sha3@0.8.0:
   version "0.8.0"
