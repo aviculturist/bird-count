@@ -5,14 +5,15 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import Badge from '@mui/material/Badge';
 import Typography from '@mui/material/Typography';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { pendingTransactionsCountAtom } from '@store/pending-transactions-count';
 import ToggleDarkMode from '@components/toggle-darkmode';
 import { WalletConnectButton } from '@components/wallet-connect-button';
 import { useDrawer } from '@hooks/use-drawer';
 
-export default function MainAppBar(): JSX.Element {
+function MainAppBar(): JSX.Element {
   const { isDrawer, setIsDrawer } = useDrawer();
   const handleToggleDrawer = (event: React.MouseEvent<HTMLElement>) => {
     void setIsDrawer(true);
@@ -24,8 +25,16 @@ export default function MainAppBar(): JSX.Element {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="relative">
         <Toolbar>
-          <AddCircleIcon sx={{ mr: 2 }} />
-          <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
+        <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             BirdCount
           </Typography>
           <ToggleDarkMode />
@@ -40,3 +49,4 @@ export default function MainAppBar(): JSX.Element {
     </Box>
   );
 }
+export default MainAppBar;
