@@ -1,4 +1,7 @@
+//https://github.com/Microsoft/TypeScript/issues/27481
+// @ts-ignore
 import { Clarinet, Tx, Chain, Account, types } from 'https://deno.land/x/clarinet@v0.15.2/index.ts';
+// @ts-ignore
 import { assertEquals } from 'https://deno.land/std@0.107.0/testing/asserts.ts';
 
 Clarinet.test({

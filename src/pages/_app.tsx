@@ -5,10 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 
-interface MyAppProps extends AppProps {
-  emotionCache?: EmotionCache;
-}
-export default function BirdCountApp(props: MyAppProps): JSX.Element {
+export default function BirdCountApp(props: AppProps): JSX.Element {
   const { Component, pageProps } = props;
   return (
     <Provider>

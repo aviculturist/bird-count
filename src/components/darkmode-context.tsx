@@ -1,21 +1,30 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { ReactNode, useState, useEffect, useContext } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { PaletteMode } from '@mui/material';
 
-const DarkModeContext = React.createContext(false);
+export interface DarkModeContextInterface {
+  darkMode?: any;
+  toggleDarkMode?: any;
+}
+// https://fettblog.eu/typescript-react/context/
+const DarkModeContext = React.createContext<Partial<DarkModeContextInterface>>({});
 
-export function DarkModeProvider({ children }): JSX.Element {
+// https://newbedev.com/how-to-fix-binding-element-children-implicitly-has-an-any-type-ts-7031
+interface Props {
+  children: ReactNode;
+}
+
+// https://stackoverflow.com/questions/56457935/typescript-error-property-x-does-not-exist-on-type-window
+declare global {
+  interface Window {
+    __prefersDarkMode:any;
+    __setPrefersDarkMode:any;
+    __onPrefChange:any;
+  }
+}
+
+export function DarkModeProvider({ children }:Props): JSX.Element {
   const [darkMode, setDarkMode] = useState(global.window?.__prefersDarkMode || false);
-
-  // TODO: recall why I don't need this bit
-  // const colorMode = React.useMemo(
-  //   () => ({
-  //     toggleColorMode: () => {
-  //       toggleDarkMode(); //setDarkMode(!darkMode);
-  //     },
-  //   }),
-  //   []
-  // );
 
   const getColorMode = (dmode: boolean) => ({
     palette: {
@@ -35,10 +44,10 @@ export function DarkModeProvider({ children }): JSX.Element {
   }, []);
 
   return (
-    <DarkModeContext.Provider value={{ darkMode, toggleDarkMode }}>
+    <DarkModeContext.Provider value={{ darkMode, toggleDarkMode } as DarkModeContextInterface}>
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </DarkModeContext.Provider>
   );
 }
 
-export const useDarkModeContext = () => useContext(DarkModeContext);
+export const useDarkModeContext = ():DarkModeContextInterface => useContext(DarkModeContext);

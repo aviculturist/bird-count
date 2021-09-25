@@ -8,7 +8,7 @@ import { LOADING_KEYS } from '@store/loading';
 
 export default function SimpleSnackbar() {
   //const [open, setOpen] = React.useState(false);
-  const { isLoading, setIsLoading } = useLoading(LOADING_KEYS.PENDINGTRANSACTION);
+  const { isLoading, setIsLoading } = useLoading(LOADING_KEYS.WALLETPOPUP);
 
   const handleClick = () => {
     setIsLoading(true);
