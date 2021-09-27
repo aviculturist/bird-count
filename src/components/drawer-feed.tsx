@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IconButton, Pagination, Tooltip, Typography } from '@mui/material';
+import { IconButton, Pagination, Tooltip } from '@mui/material';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -13,12 +13,11 @@ import LaunchIcon from '@mui/icons-material/Launch';
 import { useDrawer } from '@hooks/use-drawer';
 import { useFeed } from '@hooks/use-feed';
 import { toRelativeTime } from '@utils/time';
+import { DEFAULT_EXPLORER, DEFAULT_CHAIN } from '@utils/constants';
 
-export default function DrawerFeed() {
+export default function DrawerFeed(): JSX.Element {
   const { isDrawer, setIsDrawer } = useDrawer();
   const feed = useFeed();
-  console.log('this is the feed');
-  console.log(feed);
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
       event.type === 'keydown' &&
@@ -55,7 +54,7 @@ export default function DrawerFeed() {
                     {item.function}{' '}
                     <IconButton
                       target="_blank"
-                      href={`http://localhost:8000/txid/${item.txid}`}
+                      href={`${DEFAULT_EXPLORER}/txid/${item.txid}?chain=${DEFAULT_CHAIN}`}
                       aria-label="go"
                     >
                       <LaunchIcon fontSize="small" />
@@ -75,7 +74,6 @@ export default function DrawerFeed() {
   return (
     <div>
       <Drawer
-        style={{ width: '600px' }}
         anchor="right"
         open={isDrawer}
         onClose={toggleDrawer(false)}

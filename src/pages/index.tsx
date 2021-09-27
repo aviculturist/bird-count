@@ -1,10 +1,14 @@
 import * as React from 'react';
+import { useAtom } from 'jotai';
 import LoadingBackdrop from '@components/loading-backdrop';
 import BirdCount from '@components/bird-count';
+import { IS_TESTNET, IS_BROWSER } from '@utils/constants';
 import { GetStaticPropsContext, NextPage } from 'next';
 import { GetQueries, getStaticQueryProps, withInitialQueryData } from 'jotai-query-toolkit/nextjs';
 import { appProviderAtomBuilder } from 'micro-stacks/react';
-import { StacksTestnet } from 'micro-stacks/network';
+import { StacksTestnet, StacksMainnet } from 'micro-stacks/network';
+import { Network, currentNetworkAtom } from '@store/networks';
+import { currentNetwork } from '@utils/constants';
 
 // https://blog.hao.dev/render-client-side-only-component-in-next-js
 const Index: NextPage<any> = () => {
@@ -43,14 +47,16 @@ export const getStaticProps = getStaticQueryProps(getQueries)(async _ctx => {
   return { props: {}, revalidate: 60 };
 });
 
+// TODO: not happy about this implementation of currentNetwork but not sure how else to get state values this early.
+// More importantly, how does one enforce a render when the user selects a new url?
 export default withInitialQueryData(
   Index,
   appProviderAtomBuilder({
-    network: new StacksTestnet({ url: 'http://localhost:3999' }),
+    network: new StacksTestnet({ url: currentNetwork.url }), //IS_TESTNET ? new StacksTestnet({ url: apiServer }) : new StacksMainnet({ url: apiServer }),
     authOptions: {
       appDetails: {
         name: 'BirdCount',
-        icon: '/stx-favicon.png',
+        icon: './stx-favicon.png',
       },
     },
   })

@@ -5,7 +5,7 @@ import { Clarinet, Tx, Chain, Account, types } from 'https://deno.land/x/clarine
 import { assertEquals } from 'https://deno.land/std@0.107.0/testing/asserts.ts';
 
 Clarinet.test({
-  name: 'get-bird-count returns u0 for principals that never called count-bird before',
+  name: 'get-bird-count returns u0 immediately after being deployed',
   async fn(chain: Chain, accounts: Map<string, Account>) {
     // Get the deployer account.
     const deployer = accounts.get('deployer')!;
@@ -21,7 +21,7 @@ Clarinet.test({
 });
 
 Clarinet.test({
-  name: 'count-bird counts up for the tx-sender',
+  name: 'increment function counts up',
   async fn(chain: Chain, accounts: Map<string, Account>) {
     // Get the deployer account.
     const deployer = accounts.get('deployer')!;

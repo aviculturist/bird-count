@@ -12,6 +12,7 @@ import { pendingTransactionsCountAtom } from '@store/pending-transactions-count'
 import ToggleDarkMode from '@components/toggle-darkmode';
 import { WalletConnectButton } from '@components/wallet-connect-button';
 import { useDrawer } from '@hooks/use-drawer';
+import NetworkDialog from '@components/network-dialog';
 
 function MainAppBar(): JSX.Element {
   const { isDrawer, setIsDrawer } = useDrawer();
@@ -43,6 +44,7 @@ function MainAppBar(): JSX.Element {
               <VisibilityIcon />
             </Badge>
           </Button>
+          <NetworkDialog />
           <WalletConnectButton />
         </Toolbar>
       </AppBar>

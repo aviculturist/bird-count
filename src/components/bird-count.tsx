@@ -8,13 +8,19 @@ import DrawerFeed from '@components/drawer-feed';
 import BirdCountButtonGroup from '@components/bird-count-buttongroup';
 import SimpleSnackbar from '@components/snackbar';
 import MainAppBar from '@components/main-appbar';
+import Alert from '@mui/material/Alert';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="/">
-        foobar
+      {'copyright © '}
+      <Link
+        color="inherit"
+        target="_blank"
+        href="https://github.com/aviculturist/bird-count/graphs/contributors"
+      >
+        the contributors
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -45,6 +51,7 @@ export default function BirdCount(): JSX.Element {
             >
               BirdCount makes it easy to count all the birds
             </Typography>
+            <Alert severity="warning">EXTREME ALPHA SOFTWARE: USE AT YOUR OWN RISK</Alert>
             <Typography variant="h5" align="center" color="text.secondary" paragraph>
               .
             </Typography>
@@ -62,7 +69,7 @@ export default function BirdCount(): JSX.Element {
           This is the gutterBottom.
         </Typography>
         <Typography variant="subtitle1" align="center" color="text.secondary" component="p">
-          This is above the Copyright!
+          created with <FavoriteIcon /> and
         </Typography>
         <Copyright />
       </Box>

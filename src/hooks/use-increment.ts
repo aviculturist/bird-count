@@ -6,7 +6,7 @@ import { loadingAtom } from '@store/loading';
 import { useAtom } from 'jotai';
 
 export function useHandleIncrement() {
-  const [contractAddress, contractName] = BIRDCOUNT_CONTRACT.split('.');
+  const [contractAddress, contractName] = BIRDCOUNT_CONTRACT?.split('.') || '';
   const [isWalletPopup, setIsWalletPopup] = useAtom(loadingAtom(LOADING_KEYS.WALLETPOPUP));
   const { handleContractCall } = useTransactionPopup();
 
