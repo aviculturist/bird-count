@@ -28,7 +28,7 @@ function Copyright() {
   );
 }
 
-export default function BirdCount(): JSX.Element {
+export default function BirdCount() {
   return (
     <>
       <MainAppBar />

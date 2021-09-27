@@ -5,7 +5,7 @@ import { useDarkModeContext } from '@components/darkmode-context';
 import IconButton from '@mui/material/IconButton';
 import NoSsr from '@mui/core/NoSsr';
 
-function ToggleDarkMode(): JSX.Element {
+function ToggleDarkMode() {
   const { darkMode, toggleDarkMode } = useDarkModeContext();
 
   return (

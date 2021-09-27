@@ -3,6 +3,7 @@ import { atomWithStorage } from 'jotai/utils'
 import { DEFAULT_NETWORK_LIST } from '@utils/constants';
 
 export interface Network {
+  index: number;
   name: string;
   label: string;
   chain: string;

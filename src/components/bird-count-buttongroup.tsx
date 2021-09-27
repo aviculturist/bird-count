@@ -26,7 +26,7 @@ import { useHandleIncrement } from '@hooks/use-increment';
 //   }
 // }
 
-export default function BirdCountButtonGroup(): JSX.Element {
+export default function BirdCountButtonGroup() {
   const [birdCount, setBirdCount] = useAtom(birdCountAtom);
   const handleIncrement = useHandleIncrement();
 

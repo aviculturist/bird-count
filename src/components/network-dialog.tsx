@@ -24,11 +24,11 @@ const networks: Network[] = DEFAULT_NETWORK_LIST;
 
 export interface SimpleDialogProps {
   open: boolean;
-  selectedValue: Network;
-  onClose: (network: Network) => void;
+  selectedValue: number;
+  onClose: (index: number) => void;
 }
 
-function SimpleDialog(props: SimpleDialogProps): JSX.Element {
+function SimpleDialog(props: SimpleDialogProps) {
   const { onClose, selectedValue, open } = props;
 
   //const [ networks:Network[], setNetworks ] = useAtom(networksAtom);
@@ -37,24 +37,24 @@ function SimpleDialog(props: SimpleDialogProps): JSX.Element {
     onClose(selectedValue);
   };
 
-  const handleListItemClick = (network: Network) => {
-    setCurrentNetwork(network);
-    onClose(network);
+  const handleListItemClick = (index: number) => {
+    setCurrentNetwork(DEFAULT_NETWORK_LIST[index]);
+    onClose(index);
   };
 
   return (
     <Dialog onClose={handleClose} open={open}>
       <DialogTitle>Set network</DialogTitle>
       <List sx={{ pt: 0 }}>
-        {networks.map((network, key) => (
-          <ListItem button onClick={() => handleListItemClick(network)} key={key}>
+        {networks.map((network) => (
+          <ListItem button onClick={() => handleListItemClick(network.index)} key={network.index}>
             <ListItemAvatar>
               <Avatar>
                 <CloudQueueIcon />
               </Avatar>
             </ListItemAvatar>
             <ListItemText
-              primary={<React.Fragment>{network.name} </React.Fragment>}
+              primary={<React.Fragment>{network.name}</React.Fragment>}
               secondary={<React.Fragment>{network.label}</React.Fragment>}
             />
             <ListItemAvatar>
@@ -77,9 +77,9 @@ export default function NetworkDialog(): JSX.Element {
     setOpen(true);
   };
 
-  const handleClose = (network: Network) => {
+  const handleClose = (index: number) => {
     setOpen(false);
-    setCurrentNetwork(network);
+    setCurrentNetwork(DEFAULT_NETWORK_LIST[index]);
   };
 
   return (
@@ -87,7 +87,7 @@ export default function NetworkDialog(): JSX.Element {
       <Button color="inherit" onClick={handleClickOpen}>
         Network
       </Button>
-      <SimpleDialog selectedValue={currentNetwork} open={open} onClose={handleClose} />
+      <SimpleDialog selectedValue={currentNetwork.index} open={open} onClose={handleClose} />
     </>
   );
 }

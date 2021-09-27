@@ -14,7 +14,7 @@ import { WalletConnectButton } from '@components/wallet-connect-button';
 import { useDrawer } from '@hooks/use-drawer';
 import NetworkDialog from '@components/network-dialog';
 
-function MainAppBar(): JSX.Element {
+function MainAppBar() {
   const { isDrawer, setIsDrawer } = useDrawer();
   const handleToggleDrawer = (event: React.MouseEvent<HTMLElement>) => {
     void setIsDrawer(true);

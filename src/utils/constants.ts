@@ -13,18 +13,21 @@ export const DEFAULT_LOCALNET_EXPLORER = process.env.NEXT_PUBLIC_LOCALNET_EXPLOR
 
 export const DEFAULT_NETWORK_LIST = [
   {
+    index: 0,
     name: 'mainnet',
     label: 'stacks.co',
     chain: 'mainnet',
     url: DEFAULT_MAINNET_SERVER,
   },
   {
+    index: 1,
     name: 'testnet',
     label: 'stacks.co',
     chain: 'testnet',
     url: DEFAULT_TESTNET_SERVER,
   },
   {
+    index: 2,
     name: 'localnet',
     label: 'localhost',
     chain: 'testnet',

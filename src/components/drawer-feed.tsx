@@ -15,7 +15,7 @@ import { useFeed } from '@hooks/use-feed';
 import { toRelativeTime } from '@utils/time';
 import { DEFAULT_EXPLORER, DEFAULT_CHAIN } from '@utils/constants';
 
-export default function DrawerFeed(): JSX.Element {
+export default function DrawerFeed() {
   const { isDrawer, setIsDrawer } = useDrawer();
   const feed = useFeed();
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
