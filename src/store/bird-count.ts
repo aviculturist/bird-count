@@ -3,7 +3,6 @@ import {
   COUNT_FUNCTION,
   INCREMENT_FUNCTION,
   DECREMENT_FUNCTION,
-  currentNetwork,
 } from '@utils/constants';
 import { userStxAddressesAtom } from 'micro-stacks/react';
 import { cvToJSON, hexToCV } from '@stacks/transactions';
@@ -25,46 +24,46 @@ export interface BirdCount {
   isPending?: boolean;
 }
 
-/*
- * A list of the confirmed increment transactions associated with a specific
- * address. TODO: don't think it's used any more, can be removed
- */
-export const confirmedTxsAtom = atomWithQuery<BirdCount[]>('confirmed-txs', async get => {
-  const address = get(userStxAddressesAtom);
-  const client = get(accountsClientAtom);
-  const txClient = get(transactionsClientAtom);
-  const birdCountContract = get(currentBirdcountContractState);
+// /*
+//  * A list of the confirmed increment transactions associated with a specific
+//  * address. TODO: don't think it's used any more, can be removed
+//  */
+// export const confirmedTxsAtom = atomWithQuery<BirdCount[]>('confirmed-txs', async get => {
+//   const address = get(userStxAddressesAtom);
+//   const client = get(accountsClientAtom);
+//   const txClient = get(transactionsClientAtom);
+//   const birdCountContract = get(currentBirdcountContractState);
 
-  if (!address?.testnet) return []; // TODO not ideal way to test if is logged in
-  const txs = await client.getAccountTransactions({
-    limit: 50,
-    principal: currentNetwork.chain === 'testnet' ? address?.testnet || '' : address?.mainnet,
-  });
+//   if (!address?.testnet) return []; // TODO not ideal way to test if is logged in
+//   const txs = await client.getAccountTransactions({
+//     limit: 50,
+//     principal: currentNetwork.chain === 'testnet' ? address?.testnet || '' : address?.mainnet,
+//   });
 
-  const txids = (txs as TransactionResults).results
-    .filter(
-      tx =>
-        tx.tx_type === 'contract_call' &&
-        tx.contract_call.contract_id === birdCountContract &&
-        (tx.contract_call.function_name === INCREMENT_FUNCTION ||
-          tx.contract_call.function_name === DECREMENT_FUNCTION) &&
-        tx.tx_status === 'success'
-    )
-    .map(tx => tx.tx_id);
+//   const txids = (txs as TransactionResults).results
+//     .filter(
+//       tx =>
+//         tx.tx_type === 'contract_call' &&
+//         tx.contract_call.contract_id === birdCountContract &&
+//         (tx.contract_call.function_name === INCREMENT_FUNCTION ||
+//           tx.contract_call.function_name === DECREMENT_FUNCTION) &&
+//         tx.tx_status === 'success'
+//     )
+//     .map(tx => tx.tx_id);
 
-  const final = await Promise.all(txids.map(async txId => txClient.getTransactionById({ txId })));
-  return (
-    (final as ContractCallTransaction[]).map(tx => {
-      return {
-        sender: tx.sender_address,
-        txid: tx.tx_id,
-        function: tx.contract_call.function_name,
-        contract: tx.contract_call.contract_id.split('.')[1],
-        timestamp: tx.burn_block_time,
-      };
-    }) || []
-  );
-});
+//   const final = await Promise.all(txids.map(async txId => txClient.getTransactionById({ txId })));
+//   return (
+//     (final as ContractCallTransaction[]).map(tx => {
+//       return {
+//         sender: tx.sender_address,
+//         txid: tx.tx_id,
+//         function: tx.contract_call.function_name,
+//         contract: tx.contract_call.contract_id.split('.')[1],
+//         timestamp: tx.burn_block_time,
+//       };
+//     }) || []
+//   );
+// });
 
 /*
  * A list of the confirmed increment transactions associated with a specific
@@ -183,6 +182,9 @@ export const birdCountAtom = atomWithQuery<number>('bird-count', async get => {
   const client = get(smartContractsClientAtom);
   const birdCountContract = get(currentBirdcountContractState);
   const [contractAddress, contractName] = birdCountContract.split('.');
+  console.log(contractAddress);
+  console.log(contractName);
+  console.log(COUNT_FUNCTION);
   try {
     const data = await client.callReadOnlyFunction({
       contractAddress,
@@ -194,7 +196,7 @@ export const birdCountAtom = atomWithQuery<number>('bird-count', async get => {
       },
     });
     if (data.okay && data.result) {
-      const result = cvToJSON(hexToCV(data.result as string)); // TODO
+      const result = cvToJSON(hexToCV(data.result as string));
       return result.value;
     } // TODO: failed to fetch
   } catch (_e) {

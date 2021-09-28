@@ -18,9 +18,9 @@ export const DEFAULT_TESTNET_BIRDCOUNT_CONTRACT =
 export const DEFAULT_LOCALNET_BIRDCOUNT_CONTRACT =
   process.env.NEXT_PUBLIC_LOCALNET_BIRDCOUNT_CONTRACT || '';
 
-export const COUNT_FUNCTION = process.env.NEXT_PUBLIC_COUNT_FUNCTION || '';
-export const INCREMENT_FUNCTION = process.env.NEXT_PUBLIC_INCREMENT_FUNCTION || '';
-export const DECREMENT_FUNCTION = process.env.NEXT_PUBLIC_DECREMENT_FUNCTION || '';
+export const COUNT_FUNCTION = 'get-counter';
+export const INCREMENT_FUNCTION = 'increment';
+export const DECREMENT_FUNCTION = 'decrement';
 
 export const DEFAULT_NETWORK_LIST = [
   {
@@ -45,13 +45,3 @@ export const DEFAULT_NETWORK_LIST = [
     url: DEFAULT_LOCALNET_SERVER,
   },
 ];
-
-// In the browser, check for localStorage value, default to mainnet
-// On the server, default to mainnet
-export const currentNetwork = IS_BROWSER
-  ? (JSON.parse(
-      localStorage.getItem('network') || JSON.stringify(DEFAULT_NETWORK_LIST[0])
-    ) as Network)
-  : DEFAULT_NETWORK_LIST[0];
-
-export const DEFAULT_CHAIN = currentNetwork.chain;
