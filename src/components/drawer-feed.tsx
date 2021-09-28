@@ -18,8 +18,8 @@ import { useAtom } from 'jotai';
 
 export default function DrawerFeed() {
   const { isDrawer, setIsDrawer } = useDrawer();
-  const explorer = useAtom(currentExplorerState);
-  const chain = useAtom(currentChainState);
+  const [explorer,] = useAtom(currentExplorerState);
+  const [chain,] = useAtom(currentChainState);
   const feed = useFeed();
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
