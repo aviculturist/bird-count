@@ -16,9 +16,9 @@ import { atom } from 'jotai';
 export const currentBirdcountContractState = atom(get => {
   const network = get(networkAtom);
   const birdCountContract =
-    network.coreApiUrl === DEFAULT_LOCALNET_SERVER
+    network.getCoreApiUrl() === DEFAULT_LOCALNET_SERVER
       ? DEFAULT_LOCALNET_BIRDCOUNT_CONTRACT
-      : network.coreApiUrl === DEFAULT_TESTNET_SERVER
+      : network.getCoreApiUrl() === DEFAULT_TESTNET_SERVER
       ? DEFAULT_TESTNET_BIRDCOUNT_CONTRACT
       : DEFAULT_MAINNET_BIRDCOUNT_CONTRACT;
   return birdCountContract;
@@ -27,9 +27,9 @@ export const currentBirdcountContractState = atom(get => {
 export const currentExplorerState = atom(get => {
   const network = get(networkAtom);
   const defaultExplorer =
-    network.coreApiUrl === DEFAULT_LOCALNET_SERVER
+    network.getCoreApiUrl() === DEFAULT_LOCALNET_SERVER
       ? DEFAULT_LOCALNET_EXPLORER
-      : network.coreApiUrl === DEFAULT_TESTNET_SERVER
+      : network.getCoreApiUrl() === DEFAULT_TESTNET_SERVER
       ? DEFAULT_TESTNET_EXPLORER
       : DEFAULT_MAINNET_EXPLORER;
   return defaultExplorer;
@@ -37,6 +37,6 @@ export const currentExplorerState = atom(get => {
 
 export const currentChainState = atom(get => {
   const network = get(networkAtom);
-  const defaultChain = network.coreApiUrl === DEFAULT_MAINNET_SERVER ? 'mainnet' : 'testnet';
+  const defaultChain = network.getCoreApiUrl() === DEFAULT_MAINNET_SERVER ? 'mainnet' : 'testnet';
   return defaultChain;
 });
