@@ -12,7 +12,7 @@ const scriptTxt = `
   base.href = ipfsMatch ? ipfsMatch[0] : '/'
   document.head.append(base)
 })();
-`
+`;
 
 export default class MyDocument extends Document {
   render() {
@@ -25,7 +25,7 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
             rel="stylesheet"
           />
-          <script dangerouslySetInnerHTML={{__html: scriptTxt}}/>
+          <script dangerouslySetInnerHTML={{ __html: scriptTxt }} />
         </Head>
         <body>
           <script

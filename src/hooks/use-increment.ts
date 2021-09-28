@@ -1,12 +1,14 @@
-import { LOADING_KEYS } from '@store/loading';
 import { useCallback } from 'react';
-import { BIRDCOUNT_CONTRACT, INCREMENT_FUNCTION } from '@utils/constants';
-import { useTransactionPopup } from 'micro-stacks/react';
-import { loadingAtom } from '@store/loading';
 import { useAtom } from 'jotai';
+import { useTransactionPopup } from 'micro-stacks/react';
+import { LOADING_KEYS } from '@store/loading';
+import { loadingAtom } from '@store/loading';
+import { currentBirdcountContractState } from '@store/network-state';
+import { INCREMENT_FUNCTION } from '@utils/constants';
 
 export function useHandleIncrement() {
-  const [contractAddress, contractName] = BIRDCOUNT_CONTRACT?.split('.') || '';
+  const [birdCountContract] = useAtom(currentBirdcountContractState);
+  const [contractAddress, contractName] = birdCountContract.split('.');
   const [isWalletPopup, setIsWalletPopup] = useAtom(loadingAtom(LOADING_KEYS.WALLETPOPUP));
   const { handleContractCall } = useTransactionPopup();
 

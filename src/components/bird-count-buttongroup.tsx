@@ -42,9 +42,7 @@ export default function BirdCountButtonGroup() {
           </Button>
         </Tooltip>
 
-        <Button variant="contained">
-          {birdCount} birds
-        </Button>
+        <Button variant="contained">{birdCount} birds</Button>
         <Tooltip title="Click to increment">
           <Button onClick={() => handleIncrement()} variant="contained">
             <AddIcon />

@@ -66,10 +66,10 @@ export default function BirdCount() {
       {/* Footer */}
       <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
         <Typography variant="h6" align="center" gutterBottom>
-          This is the gutterBottom.
+          created with <FavoriteIcon /> and
         </Typography>
         <Typography variant="subtitle1" align="center" color="text.secondary" component="p">
-          created with <FavoriteIcon /> and
+          .{' '}
         </Typography>
         <Copyright />
       </Box>

@@ -12,16 +12,24 @@ import CheckIcon from '@mui/icons-material/Check';
 import AddIcon from '@mui/icons-material/Add';
 import { networkDialogAtom } from '@store/network-dialog';
 import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai/utils';
 import { DEFAULT_NETWORK_LIST } from '@utils/constants';
-import { networksAtom, currentNetworkAtom, Network } from '@store/networks';
+import { currentNetworkAtom, Network } from '@store/networks';
 import NoSsr from '@mui/core/NoSsr';
 import { useNetwork, currentNetworkName, useCurrentNetworkUrl } from 'micro-stacks/react';
-import { StacksMainnet, StacksNetwork, StacksRegtest, StacksMocknet, StacksTestnet, HIRO_MAINNET_DEFAULT, HIRO_REGTEST_DEFAULT, HIRO_TESTNET_DEFAULT, HIRO_MOCKNET_DEFAULT} from 'micro-stacks/network';
-import { useAtomValue } from 'jotai/utils';
+import {
+  StacksMainnet,
+  StacksNetwork,
+  StacksRegtest,
+  StacksMocknet,
+  StacksTestnet,
+  HIRO_MAINNET_DEFAULT,
+  HIRO_REGTEST_DEFAULT,
+  HIRO_TESTNET_DEFAULT,
+  HIRO_MOCKNET_DEFAULT,
+} from 'micro-stacks/network';
 
-// import { HIRO_MAINNET_DEFAULT, HIRO_REGTEST_DEFAULT, HIRO_TESTNET_DEFAULT, HIRO_MOCKNET_DEFAULT ) network.coreApiUrl
 const networks: Network[] = DEFAULT_NETWORK_LIST;
-//const networkName = network.coreApiUrl === HIRO_MAINNET_DEFAULT ? "Mainnet"
 
 export interface SimpleDialogProps {
   open: boolean;
@@ -38,8 +46,15 @@ function SimpleDialog(props: SimpleDialogProps) {
   };
 
   const handleListItemClick = (index: number) => {
+    // local phony state TODO: replace
     setCurrentNetwork(DEFAULT_NETWORK_LIST[index]);
-    handleSetNetwork(new StacksTestnet({ url: DEFAULT_NETWORK_LIST[index].url }));
+
+    // the state that matters
+    handleSetNetwork(
+      index === 0
+        ? new StacksMainnet({ url: DEFAULT_NETWORK_LIST[index].url })
+        : new StacksTestnet({ url: DEFAULT_NETWORK_LIST[index].url })
+    );
     onClose(index);
   };
 

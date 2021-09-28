@@ -19,13 +19,13 @@ interface Props {
 // https://stackoverflow.com/questions/56457935/typescript-error-property-x-does-not-exist-on-type-window
 declare global {
   interface Window {
-    __prefersDarkMode:any;
-    __setPrefersDarkMode:any;
-    __onPrefChange:any;
+    __prefersDarkMode: any;
+    __setPrefersDarkMode: any;
+    __onPrefChange: any;
   }
 }
 
-export function DarkModeProvider({ children }:Props): JSX.Element {
+export function DarkModeProvider({ children }: Props): JSX.Element {
   // TODO: footer gets the correct theme, but the main body doesn't
   //const [darkMode, setDarkMode] = useState(global.window?.__prefersDarkMode || false);
   const [darkMode, setDarkMode] = useAtom(darkModeAtom);
@@ -44,7 +44,7 @@ export function DarkModeProvider({ children }:Props): JSX.Element {
 
   useEffect(() => {
     global.window.__onPrefChange = setDarkMode;
-  }, []);
+  }, [setDarkMode]);
 
   return (
     <DarkModeContext.Provider value={{ darkMode, toggleDarkMode } as DarkModeContextInterface}>
@@ -53,4 +53,4 @@ export function DarkModeProvider({ children }:Props): JSX.Element {
   );
 }
 
-export const useDarkModeContext = ():DarkModeContextInterface => useContext(DarkModeContext);
+export const useDarkModeContext = (): DarkModeContextInterface => useContext(DarkModeContext);

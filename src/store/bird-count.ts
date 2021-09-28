@@ -3,18 +3,18 @@ import {
   COUNT_FUNCTION,
   INCREMENT_FUNCTION,
   DECREMENT_FUNCTION,
-  currentNetwork
+  currentNetwork,
 } from '@utils/constants';
 import { userStxAddressesAtom } from 'micro-stacks/react';
 import { cvToJSON, hexToCV } from '@stacks/transactions';
-import { atom, useAtom } from 'jotai';
+import { atom } from 'jotai';
 import { atomWithQuery } from 'jotai-query-toolkit';
 import {
   ContractCallTransaction,
   MempoolTransactionListResponse,
   TransactionResults,
 } from '@blockstack/stacks-blockchain-api-types';
-import { GetCurrentBirdcountContract } from '@hooks/use-birdcount-contract';
+import { currentBirdcountContractState } from '@store/network-state';
 
 export interface BirdCount {
   sender: string;
@@ -33,12 +33,12 @@ export const confirmedTxsAtom = atomWithQuery<BirdCount[]>('confirmed-txs', asyn
   const address = get(userStxAddressesAtom);
   const client = get(accountsClientAtom);
   const txClient = get(transactionsClientAtom);
-  const { birdCountContract } = GetCurrentBirdcountContract();
+  const birdCountContract = get(currentBirdcountContractState);
 
   if (!address?.testnet) return []; // TODO not ideal way to test if is logged in
   const txs = await client.getAccountTransactions({
     limit: 50,
-    principal: currentNetwork.chain === 'testnet' ? ( address?.testnet || '' ) : ( address?.mainnet ),
+    principal: currentNetwork.chain === 'testnet' ? address?.testnet || '' : address?.mainnet,
   });
 
   const txids = (txs as TransactionResults).results
@@ -81,7 +81,7 @@ enum GetTransactionListTypeEnum {
 
 export const recentTxsAtom = atomWithQuery<BirdCount[]>('recent-txs', async get => {
   const txClient = get(transactionsClientAtom);
-  const { birdCountContract } = GetCurrentBirdcountContract();
+  const birdCountContract = get(currentBirdcountContractState);
 
   const txs = await txClient.getTransactionList({
     limit: 50,
@@ -118,7 +118,7 @@ export const recentTxsAtom = atomWithQuery<BirdCount[]>('recent-txs', async get 
  */
 export const pendingTxsAtom = atomWithQuery<BirdCount[]>('pending-txs', async get => {
   const client = get(transactionsClientAtom);
-  const { birdCountContract } = GetCurrentBirdcountContract();
+  const birdCountContract = get(currentBirdcountContractState);
 
   const txs = await client.getMempoolTransactionList({ limit: 96 });
   // console.log('all pending increment transactions');
@@ -181,9 +181,8 @@ export const allTransactionsAtom = atom(get => {
  */
 export const birdCountAtom = atomWithQuery<number>('bird-count', async get => {
   const client = get(smartContractsClientAtom);
-  const { birdCountContract } = GetCurrentBirdcountContract();
-
-  const [contractAddress, contractName] = birdCountContract?.split('.') || '';
+  const birdCountContract = get(currentBirdcountContractState);
+  const [contractAddress, contractName] = birdCountContract.split('.');
   try {
     const data = await client.callReadOnlyFunction({
       contractAddress,
@@ -198,6 +197,8 @@ export const birdCountAtom = atomWithQuery<number>('bird-count', async get => {
       const result = cvToJSON(hexToCV(data.result as string)); // TODO
       return result.value;
     } // TODO: failed to fetch
-  } catch (_e) {}
+  } catch (_e) {
+    console.error(_e);
+  }
   return 0;
 });

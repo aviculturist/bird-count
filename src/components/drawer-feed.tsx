@@ -13,10 +13,13 @@ import LaunchIcon from '@mui/icons-material/Launch';
 import { useDrawer } from '@hooks/use-drawer';
 import { useFeed } from '@hooks/use-feed';
 import { toRelativeTime } from '@utils/time';
-import { DEFAULT_EXPLORER, DEFAULT_CHAIN } from '@utils/constants';
+import { currentExplorerState, currentChainState } from '@store/network-state';
+import { useAtom } from 'jotai';
 
 export default function DrawerFeed() {
   const { isDrawer, setIsDrawer } = useDrawer();
+  const explorer = useAtom(currentExplorerState);
+  const chain = useAtom(currentChainState);
   const feed = useFeed();
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
@@ -54,7 +57,7 @@ export default function DrawerFeed() {
                     {item.function}{' '}
                     <IconButton
                       target="_blank"
-                      href={`${DEFAULT_EXPLORER}/txid/${item.txid}?chain=${DEFAULT_CHAIN}`}
+                      href={`${explorer}/txid/${item.txid}?chain=${chain}`}
                       aria-label="go"
                     >
                       <LaunchIcon fontSize="small" />
@@ -73,11 +76,7 @@ export default function DrawerFeed() {
 
   return (
     <div>
-      <Drawer
-        anchor="right"
-        open={isDrawer}
-        onClose={toggleDrawer(false)}
-      >
+      <Drawer anchor="right" open={isDrawer} onClose={toggleDrawer(false)}>
         {list()}
       </Drawer>
     </div>

@@ -17,7 +17,6 @@ export default function SimpleSnackbar() {
     if (reason === 'clickaway') {
       return;
     }
-
     setIsLoading(false);
   };
 
