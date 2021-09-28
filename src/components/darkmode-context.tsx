@@ -1,6 +1,8 @@
 import React, { ReactNode, useState, useEffect, useContext } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { PaletteMode } from '@mui/material';
+import { useAtom } from 'jotai';
+import { darkModeAtom } from '@store/darkmode';
 
 export interface DarkModeContextInterface {
   darkMode?: any;
@@ -24,8 +26,9 @@ declare global {
 }
 
 export function DarkModeProvider({ children }:Props): JSX.Element {
-  const [darkMode, setDarkMode] = useState(global.window?.__prefersDarkMode || false);
-
+  // TODO: footer gets the correct theme, but the main body doesn't
+  //const [darkMode, setDarkMode] = useState(global.window?.__prefersDarkMode || false);
+  const [darkMode, setDarkMode] = useAtom(darkModeAtom);
   const getColorMode = (dmode: boolean) => ({
     palette: {
       mode: dmode === true ? ('dark' as PaletteMode) : ('light' as PaletteMode),
@@ -33,7 +36,7 @@ export function DarkModeProvider({ children }:Props): JSX.Element {
   });
 
   // Update the theme only if darkMode changes
-  const theme = React.useMemo(() => createTheme(getColorMode(darkMode)), [darkMode]);
+  const theme = React.useMemo(() => createTheme(getColorMode(darkMode as boolean)), [darkMode]);
 
   const toggleDarkMode = () => {
     global.window.__setPrefersDarkMode(darkMode === true ? false : true);

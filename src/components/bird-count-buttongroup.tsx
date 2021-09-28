@@ -29,7 +29,8 @@ import { useHandleIncrement } from '@hooks/use-increment';
 export default function BirdCountButtonGroup() {
   const [birdCount, setBirdCount] = useAtom(birdCountAtom);
   const handleIncrement = useHandleIncrement();
-
+  console.log('BIRDCOUNT');
+  console.log(birdCount);
   // TODO: implement using @clarigen/web
   //const handleDecrement = useHandleDecrement();
 

@@ -43,25 +43,20 @@ function SimpleDialog(props: SimpleDialogProps) {
   };
 
   return (
-    <Dialog onClose={handleClose} open={open}>
+    <Dialog fullWidth={true} maxWidth="xs" onClose={handleClose} open={open}>
       <DialogTitle>Set network</DialogTitle>
       <List sx={{ pt: 0 }}>
         {networks.map((network) => (
           <ListItem button onClick={() => handleListItemClick(network.index)} key={network.index}>
             <ListItemAvatar>
               <Avatar>
-                <CloudQueueIcon />
+              {currentNetwork.name === network.name ? <CheckIcon color="success"/> : <CloudQueueIcon color="info"/>}
               </Avatar>
             </ListItemAvatar>
             <ListItemText
               primary={<React.Fragment>{network.name}</React.Fragment>}
               secondary={<React.Fragment>{network.label}</React.Fragment>}
             />
-            <ListItemAvatar>
-              <Avatar>
-                <CheckIcon />
-              </Avatar>
-            </ListItemAvatar>
           </ListItem>
         ))}
       </List>
@@ -85,7 +80,7 @@ export default function NetworkDialog(): JSX.Element {
   return (
     <>
       <Button color="inherit" onClick={handleClickOpen}>
-        Network
+      {currentNetwork.name}
       </Button>
       <SimpleDialog selectedValue={currentNetwork.index} open={open} onClose={handleClose} />
     </>
