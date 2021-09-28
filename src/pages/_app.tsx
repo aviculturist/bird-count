@@ -5,7 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 
-export default function BirdCountApp(props: AppProps): JSX.Element {
+export default function BirdCountApp(props: AppProps) {
   const { Component, pageProps } = props;
   return (
     <Provider>
