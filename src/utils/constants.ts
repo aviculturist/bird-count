@@ -1,7 +1,6 @@
 import { Network } from '@store/network-state';
 
-export const IS_DEV = process.env.NODE_ENV === 'development';
-export const IS_TEST = process.env.NODE_ENV === 'test';
+export const ENV = process.env.NEXT_PUBLIC_ENV || '';
 export const IS_BROWSER = typeof document !== 'undefined';
 
 export const DEFAULT_MAINNET_SERVER = process.env.NEXT_PUBLIC_MAINNET_API_SERVER || '';
@@ -56,3 +55,4 @@ export const DEFAULT_NETWORK_LIST: Network[] = [
     url: DEFAULT_LOCALNET_SERVER,
   },
 ];
+export const DEFAULT_NETWORK_INDEX=parseFloat(process.env.NEXT_PUBLIC_DEFAULT_NETWORK_INDEX || '0');

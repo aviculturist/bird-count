@@ -12,6 +12,7 @@ export interface Network {
 
 import {
   DEFAULT_NETWORK_LIST,
+  DEFAULT_NETWORK_INDEX,
   DEFAULT_MAINNET_SERVER,
   DEFAULT_TESTNET_SERVER,
   DEFAULT_LOCALNET_SERVER,
@@ -52,4 +53,7 @@ export const currentChainState = atom(get => {
 });
 
 // defaulting to mainnet, but not sure that's operative here
-export const currentNetworkAtom = atomWithStorage<Network>('network', DEFAULT_NETWORK_LIST[0]);
+export const currentNetworkAtom = atomWithStorage<Network>(
+  'network',
+  DEFAULT_NETWORK_LIST[DEFAULT_NETWORK_INDEX]
+);

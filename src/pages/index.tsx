@@ -9,12 +9,9 @@ import {
   DEFAULT_MAINNET_SERVER,
   DEFAULT_REGTEST_SERVER,
   DEFAULT_LOCALNET_SERVER,
-  IS_DEV,
+  ENV,
 } from '@utils/constants';
 
-//import { ErrorBoundary } from '@components/error-boundry';
-
-// https://blog.hao.dev/render-client-side-only-component-in-next-js
 const Index: NextPage<any> = () => {
   return (
     <>
@@ -24,7 +21,7 @@ const Index: NextPage<any> = () => {
   );
 };
 
-// the queries array
+// an array of queries for initial data
 const getQueries: GetQueries = (_ctx: GetStaticPropsContext) => [
   [
     'bird-count', // the query key we're using
@@ -46,17 +43,19 @@ const getQueries: GetQueries = (_ctx: GetStaticPropsContext) => [
   ],
 ];
 
-// enforce SSG mode
+// enable SSG
 export const getStaticProps = getStaticQueryProps(getQueries)(async _ctx => {
   return { props: {}, revalidate: 60 };
 });
-// IS_REGTEST and IS_TESTNET ? Different set of defaults
-// IS_TEST ? new StacksTestnet({url: DEFAULT_REGTEST_SERVER}) :
-// does not appear to be working !!
-const initialNetwork = IS_DEV
-  ? new StacksMocknet({ url: DEFAULT_LOCALNET_SERVER })
-  : new StacksMainnet({ url: DEFAULT_MAINNET_SERVER });
 
+// .env.development and .env.production are source of truth for NEXT_PUBLIC_ENV
+// in development, default to localnet, in production, mainnet
+const initialNetwork =
+  ENV === 'development'
+    ? new StacksMocknet({ url: DEFAULT_LOCALNET_SERVER })
+    : new StacksMainnet({ url: DEFAULT_MAINNET_SERVER });
+
+    // TODO: icon needs fqd
 export default withInitialQueryData(
   Index,
   appProviderAtomBuilder({

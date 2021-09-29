@@ -34,21 +34,18 @@ export default function BirdCountButtonGroup() {
   //const handleDecrement = useHandleDecrement();
 
   return (
-    <>
-      <ButtonGroup size="large" aria-label="large button group">
-        <Tooltip title="Click to decrement">
-          <Button onClick={() => handleIncrement()} variant="contained">
-            <RemoveIcon />
-          </Button>
-        </Tooltip>
-
-        <Button variant="contained">{birdCount} birds</Button>
-        <Tooltip title="Click to increment">
-          <Button onClick={() => handleIncrement()} variant="contained">
-            <AddIcon />
-          </Button>
-        </Tooltip>
-      </ButtonGroup>
-    </>
+    <ButtonGroup size="large" variant="contained">
+      <Tooltip title="Click to decrement">
+        <Button onClick={() => handleIncrement()}>
+          <RemoveIcon />
+        </Button>
+      </Tooltip>
+      <Button>{birdCount} birds</Button>
+      <Tooltip title="Click to increment">
+        <Button onClick={() => handleIncrement()}>
+          <AddIcon />
+        </Button>
+      </Tooltip>
+    </ButtonGroup>
   );
 }
