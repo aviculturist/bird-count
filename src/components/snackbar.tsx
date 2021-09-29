@@ -3,21 +3,19 @@ import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CircularProgress from '@mui/material/CircularProgress';
 import CloseIcon from '@mui/icons-material/Close';
-import { useLoading } from '@hooks/use-loading';
-import { LOADING_KEYS } from '@store/loading';
+// import { useLoading } from '@hooks/use-loading';
+// import { LOADING_KEYS } from '@store/loading';
+import { useAuth } from 'micro-stacks/react';
 
 export default function SimpleSnackbar() {
-  const { isLoading, setIsLoading } = useLoading(LOADING_KEYS.WALLETPOPUP);
-
-  const handleClick = () => {
-    setIsLoading(true);
-  };
+  //const { isLoading, setIsLoading } = useLoading(LOADING_KEYS.WALLETPOPUP);
+  const { isLoading } = useAuth();
 
   const handleClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
     if (reason === 'clickaway') {
       return;
     }
-    setIsLoading(false);
+    //setIsLoading(false);
   };
 
   const action = (
