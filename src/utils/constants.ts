@@ -17,7 +17,7 @@ export const DEFAULT_MAINNET_BIRDCOUNT_CONTRACT =
   process.env.NEXT_PUBLIC_MAINNET_BIRDCOUNT_CONTRACT || '';
 export const DEFAULT_TESTNET_BIRDCOUNT_CONTRACT =
   process.env.NEXT_PUBLIC_TESTNET_BIRDCOUNT_CONTRACT || '';
-  export const DEFAULT_REGTEST_BIRDCOUNT_CONTRACT =
+export const DEFAULT_REGTEST_BIRDCOUNT_CONTRACT =
   process.env.NEXT_PUBLIC_REGTEST_BIRDCOUNT_CONTRACT || '';
 export const DEFAULT_LOCALNET_BIRDCOUNT_CONTRACT =
   process.env.NEXT_PUBLIC_LOCALNET_BIRDCOUNT_CONTRACT || '';
@@ -26,7 +26,7 @@ export const COUNT_FUNCTION = 'get-counter';
 export const INCREMENT_FUNCTION = 'increment';
 export const DECREMENT_FUNCTION = 'decrement';
 
-export const DEFAULT_NETWORK_LIST:Network[] = [
+export const DEFAULT_NETWORK_LIST: Network[] = [
   {
     index: 0,
     name: 'mainnet',

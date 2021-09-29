@@ -1,9 +1,5 @@
 import { smartContractsClientAtom, transactionsClientAtom, accountsClientAtom } from '@store/api';
-import {
-  COUNT_FUNCTION,
-  INCREMENT_FUNCTION,
-  DECREMENT_FUNCTION,
-} from '@utils/constants';
+import { COUNT_FUNCTION, INCREMENT_FUNCTION, DECREMENT_FUNCTION } from '@utils/constants';
 import { userStxAddressesAtom } from 'micro-stacks/react';
 import { cvToJSON, hexToCV } from '@stacks/transactions';
 import { atom } from 'jotai';

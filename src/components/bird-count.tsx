@@ -26,7 +26,9 @@ function Copyright() {
           the contributors
         </Link>{' '}
         {new Date().getFullYear()}
-        <Tooltip title="Made with Love"><FavoriteIcon fontSize="inherit" /></Tooltip>
+        <Tooltip title="Made with Love">
+          <FavoriteIcon fontSize="inherit" />
+        </Tooltip>
       </Typography>
     </>
   );
@@ -56,7 +58,7 @@ export default function BirdCount() {
               BirdCount makes it easy to count all the birds
             </Typography>
             <Alert severity="warning">EXTREME ALPHA SOFTWARE: USE AT YOUR OWN RISK</Alert>
-            <Typography variant="h5" align="center"  paragraph>
+            <Typography variant="h5" align="center" paragraph>
               .
             </Typography>
             <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
@@ -64,7 +66,6 @@ export default function BirdCount() {
               <SimpleSnackbar />
             </Stack>
           </Container>
-
         </Box>
         <DrawerFeed />
       </main>

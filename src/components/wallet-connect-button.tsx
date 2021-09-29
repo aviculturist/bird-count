@@ -6,7 +6,11 @@ const WalletConnectButton = () => {
   const { isSignedIn, handleSignIn, handleSignOut, isLoading } = useAuth();
   return (
     <NoSsr>
-      <Button variant="contained" color="primary" onClick={isSignedIn ? handleSignOut : handleSignIn}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={isSignedIn ? handleSignOut : handleSignIn}
+      >
         {isLoading ? 'Loading...' : isSignedIn ? 'Sign out' : 'Connect Stacks Wallet'}
       </Button>
     </NoSsr>

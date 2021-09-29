@@ -94,7 +94,8 @@ export default function NetworkDialogButton() {
     <>
       <NoSsr>
         <Tooltip title={`Switch Networks`}>
-          <Button variant="outlined"
+          <Button
+            variant="outlined"
             startIcon={<SettingsIcon fontSize="small" />}
             onClick={handleClickOpen}
             color="inherit"

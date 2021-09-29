@@ -1,8 +1,8 @@
-import React from "react";
-import { useDrawer } from "@hooks/use-drawer";
-import { Badge, IconButton, Tooltip } from "@mui/material";
+import React from 'react';
+import { useDrawer } from '@hooks/use-drawer';
+import { Badge, IconButton, Tooltip } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { pendingTransactionsCountAtom } from "@store/pending-transactions-count";
+import { pendingTransactionsCountAtom } from '@store/pending-transactions-count';
 import { useAtom } from 'jotai';
 
 function ToggleDrawerFeedButton() {
@@ -16,7 +16,9 @@ function ToggleDrawerFeedButton() {
   return (
     <IconButton onClick={handleToggleDrawer} color="inherit">
       <Badge badgeContent={pendingTransactionsCount} color="secondary">
-      <Tooltip title="Show BirdCount Transaction Feed"><NotificationsIcon fontSize="small" /></Tooltip>
+        <Tooltip title="Show BirdCount Transaction Feed">
+          <NotificationsIcon fontSize="small" />
+        </Tooltip>
       </Badge>
     </IconButton>
   );
