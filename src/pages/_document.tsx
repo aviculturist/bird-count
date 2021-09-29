@@ -49,9 +49,10 @@ export default class MyDocument extends Document {
                 });
                 let prefersDarkMode;
                 try {
+                  darkModePreferenceExists = localStorage.getItem("darkMode") === null ? false : true;
                   prefersDarkMode = JSON.parse(localStorage.getItem("darkMode"));
                 } catch (err) {}
-                setDarkModePref(prefersDarkMode || (darkQuery.matches ? true : false));
+                setDarkModePref(darkModePreferenceExists ? prefersDarkMode : (darkQuery.matches ? true : false));
               })();
             `,
             }}
