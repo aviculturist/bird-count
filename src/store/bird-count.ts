@@ -182,9 +182,7 @@ export const birdCountAtom = atomWithQuery<number>('bird-count', async get => {
   const client = get(smartContractsClientAtom);
   const birdCountContract = get(currentBirdcountContractState);
   const [contractAddress, contractName] = birdCountContract.split('.');
-  console.log(contractAddress);
-  console.log(contractName);
-  console.log(COUNT_FUNCTION);
+
   try {
     const data = await client.callReadOnlyFunction({
       contractAddress,

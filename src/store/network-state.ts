@@ -1,3 +1,15 @@
+import { atom } from 'jotai';
+import { networkAtom } from 'micro-stacks/react';
+import { atomWithStorage } from 'jotai/utils';
+
+export interface Network {
+  index: number;
+  name: string;
+  label: string;
+  chain: string;
+  url: string;
+}
+
 import {
   DEFAULT_NETWORK_LIST,
   DEFAULT_MAINNET_SERVER,
@@ -10,8 +22,6 @@ import {
   DEFAULT_TESTNET_BIRDCOUNT_CONTRACT,
   DEFAULT_LOCALNET_BIRDCOUNT_CONTRACT,
 } from '@utils/constants';
-import { networkAtom } from 'micro-stacks/react';
-import { atom } from 'jotai';
 
 export const currentBirdcountContractState = atom(get => {
   const network = get(networkAtom);
@@ -40,3 +50,6 @@ export const currentChainState = atom(get => {
   const defaultChain = network.getCoreApiUrl() === DEFAULT_MAINNET_SERVER ? 'mainnet' : 'testnet';
   return defaultChain;
 });
+
+// defaulting to mainnet, but not sure that's operative here
+export const currentNetworkAtom = atomWithStorage<Network>('network', DEFAULT_NETWORK_LIST[0]);

@@ -6,7 +6,7 @@ It implements a simple [Clarity](https://clarity-lang.org/) counter contract and
 
 ## Getting Started
 
-First, install and run [Docker Desktop](https://www.docker.com/products/docker-desktop).
+To run the integration environment locally first install and run [Docker Desktop](https://www.docker.com/products/docker-desktop).
 
 Install [Clarinet](https://github.com/hirosystems/clarinet)
 
@@ -23,7 +23,7 @@ In a different terminal, start the development server:
 yarn && yarn run dev
 ```
 
-Install the [Hiro Wallet](https://www.hiro.so/wallet/install-web) and add `http://localhost:3999` as the `Address`. Use `LocalDevNet` for `Name` and `2147483648` for `Key`.
+Install the [Hiro Wallet](https://www.hiro.so/wallet/install-web) and select Change Network -> Localnet.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to load the app. You can connect your wallet and use the `+` button to increment the counter.
 

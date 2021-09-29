@@ -7,37 +7,27 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
+import SettingsIcon from '@mui/icons-material/Settings';
 import CloudQueueIcon from '@mui/icons-material/CloudQueue';
 import CheckIcon from '@mui/icons-material/Check';
-import AddIcon from '@mui/icons-material/Add';
 import { networkDialogAtom } from '@store/network-dialog';
 import { useAtom } from 'jotai';
-import { useAtomValue } from 'jotai/utils';
 import { DEFAULT_NETWORK_LIST } from '@utils/constants';
-import { currentNetworkAtom, Network } from '@store/networks';
+import { currentNetworkAtom, Network } from '@store/network-state';
 import NoSsr from '@mui/core/NoSsr';
-import { useNetwork, currentNetworkName, useCurrentNetworkUrl } from 'micro-stacks/react';
-import {
-  StacksMainnet,
-  StacksNetwork,
-  StacksRegtest,
-  StacksMocknet,
-  StacksTestnet,
-  HIRO_MAINNET_DEFAULT,
-  HIRO_REGTEST_DEFAULT,
-  HIRO_TESTNET_DEFAULT,
-  HIRO_MOCKNET_DEFAULT,
-} from 'micro-stacks/network';
+import { useNetwork } from 'micro-stacks/react';
+import { StacksMainnet, StacksRegtest, StacksMocknet, StacksTestnet } from 'micro-stacks/network';
+import Tooltip from '@mui/material/Tooltip';
 
 const networks: Network[] = DEFAULT_NETWORK_LIST;
 
-export interface SimpleDialogProps {
+export interface NetworkDialogProps {
   open: boolean;
   selectedValue: number;
   onClose: (index: number) => void;
 }
 
-function SimpleDialog(props: SimpleDialogProps) {
+function NetworkDialog(props: NetworkDialogProps) {
   const { onClose, selectedValue, open } = props;
   const { handleSetNetwork } = useNetwork();
   const [currentNetwork, setCurrentNetwork] = useAtom(currentNetworkAtom);
@@ -46,27 +36,31 @@ function SimpleDialog(props: SimpleDialogProps) {
   };
 
   const handleListItemClick = (index: number) => {
-    // local phony state TODO: replace
+    // used to select and display user selections
     setCurrentNetwork(DEFAULT_NETWORK_LIST[index]);
 
-    // the state that matters
+    // sets the currently active network used by the wallet
     handleSetNetwork(
       index === 0
         ? new StacksMainnet({ url: DEFAULT_NETWORK_LIST[index].url })
-        : new StacksTestnet({ url: DEFAULT_NETWORK_LIST[index].url })
+        : index === 1
+        ? new StacksTestnet({ url: DEFAULT_NETWORK_LIST[index].url })
+        : index === 2
+        ? new StacksRegtest({ url: DEFAULT_NETWORK_LIST[index].url })
+        : new StacksMocknet({ url: DEFAULT_NETWORK_LIST[index].url })
     );
     onClose(index);
   };
 
   return (
     <Dialog fullWidth={true} maxWidth="xs" onClose={handleClose} open={open}>
-      <DialogTitle>Set network</DialogTitle>
+      <DialogTitle>Select network</DialogTitle>
       <List sx={{ pt: 0 }}>
         {networks.map(network => (
           <ListItem button onClick={() => handleListItemClick(network.index)} key={network.index}>
             <ListItemAvatar>
               <Avatar>
-                {currentNetwork.name === network.name ? (
+                {currentNetwork.index === network.index ? (
                   <CheckIcon color="success" />
                 ) : (
                   <CloudQueueIcon color="info" />
@@ -84,10 +78,9 @@ function SimpleDialog(props: SimpleDialogProps) {
   );
 }
 
-export default function NetworkDialog() {
+export default function NetworkDialogButton() {
   const [open, setOpen] = useAtom(networkDialogAtom);
-  const [currentNetwork, setCurrentNetwork] = useAtom(currentNetworkAtom);
-  const name = useAtomValue(currentNetworkName);
+  const [currentNetwork] = useAtom(currentNetworkAtom);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -95,17 +88,22 @@ export default function NetworkDialog() {
 
   const handleClose = (index: number) => {
     setOpen(false);
-    setCurrentNetwork(DEFAULT_NETWORK_LIST[index]);
   };
 
   return (
     <>
       <NoSsr>
-        <Button color="inherit" onClick={handleClickOpen}>
-          {name}
-        </Button>
+        <Tooltip title={`Switch Networks`}>
+          <Button variant="outlined"
+            startIcon={<SettingsIcon fontSize="small" />}
+            onClick={handleClickOpen}
+            color="inherit"
+          >
+            {currentNetwork.name}
+          </Button>
+        </Tooltip>
+        <NetworkDialog selectedValue={currentNetwork.index} open={open} onClose={handleClose} />
       </NoSsr>
-      <SimpleDialog selectedValue={currentNetwork.index} open={open} onClose={handleClose} />
     </>
   );
 }
