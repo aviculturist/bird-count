@@ -1,11 +1,9 @@
-import { useAtom } from 'jotai';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { pendingTransactionsCountAtom } from '@store/pending-transactions-count';
 import ToggleDarkModeButton from '@components/toggle-darkmode-button';
 import NetworkDialogButton from '@components/network-dialog';
 import ToggleDrawerFeedButton from '@components/toggle-drawer-feed-button';

@@ -12,7 +12,7 @@ import Alert from '@mui/material/Alert';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Grid, Tooltip } from '@mui/material';
 import BirdCountStats from '@components/bird-count-stats';
-
+import { t } from '@lingui/macro'
 function Copyright() {
   return (
     <>
@@ -55,7 +55,7 @@ export default function BirdCount() {
               //color="text.primary"
               gutterBottom
             >
-              BirdCount makes it easy to count all the birds
+              {t`BirdCount makes it easy to count all the birds`}
             </Typography>
             <Alert severity="warning">EXTREME ALPHA SOFTWARE: USE AT YOUR OWN RISK</Alert>
             <Typography variant="h5" align="center" paragraph>

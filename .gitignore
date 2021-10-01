@@ -12,6 +12,10 @@
 /.next/
 /out/
 
+# lingui
+/locale/_build/
+/locale/**/*.js
+
 # production
 /build
 

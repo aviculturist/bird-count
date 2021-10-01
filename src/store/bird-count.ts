@@ -2,7 +2,7 @@ import { smartContractsClientAtom, transactionsClientAtom, accountsClientAtom } 
 import { COUNT_FUNCTION, INCREMENT_FUNCTION, DECREMENT_FUNCTION } from '@utils/constants';
 import { userStxAddressesAtom } from 'micro-stacks/react';
 import { cvToJSON, hexToCV } from '@stacks/transactions';
-import { atom } from 'jotai';
+import { atom, useAtom } from 'jotai';
 import { atomWithQuery } from 'jotai-query-toolkit';
 import {
   ContractCallTransaction,
@@ -19,47 +19,6 @@ export interface BirdCount {
   timestamp: number;
   isPending?: boolean;
 }
-
-// /*
-//  * A list of the confirmed increment transactions associated with a specific
-//  * address. TODO: don't think it's used any more, can be removed
-//  */
-// export const confirmedTxsAtom = atomWithQuery<BirdCount[]>('confirmed-txs', async get => {
-//   const address = get(userStxAddressesAtom);
-//   const client = get(accountsClientAtom);
-//   const txClient = get(transactionsClientAtom);
-//   const birdCountContract = get(currentBirdcountContractState);
-
-//   if (!address?.testnet) return []; // TODO not ideal way to test if is logged in
-//   const txs = await client.getAccountTransactions({
-//     limit: 50,
-//     principal: currentNetwork.chain === 'testnet' ? address?.testnet || '' : address?.mainnet,
-//   });
-
-//   const txids = (txs as TransactionResults).results
-//     .filter(
-//       tx =>
-//         tx.tx_type === 'contract_call' &&
-//         tx.contract_call.contract_id === birdCountContract &&
-//         (tx.contract_call.function_name === INCREMENT_FUNCTION ||
-//           tx.contract_call.function_name === DECREMENT_FUNCTION) &&
-//         tx.tx_status === 'success'
-//     )
-//     .map(tx => tx.tx_id);
-
-//   const final = await Promise.all(txids.map(async txId => txClient.getTransactionById({ txId })));
-//   return (
-//     (final as ContractCallTransaction[]).map(tx => {
-//       return {
-//         sender: tx.sender_address,
-//         txid: tx.tx_id,
-//         function: tx.contract_call.function_name,
-//         contract: tx.contract_call.contract_id.split('.')[1],
-//         timestamp: tx.burn_block_time,
-//       };
-//     }) || []
-//   );
-// });
 
 /*
  * A list of the confirmed increment transactions associated with a specific
@@ -114,7 +73,6 @@ export const recentTxsAtom = atomWithQuery<BirdCount[]>('recent-txs', async get 
 export const pendingTxsAtom = atomWithQuery<BirdCount[]>('pending-txs', async get => {
   const client = get(transactionsClientAtom);
   const birdCountContract = get(currentBirdcountContractState);
-
   const txs = await client.getMempoolTransactionList({ limit: 96 });
   // console.log('all pending increment transactions');
   // console.log(txs);
@@ -128,7 +86,6 @@ export const pendingTxsAtom = atomWithQuery<BirdCount[]>('pending-txs', async ge
         tx.tx_status === 'pending'
     )
     .map(tx => tx.tx_id);
-
   const final = await Promise.all(
     birdCountTxs.map(async txId => client.getTransactionById({ txId }))
   );
