@@ -1,8 +1,8 @@
 const withTM = require('next-transpile-modules')(['@mui/material', '@mui/system']); // pass the modules you would like to see transpiled
 
-const linguiConfig = require('./lingui.config.js')
-
-const { locales, sourceLocale } = linguiConfig
+// Disabled until SSG supported
+// const linguiConfig = require('./lingui.config.js')
+// const { locales, sourceLocale } = linguiConfig
 
 module.exports = withTM({
   // https://github.com/Velenir/nextjs-ipfs-example/
@@ -27,9 +27,10 @@ module.exports = withTM({
     };
     return config;
   },
-  i18n: {
-    localeDetection: false,
-    locales,
-    defaultLocale: sourceLocale,
-  },
+  // Disabled until SSG supported
+  // i18n: {
+  //   localeDetection: false,
+  //   locales,
+  //   defaultLocale: sourceLocale,
+  // },
 });

@@ -36,35 +36,39 @@ enum GetTransactionListTypeEnum {
 export const recentTxsAtom = atomWithQuery<BirdCount[]>('recent-txs', async get => {
   const txClient = get(transactionsClientAtom);
   const birdCountContract = get(currentBirdcountContractState);
-
-  const txs = await txClient.getTransactionList({
-    limit: 50,
-    type: [GetTransactionListTypeEnum['contract_call']],
-  });
-  // console.log('ALL TXS');
-  // console.log(txs);
-  const txids = (txs as TransactionResults).results
-    .filter(
-      tx =>
-        tx.tx_type === 'contract_call' &&
-        tx.contract_call.contract_id === birdCountContract &&
-        (tx.contract_call.function_name === INCREMENT_FUNCTION ||
-          tx.contract_call.function_name === DECREMENT_FUNCTION) &&
-        tx.tx_status === 'success'
-    )
-    .map(tx => tx.tx_id);
-  const final = await Promise.all(txids.map(async txId => txClient.getTransactionById({ txId })));
-  return (
-    (final as ContractCallTransaction[]).map(tx => {
-      return {
-        sender: tx.sender_address,
-        txid: tx.tx_id,
-        function: tx.contract_call.function_name,
-        contract: tx.contract_call.contract_id.split('.')[1],
-        timestamp: tx.burn_block_time,
-      };
-    }) || []
-  );
+  try {
+    const txs = await txClient.getTransactionList({
+      limit: 50,
+      type: [GetTransactionListTypeEnum['contract_call']],
+    });
+    // console.log('ALL TXS');
+    // console.log(txs);
+    const txids = (txs as TransactionResults).results
+      .filter(
+        tx =>
+          tx.tx_type === 'contract_call' &&
+          tx.contract_call.contract_id === birdCountContract &&
+          (tx.contract_call.function_name === INCREMENT_FUNCTION ||
+            tx.contract_call.function_name === DECREMENT_FUNCTION) &&
+          tx.tx_status === 'success'
+      )
+      .map(tx => tx.tx_id);
+    const final = await Promise.all(txids.map(async txId => txClient.getTransactionById({ txId })));
+    return (
+      (final as ContractCallTransaction[]).map(tx => {
+        return {
+          sender: tx.sender_address,
+          txid: tx.tx_id,
+          function: tx.contract_call.function_name,
+          contract: tx.contract_call.contract_id.split('.')[1],
+          timestamp: tx.burn_block_time,
+        };
+      }) || []
+    );
+  } catch (_e) {
+    console.error(_e);
+  }
+  return [];
 });
 
 /*
@@ -73,35 +77,40 @@ export const recentTxsAtom = atomWithQuery<BirdCount[]>('recent-txs', async get 
 export const pendingTxsAtom = atomWithQuery<BirdCount[]>('pending-txs', async get => {
   const client = get(transactionsClientAtom);
   const birdCountContract = get(currentBirdcountContractState);
-  const txs = await client.getMempoolTransactionList({ limit: 96 });
-  // console.log('all pending increment transactions');
-  // console.log(txs);
-  const birdCountTxs = (txs as MempoolTransactionListResponse).results
-    .filter(
-      tx =>
-        tx.tx_type === 'contract_call' &&
-        tx.contract_call.contract_id === birdCountContract &&
-        (tx.contract_call.function_name === INCREMENT_FUNCTION ||
-          tx.contract_call.function_name === DECREMENT_FUNCTION) &&
-        tx.tx_status === 'pending'
-    )
-    .map(tx => tx.tx_id);
-  const final = await Promise.all(
-    birdCountTxs.map(async txId => client.getTransactionById({ txId }))
-  );
+  try {
+    const txs = await client.getMempoolTransactionList({ limit: 96 });
+    // console.log('all pending increment transactions');
+    // console.log(txs);
+    const birdCountTxs = (txs as MempoolTransactionListResponse).results
+      .filter(
+        tx =>
+          tx.tx_type === 'contract_call' &&
+          tx.contract_call.contract_id === birdCountContract &&
+          (tx.contract_call.function_name === INCREMENT_FUNCTION ||
+            tx.contract_call.function_name === DECREMENT_FUNCTION) &&
+          tx.tx_status === 'pending'
+      )
+      .map(tx => tx.tx_id);
+    const final = await Promise.all(
+      birdCountTxs.map(async txId => client.getTransactionById({ txId }))
+    );
 
-  return (
-    (final as ContractCallTransaction[]).map(tx => {
-      return {
-        sender: tx.sender_address,
-        txid: tx.tx_id,
-        function: tx.contract_call.function_name,
-        contract: tx.contract_call.contract_id.split('.')[1],
-        timestamp: Math.floor(Date.now() / 1000), //tx.receipt_time,
-        isPending: true,
-      };
-    }) || []
-  );
+    return (
+      (final as ContractCallTransaction[]).map(tx => {
+        return {
+          sender: tx.sender_address,
+          txid: tx.tx_id,
+          function: tx.contract_call.function_name,
+          contract: tx.contract_call.contract_id.split('.')[1],
+          timestamp: Math.floor(Date.now() / 1000), //tx.receipt_time,
+          isPending: true,
+        };
+      }) || []
+    );
+  } catch (_e) {
+    console.error(_e);
+  }
+  return [];
 });
 
 /*
