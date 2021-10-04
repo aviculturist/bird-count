@@ -1,5 +1,5 @@
 import { NodeProvider, NodeTransaction } from '@clarigen/node';
-import { WebTransactionReceipt } from '@clarigen/core';
+import { Transaction, WebTransactionReceipt } from '@clarigen/core';
 import { contracts } from '@contracts';
 import { StacksMocknet } from '@stacks/network';
 
@@ -18,8 +18,8 @@ const deployed = NodeProvider.fromContracts(contracts, clarigenConfig);
 async function run() {
   const counter = deployed.birdCount.contract;
 
-  const incrementTx = counter.decrement() as NodeTransaction<boolean, null>;
-
+  //const incrementTx = counter.decrement() as NodeTransaction<boolean, null>;
+  const incrementTx = counter.decrement() as Transaction<bigint, null>;
   const result = (await incrementTx.submit({
     postConditions: [],
   })) as WebTransactionReceipt<number, null>;
