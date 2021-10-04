@@ -31,7 +31,7 @@ export function useLocationLinkProps(locale: Locale | null): {
               search: stringify({ ...qs, lng: locale }),
             },
             onClick: () => {
-              console.log('Click from useLocationLinkProps ' + locale);
+              //console.log('Click from useLocationLinkProps ' + locale);
               setUserLocale(locale);
               setIsOpen(false);
             },
