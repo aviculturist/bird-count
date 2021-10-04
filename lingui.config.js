@@ -20,4 +20,4 @@ module.exports = {
     i18n: ['@lingui/core', 'i18n'],
     Trans: ['@lingui/react', 'Trans'],
   },
-}
+};

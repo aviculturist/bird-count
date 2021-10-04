@@ -20,7 +20,7 @@ module.exports = withTM({
         resourceQuery: /raw-lingui/,
         type: 'javascript/auto',
       },
-    ]
+    ];
     config.resolve.alias = {
       ...config.resolve.alias,
       '@mui/styled-engine': '@mui/styled-engine-sc',

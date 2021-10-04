@@ -55,4 +55,6 @@ export const DEFAULT_NETWORK_LIST: Network[] = [
     url: DEFAULT_LOCALNET_SERVER,
   },
 ];
-export const DEFAULT_NETWORK_INDEX=parseFloat(process.env.NEXT_PUBLIC_DEFAULT_NETWORK_INDEX || '0');
+export const DEFAULT_NETWORK_INDEX = parseFloat(
+  process.env.NEXT_PUBLIC_DEFAULT_NETWORK_INDEX || '0'
+);

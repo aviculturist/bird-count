@@ -55,7 +55,7 @@ const initialNetwork =
     ? new StacksMocknet({ url: DEFAULT_LOCALNET_SERVER })
     : new StacksMainnet({ url: DEFAULT_MAINNET_SERVER });
 
-    // TODO: icon needs fqd
+// TODO: icon needs fqd
 export default withInitialQueryData(
   Index,
   appProviderAtomBuilder({

@@ -10,9 +10,9 @@ import SimpleSnackbar from '@components/snackbar';
 import MainAppBar from '@components/main-appbar';
 import Alert from '@mui/material/Alert';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { Grid, Tooltip } from '@mui/material';
-import BirdCountStats from '@components/bird-count-stats';
-import { t } from '@lingui/macro'
+import { Tooltip } from '@mui/material';
+import { t } from '@lingui/macro';
+
 function Copyright() {
   return (
     <>

@@ -1,6 +1,6 @@
 module.exports = function (api) {
-  const isServer = api.caller((caller) => caller?.isServer)
-  const isCallerDevelopment = api.caller((caller) => caller?.isDev)
+  const isServer = api.caller(caller => caller?.isServer);
+  const isCallerDevelopment = api.caller(caller => caller?.isDev);
 
   const presets = [
     [
@@ -8,13 +8,11 @@ module.exports = function (api) {
       {
         'preset-react': {
           importSource:
-            !isServer && isCallerDevelopment
-              ? '@welldone-software/why-did-you-render'
-              : 'react',
+            !isServer && isCallerDevelopment ? '@welldone-software/why-did-you-render' : 'react',
         },
       },
     ],
-  ]
+  ];
 
-  return { presets }
-}
+  return { presets };
+};

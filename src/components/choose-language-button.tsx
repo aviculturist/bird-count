@@ -90,7 +90,7 @@ function LanguageMenuItem({ locale, active }: { locale: Locale; active: boolean 
   if (!to) return null;
 
   return (
-    <MenuItem key={locale} onClick={onClick} >
+    <MenuItem key={locale} onClick={onClick}>
       <Link to={to}>
         {CODE_TO_NAME[locale]} {active && 'Active'}
       </Link>
@@ -100,7 +100,7 @@ function LanguageMenuItem({ locale, active }: { locale: Locale; active: boolean 
 
 function ChooseLanguageButton() {
   const [isOpen, setIsOpen] = useAtom(languageMenuAtom);
-  const [,setAnchorEl] = useAtom(languageMenuAnchorElAtom);
+  const [, setAnchorEl] = useAtom(languageMenuAnchorElAtom);
   const handleChooseLanguage = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
     setIsOpen(true);
