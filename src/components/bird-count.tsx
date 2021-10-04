@@ -10,7 +10,7 @@ import SimpleSnackbar from '@components/snackbar';
 import MainAppBar from '@components/main-appbar';
 import Alert from '@mui/material/Alert';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { Tooltip } from '@mui/material';
+import Tooltip from '@mui/material/Tooltip';
 import { t } from '@lingui/macro';
 
 function Copyright() {

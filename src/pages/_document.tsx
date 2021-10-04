@@ -88,6 +88,8 @@ MyDocument.getInitialProps = async ctx => {
         </>
       ),
     };
+  } catch (_e) {
+    console.error(_e);
   } finally {
     sheet.seal();
   }

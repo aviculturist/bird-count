@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { useDrawer } from '@hooks/use-drawer';
-import { Badge, IconButton, Tooltip } from '@mui/material';
+import Badge from '@mui/material/Badge';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { pendingTransactionsCountAtom } from '@store/pending-transactions-count';
 import { useAtom } from 'jotai';

@@ -26,7 +26,7 @@ import { useHandleIncrement } from '@hooks/use-increment';
 //   }
 // }
 
-export default function BirdCountButtonGroup() {
+function BirdCountButtonGroup() {
   const [birdCount, setBirdCount] = useAtom(birdCountAtom);
   const handleIncrement = useHandleIncrement();
 
@@ -35,17 +35,19 @@ export default function BirdCountButtonGroup() {
 
   return (
     <ButtonGroup size="large" variant="contained">
-      <Tooltip title="Click to decrement">
-        <Button onClick={() => handleIncrement()}>
-          <RemoveIcon />
-        </Button>
-      </Tooltip>
+      {/* <Tooltip title="Click to decrement"> */}
+      <Button onClick={() => handleIncrement()}>
+        <RemoveIcon />
+      </Button>
+      {/* </Tooltip> */}
       <Button>{birdCount} birds</Button>
-      <Tooltip title="Click to increment">
-        <Button onClick={() => handleIncrement()}>
-          <AddIcon />
-        </Button>
-      </Tooltip>
+      {/* <Tooltip title="Click to increment"> */}
+      <Button onClick={() => handleIncrement()}>
+        <AddIcon />
+      </Button>
+      {/* </Tooltip> */}
     </ButtonGroup>
   );
 }
+//BirdCountButtonGroup.WhyDidYouRender = true;
+export default BirdCountButtonGroup;

@@ -4,7 +4,7 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { useDarkModeContext } from '@components/darkmode-context';
 import IconButton from '@mui/material/IconButton';
 import NoSsr from '@mui/core/NoSsr';
-import { Tooltip } from '@mui/material';
+import Tooltip from '@mui/material/Tooltip';
 import { grey } from '@mui/material/colors';
 
 function ToggleDarkModeButton() {

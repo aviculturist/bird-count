@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { IconButton, Pagination, Tooltip } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import Pagination from '@mui/material/Pagination';
+import Tooltip from '@mui/material/Tooltip';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
