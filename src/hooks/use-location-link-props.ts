@@ -36,6 +36,6 @@ export function useLocationLinkProps(locale: Locale | null): {
               setIsOpen(false);
             },
           },
-    [location, qs, activeLocale, locale]
+    [locale, location, qs, setUserLocale, setIsOpen]
   );
 }
