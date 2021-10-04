@@ -16,7 +16,13 @@ Clarinet.test({
     const count = chain.callReadOnlyFn('bird-count', 'get-counter', [], deployer.address);
 
     // Assert that the returned result is a uint with a value of 0 (u0).
-    count.result.expectUint(0);
+    // The unwrapped variety with Uint
+    // count.result.expectUint(0);
+    count.result.expectOk();
+    // Or... wrapped variety with Int
+    // block.receipts[0].result.expectOk().expectBool(true);
+    // block.receipts[0].result.expectErr().expectUint(100);
+    count.result.expectOk().expectInt(0);
   },
 });
 
@@ -36,12 +42,15 @@ Clarinet.test({
     const [receipt] = block.receipts;
 
     // Assert that the returned result is a boolean true.
-    receipt.result.expectOk().expectBool(true);
+    //receipt.result.expectOk().expectBool(true);
 
     // Get the bird-counter value.
-    const count = chain.callReadOnlyFn('bird-count', 'get-counter', [], deployer.address);
+    //const count = chain.callReadOnlyFn('bird-count', 'get-counter', [], deployer.address);
 
     // Assert that the returned result is a u1.
-    count.result.expectUint(1);
+    //count.result.expectUint(1);
+
+    // Wrapped variety with Int
+    receipt.result.expectOk().expectInt(1);
   },
 });

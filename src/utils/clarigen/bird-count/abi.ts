@@ -11,7 +11,7 @@ export const BirdCountInterface: ClarityAbi = {
         "type": {
           "response": {
             "error": "none",
-            "ok": "bool"
+            "ok": "int128"
           }
         }
       }
@@ -24,7 +24,7 @@ export const BirdCountInterface: ClarityAbi = {
         "type": {
           "response": {
             "error": "none",
-            "ok": "bool"
+            "ok": "int128"
           }
         }
       }
@@ -34,7 +34,12 @@ export const BirdCountInterface: ClarityAbi = {
       "args": [],
       "name": "get-counter",
       "outputs": {
-        "type": "uint128"
+        "type": {
+          "response": {
+            "error": "none",
+            "ok": "int128"
+          }
+        }
       }
     }
   ],
@@ -45,7 +50,7 @@ export const BirdCountInterface: ClarityAbi = {
     {
       "access": "variable",
       "name": "counter",
-      "type": "uint128"
+      "type": "int128"
     }
   ]
 };

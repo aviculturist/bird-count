@@ -157,7 +157,7 @@ export const birdCountAtom = atomWithQuery<number>('bird-count', async get => {
     });
     if (data.okay && data.result) {
       const result = cvToJSON(hexToCV(data.result as string));
-      return result.value;
+      return result.value.value;
     } // TODO: failed to fetch
   } catch (_e) {
     console.error(_e);

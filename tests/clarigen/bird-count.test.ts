@@ -18,19 +18,31 @@ describe('Counter contract', () => {
 
   test('initial counter is 0', async () => {
     const response = await counter.getCounter();
-    expect(response).toEqual(0n);
+
+    // When response is returned without (ok wrapp
+    // expect(response).toEqual(0n);
+
+    // When response is wrapped in (ok
+    expect(response.isOk()).toBe(true);
+    expect(response).toEqual({"value": 0n});
   });
 
   test('increment counter', async () => {
     const tx = counter.increment();
     const result = await txOk(tx, alice);
-    expect(result.value).toBe(true);
-    await expect(counter.getCounter()).resolves.toEqual(BigInt(1));
+    expect(result.value).toEqual(1n);
+
+    // unwrapped variation
+    //expect(result.value).toBe(true);
+    //await expect(counter.getCounter()).resolves.toEqual(BigInt(1));
   });
 
   test('decrement counter', async () => {
     const result = await txOk(counter.decrement(), alice);
-    expect(result.value).toBe(true);
-    await expect(counter.getCounter()).resolves.toEqual(BigInt(0));
+    expect(result.value).toEqual(0n);
+
+    // unwrapped variation
+    //expect(result.value).toBe(true);
+    //await expect(counter.getCounter()).resolves.toEqual(BigInt(0));
   });
 });

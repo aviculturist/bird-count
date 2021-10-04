@@ -25,7 +25,7 @@ declare global {
   }
 }
 
-export function DarkModeProvider({ children }: Props) {
+export function DarkModeProvider({ children }: { children: ReactNode }) {
   // TODO: footer gets the correct theme, but the main body doesn't
   //const [darkMode, setDarkMode] = useState(global.window?.__prefersDarkMode || false);
   const [darkMode, setDarkMode] = useAtom(darkModeAtom);

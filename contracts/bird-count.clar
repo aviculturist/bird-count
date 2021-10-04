@@ -1,26 +1,14 @@
-(define-data-var counter uint u0)
+(define-data-var counter int 0)
 
 (define-read-only (get-counter)
-  (var-get counter))
+  (ok (var-get counter)))
 
 (define-public (increment)
-  (let
-    (
-      (current-val (var-get counter))
-      (next-val (+ current-val u1))
-    )
-    (var-set counter next-val)
-    (ok true)
-  )
-)
+  (begin
+    (var-set counter (+ (var-get counter) 1))
+    (ok (var-get counter))))
 
 (define-public (decrement)
-  (let
-    (
-      (current-val (var-get counter))
-      (next-val (- current-val u1))
-    )
-    (var-set counter next-val)
-    (ok true)
-  )
-)
+  (begin
+    (var-set counter (- (var-get counter) 1))
+    (ok (var-get counter))))
