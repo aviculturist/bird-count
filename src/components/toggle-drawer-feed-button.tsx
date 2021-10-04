@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { useDrawer } from '@hooks/use-drawer';
 import { Badge, IconButton, Tooltip } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';

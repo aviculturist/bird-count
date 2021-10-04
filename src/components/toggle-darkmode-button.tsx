@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { useDarkModeContext } from '@components/darkmode-context';
