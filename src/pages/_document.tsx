@@ -68,6 +68,7 @@ export default class MyDocument extends Document {
 // `getInitialProps` belongs to `_document` (instead of `_app`),
 // it's compatible with static-site generation (SSG).
 // https://github.com/vercel/next.js/blob/master/examples/with-styled-components/pages/_document.js
+// See also https://stackoverflow.com/questions/60697385/fix-eslint-warnings-in-next-jss-document-tsx-thrown-by-documentany-and-ctx-r
 MyDocument.getInitialProps = async ctx => {
   const sheet = new ServerStyleSheet();
   const originalRenderPage = ctx.renderPage;
@@ -88,8 +89,6 @@ MyDocument.getInitialProps = async ctx => {
         </>
       ),
     };
-  } catch (_e) {
-    console.error(_e);
   } finally {
     sheet.seal();
   }
