@@ -17,13 +17,13 @@ cd bird-count
 clarinet integrate
 ```
 
-In a different terminal, start the development server:
+In a different terminal, install the dependencies and start the development server:
 
 ```bash
 yarn && yarn run dev
 ```
 
-Install the [Hiro Wallet](https://www.hiro.so/wallet/install-web) and select Change Network -> Localnet.
+In your browser, install the [Hiro Wallet](https://www.hiro.so/wallet/install-web) and select Change Network -> Localnet.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to load the app. You can connect your wallet and use the `+` button to increment the counter.
 
