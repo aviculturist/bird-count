@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "lingui compile && next dev",
-    "build": "next build",
+    "build": "lingui compile && next build",
     "export": "next export",
     "start": "next start",
     "lingui": "lingui extract --clean --overwrite && lingui compile",
