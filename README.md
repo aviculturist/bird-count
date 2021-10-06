@@ -1,10 +1,11 @@
 # BirdCount
 
-[![Release](https://github.com/aviculturist/bird-count/blob/main/.github/workflows/release.yaml/badge.svg)](https://github.com/aviculturist/bird-count/blob/main/.github/workflows/release.yaml)
+[![Release](https://github.com/aviculturist/bird-count//actions/workflows/release.yaml/badge.svg)](https://github.com/aviculturist/bird-count//actions/workflows/release.yamlrelease.yaml)
+[![Lint](https://github.com/aviculturist/bird-count/actions/workflows/lint.yml/badge.svg)](https://github.com/aviculturist/bird-count/actions/workflows/lint.yml)
 
 BirdCount comprises a proof of concept [Stacks](https://stacks.co) and [Next.js](https://nextjs.org/) app.
 
-It implements a simple [Clarity](https://clarity-lang.org/) counter contract and knits together a web frontend interface, testing frameworks, integration environment, scripting setup, and deployment workflow.
+It implements a simple [Clarity](https://clarity-lang.org/) counter contract and knits together a web frontend interface, testing frameworks, integration environment, scripting setup, and static IPFS deployment workflow.
 
 **NOTE: THIS PROJECT AND SUPPORTING LIBRARIES HAVE NOT BEEN AUDITED, IT IS IN ALPHA STATE. USE AT YOUR OWN RISK / DISCRETION**  
 
