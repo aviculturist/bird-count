@@ -1,8 +1,17 @@
 import React, { ReactNode, useState, useEffect, useContext } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { PaletteMode } from '@mui/material';
+import { Direction, PaletteMode } from '@mui/material';
 import { useAtom } from 'jotai';
 import { darkModeAtom } from '@store/darkmode';
+import { useActiveLocale } from '@hooks/use-active-locale';
+import { arEG, enUS, itIT, Localization, ruRU } from '@mui/material/locale';
+
+const CODE_TO_LOCALE: { [char: string]: Localization } = {
+  en: enUS,
+  ar: arEG,
+  it: itIT,
+  ru: ruRU,
+};
 
 export interface DarkModeContextInterface {
   darkMode?: any;
@@ -29,14 +38,25 @@ export function DarkModeProvider({ children }: { children: ReactNode }) {
   // TODO: footer gets the correct theme, but the main body doesn't
   //const [darkMode, setDarkMode] = useState(global.window?.__prefersDarkMode || false);
   const [darkMode, setDarkMode] = useAtom(darkModeAtom);
-  const getColorMode = (dmode: boolean) => ({
+  const activeLocale = useActiveLocale();
+  const languageDirection = activeLocale === 'ar' ? 'rtl' : 'ltr';
+  //console.log(languageDirection);
+  const getColorMode = (dmode: boolean, dir: Direction) => ({
+    direction: dir,
     palette: {
       mode: dmode === true ? ('dark' as PaletteMode) : ('light' as PaletteMode),
     },
   });
 
-  // Update the theme only if darkMode changes
-  const theme = React.useMemo(() => createTheme(getColorMode(darkMode as boolean)), [darkMode]);
+  // Update the theme only if darkMode or languageDirection changes
+  const theme = React.useMemo(
+    () =>
+      createTheme(
+        getColorMode(darkMode as boolean, languageDirection as Direction),
+        CODE_TO_LOCALE[activeLocale]
+      ),
+    [activeLocale, darkMode, languageDirection]
+  );
 
   const toggleDarkMode = () => {
     global.window.__setPrefersDarkMode(darkMode === true ? false : true);

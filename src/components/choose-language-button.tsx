@@ -18,6 +18,7 @@ import MenuItem from '@mui/material/MenuItem';
 //import { useLocation } from 'react-router-dom';
 import { useLocationLinkProps } from '@hooks/use-location-link-props';
 import LanguageLink from '@components/language-link';
+import { t } from '@lingui/macro';
 
 function LanguageMenu() {
   const [isOpen, setIsOpen] = useAtom(languageMenuAtom);
@@ -99,7 +100,7 @@ function ChooseLanguageButton() {
         aria-haspopup="true"
         aria-expanded={isOpen ? 'true' : undefined}
       >
-        <Tooltip title="Choose Language">
+        <Tooltip title={t`Choose Language`}>
           <LanguageIcon fontSize="small" />
         </Tooltip>
       </IconButton>

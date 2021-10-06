@@ -40,7 +40,7 @@ function Copyright() {
         >
           {'© '}
           {t`the contributors`} {new Date().getFullYear()}
-          <Tooltip title="Made with Love">
+          <Tooltip title={t`Made with Love`}>
             <FavoriteIcon color="error" fontSize="inherit" />
           </Tooltip>
         </Button>{' '}

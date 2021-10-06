@@ -1,0 +1,20 @@
+{
+  "BirdCount makes it easy to count all the birds": "يجعل BirdCount من السهل عد جميع الطيور",
+  "Bitcoin Block Height": "",
+  "Choose Language": "اختر اللغة",
+  "Click to decrement": "انقر لتقليل",
+  "Click to increment": "انقر لزيادة",
+  "Connect Stacks Wallet": "Stacks Wallet الاتصال",
+  "Connecting to Stacks Wallet": "Stacks Wallet توصيل",
+  "EXTREME ALPHA SOFTWARE: USE AT YOUR OWN RISK": "برنامج ألفا للغاية: استخدمه على مسؤوليتك الخاصة",
+  "Loading...": "...تحميل",
+  "Made with Love": "مصنوع بحب",
+  "Show BirdCount Transactions": "إظهار معاملات BirdCount",
+  "Sign out": "خروج",
+  "Stacks Chain Tip": "",
+  "Transactions": "المعاملات",
+  "Turn off Dark Mode": "قم بإيقاف تشغيل الوضع الداكن",
+  "Turn on Dark Mode": "قم بتشغيل الوضع الداكن",
+  "the contributors": "المساهمين",
+  "{birdCount, plural, one {# bird} other {# birds}}": "{birdCount, plural, one {طائر #} other {طيور #}}"
+}

@@ -6,6 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { birdCountAtom } from '@store/bird-count';
 import { useHandleIncrement } from '@hooks/use-increment';
+import { t, plural, Plural } from '@lingui/macro';
 
 // TODO: implement using @clarigen/web
 // import { useCallback } from 'react';
@@ -27,7 +28,7 @@ import { useHandleIncrement } from '@hooks/use-increment';
 // }
 
 function BirdCountButtonGroup() {
-  const [birdCount, setBirdCount] = useAtom(birdCountAtom);
+  const [birdCount] = useAtom(birdCountAtom);
   const handleIncrement = useHandleIncrement();
 
   // TODO: implement using @clarigen/web
@@ -35,17 +36,28 @@ function BirdCountButtonGroup() {
 
   return (
     <ButtonGroup size="large" variant="contained">
-      {/* <Tooltip title="Click to decrement"> */}
-      <Button onClick={() => handleIncrement()}>
-        <RemoveIcon />
+      <Tooltip title={t`Click to decrement`}>
+        <Button onClick={() => handleIncrement()}>
+          <RemoveIcon />
+        </Button>
+      </Tooltip>
+      <Button>
+        {t({
+          message: plural(birdCount, {
+            one: '# bird',
+            other: '# birds',
+          }),
+        })}
       </Button>
-      {/* </Tooltip> */}
-      <Button>{birdCount} birds</Button>
-      {/* <Tooltip title="Click to increment"> */}
-      <Button onClick={() => handleIncrement()}>
-        <AddIcon />
-      </Button>
-      {/* </Tooltip> */}
+      {/* Another way to do plurals
+      <Button>
+        <Plural value={birdCount} one="# bird" other="# birds" />
+      </Button> */}
+      <Tooltip title={t`Click to increment`}>
+        <Button onClick={() => handleIncrement()}>
+          <AddIcon />
+        </Button>
+      </Tooltip>
     </ButtonGroup>
   );
 }

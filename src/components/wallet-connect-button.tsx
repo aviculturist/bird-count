@@ -1,6 +1,6 @@
 import { useAuth } from 'micro-stacks/react';
 import Button from '@mui/material/Button';
-import NoSsr from '@mui/core/NoSsr';
+import { t } from '@lingui/macro';
 
 const WalletConnectButton = () => {
   const { isSignedIn, handleSignIn, handleSignOut, isLoading } = useAuth();
@@ -11,7 +11,7 @@ const WalletConnectButton = () => {
         color="primary"
         onClick={isSignedIn ? handleSignOut : handleSignIn}
       >
-        {isLoading ? 'Loading...' : isSignedIn ? 'Sign out' : 'Connect Stacks Wallet'}
+        {isLoading ? t`Loading...` : isSignedIn ? t`Sign out` : t`Connect Stacks Wallet`}
       </Button>
     </>
   );

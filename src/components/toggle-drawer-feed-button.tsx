@@ -6,6 +6,7 @@ import Tooltip from '@mui/material/Tooltip';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { pendingTransactionsCountAtom } from '@store/pending-transactions-count';
 import { useAtom } from 'jotai';
+import { t } from '@lingui/macro';
 
 function ToggleDrawerFeedButton() {
   const { isDrawer, setIsDrawer } = useDrawer();
@@ -18,7 +19,7 @@ function ToggleDrawerFeedButton() {
   return (
     <IconButton onClick={handleToggleDrawer} color="inherit">
       <Badge badgeContent={pendingTransactionsCount} color="secondary">
-        <Tooltip title="Show BirdCount Transaction Feed">
+        <Tooltip title={t`Show BirdCount Transactions`}>
           <NotificationsIcon fontSize="small" />
         </Tooltip>
       </Badge>

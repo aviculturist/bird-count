@@ -1,3 +1,20 @@
 {
-  "BirdCount makes it easy to count all the birds": "BirdCount rende facile contare tutti gli uccelli"
+  "BirdCount makes it easy to count all the birds": "BirdCount rende facile contare tutti gli uccelli",
+  "Bitcoin Block Height": "Altezza blocco bitcoin",
+  "Choose Language": "Scegli la lingua",
+  "Click to decrement": "Clicca per diminuire",
+  "Click to increment": "Clicca per incrementare",
+  "Connect Stacks Wallet": "",
+  "Connecting to Stacks Wallet": "Connessione a Stacks Wallet",
+  "EXTREME ALPHA SOFTWARE: USE AT YOUR OWN RISK": "SOFTWARE ALPHA ESTREMA: UTILIZZO A PROPRIO RISCHIO",
+  "Loading...": "Caricamento...",
+  "Made with Love": "Fatto con amore",
+  "Show BirdCount Transactions": "Mostra transazioni BirdCount",
+  "Sign out": "Disconnessione",
+  "Stacks Chain Tip": "",
+  "Transactions": "Transazioni",
+  "Turn off Dark Mode": "Disattiva modalità oscura",
+  "Turn on Dark Mode": "Attiva modalità oscura",
+  "the contributors": "i contributori",
+  "{birdCount, plural, one {# bird} other {# birds}}": "{birdCount, plural, one {# uccello} other {# uccelli}}"
 }

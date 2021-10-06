@@ -17,20 +17,32 @@ import { useAtom } from 'jotai';
 import { userLocaleAtom, DEFAULT_MESSAGES, DEFAULT_LOCALE, Locale } from '@store/user-locale';
 import { useActiveLocale, queryLocale, navigatorLocale } from '@hooks/use-active-locale';
 import { NoSsr } from '@mui/core';
+import { StyleSheetManager } from 'styled-components';
+import rtlPlugin from 'stylis-plugin-rtl';
+import { StylisPlugin } from 'styled-components';
 
-// TODO: missing userLocale
-async function dynamicActivate(locale: Locale) {
-  //console.log('within dynamicActivate: ' + locale);
-  i18n.loadLocaleData(locale, { plurals: () => plurals[locale] });
-  const { messages } =
-    locale === DEFAULT_LOCALE
-      ? { messages: DEFAULT_MESSAGES }
-      : await import(`@lingui/loader!./../../locale/${locale}.json?raw-lingui`);
-  i18n.load(locale, messages);
-  i18n.activate(locale);
+//
+// function DirectionProvider(props) {
+//   return <StyleSheetManager stylisPlugins={[rtlPlugin]}>{props.children}</StyleSheetManager>;
+// }
+
+// https://dev.to/pffigueiredo/bullet-proof-rtl-rtl-in-a-web-platform-3-6-4bne
+// TODO: these props/children ?
+function DirectionProvider({ children }: { children: ReactNode }) {
+  //function DirectionProvider(props: ) {
+  const locale = useActiveLocale();
+  // TODO: see if direction detection is available as part of the rtlPlugin instead of hardcoding
+  const dir = locale === 'ar' ? 'rtl' : 'ltr';
+
+  return (
+    <StyleSheetManager stylisPlugins={dir === 'rtl' ? [rtlPlugin as unknown as StylisPlugin] : []}>
+      {children}
+      {/* {props.children} */}
+    </StyleSheetManager>
+  );
 }
 
-async function initialDynamicActivate(queryLocale: Locale | undefined, userLocale: Locale | null) {
+async function dynamicActivate(queryLocale: Locale | undefined, userLocale: Locale | null) {
   //console.log('within initialDynamicActivate: ' + queryLocale + ' ' + userLocale);
 
   const locale: Locale = queryLocale ?? userLocale ?? navigatorLocale() ?? DEFAULT_LOCALE;
@@ -43,7 +55,8 @@ async function initialDynamicActivate(queryLocale: Locale | undefined, userLocal
   i18n.activate(locale);
 }
 
-dynamicActivate(queryLocale ?? navigatorLocale() ?? DEFAULT_LOCALE);
+// TODO: is this only run server side?
+dynamicActivate(queryLocale ?? navigatorLocale() ?? DEFAULT_LOCALE, null);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const locale = useActiveLocale();
@@ -51,9 +64,12 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [userLocale, setUserLocale] = useAtom(userLocaleAtom); //useUserLocaleManager()
 
   useEffect(() => {
-    initialDynamicActivate(locale, userLocale)
+    dynamicActivate(locale, userLocale)
       .then(() => {
         document.documentElement.setAttribute('lang', locale);
+        const dir = locale === 'ar' ? 'rtl' : 'ltr';
+        document.documentElement.setAttribute('dir', dir);
+        document.querySelector('body')?.setAttribute('dir', dir);
         setUserLocale(locale); // stores the selected locale to persist across sessions
       })
       .catch(error => {
@@ -99,10 +115,12 @@ function BirdCountApp(props: AppProps) {
       <NoSsr>
         <HashRouter>
           <LanguageProvider>
-            <DarkModeProvider>
-              <CssBaseline />
-              <Component {...pageProps} />
-            </DarkModeProvider>
+            <DirectionProvider>
+              <DarkModeProvider>
+                <CssBaseline />
+                <Component {...pageProps} />
+              </DarkModeProvider>
+            </DirectionProvider>
           </LanguageProvider>
         </HashRouter>
       </NoSsr>

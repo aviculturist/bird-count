@@ -7,6 +7,7 @@ import CircleIcon from '@mui/icons-material/Circle';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Tooltip from '@mui/material/Tooltip';
 import { networkAtom } from 'micro-stacks/react';
+import { t } from '@lingui/macro';
 
 export default function BitcoinBlockHeightButton() {
   const [network] = useAtom(networkAtom);
@@ -14,7 +15,7 @@ export default function BitcoinBlockHeightButton() {
   const [currentBitcoinExplorer] = useAtom(currentBitcoinExplorerState);
   return (
     <>
-      <Tooltip title="Bitcoin Block Height">
+      <Tooltip title={t`Bitcoin Block Height`}>
         <LoadingButton
           loading={networkInfo.burn_block_height === undefined}
           loadingPosition="start"

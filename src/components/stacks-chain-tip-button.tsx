@@ -5,6 +5,7 @@ import { currentExplorerState, currentChainState } from '@store/network-state';
 import CircleIcon from '@mui/icons-material/Circle';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Tooltip from '@mui/material/Tooltip';
+import { t } from '@lingui/macro';
 
 export default function StacksChainTipButton() {
   const [networkInfo] = useAtom(networkInfoAtom);
@@ -13,7 +14,7 @@ export default function StacksChainTipButton() {
 
   return (
     <>
-      <Tooltip title="Stacks Chain Tip">
+      <Tooltip title={t`Stacks Chain Tip`}>
         <LoadingButton
           loading={networkInfo.stacks_tip === undefined}
           loadingPosition="start"

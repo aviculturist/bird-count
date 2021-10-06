@@ -17,6 +17,7 @@ import { useFeed } from '@hooks/use-feed';
 import { toRelativeTime } from '@utils/time';
 import { currentExplorerState, currentChainState } from '@store/network-state';
 import { useAtom } from 'jotai';
+import { t } from '@lingui/macro';
 
 export default function DrawerFeed() {
   const { isDrawer, setIsDrawer } = useDrawer();
@@ -43,7 +44,7 @@ export default function DrawerFeed() {
     >
       <List
         sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
-        subheader={<ListSubheader>BirdCounts</ListSubheader>}
+        subheader={<ListSubheader>{t`Transactions`}</ListSubheader>}
       >
         {feed.map((item, key) => (
           <ListItem button key={key}>

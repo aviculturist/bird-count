@@ -3,6 +3,7 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import Stack from '@mui/material/Stack';
 import { useAuth } from 'micro-stacks/react';
+import { t } from '@lingui/macro';
 
 export default function LoadingBackdrop() {
   const { isLoading } = useAuth();
@@ -19,7 +20,7 @@ export default function LoadingBackdrop() {
     >
       <Stack spacing={2} alignItems="center">
         <CircularProgress color="inherit" />
-        <Typography>Connecting to Stacks Wallet</Typography>
+        <Typography>{t`Connecting to Stacks Wallet`}</Typography>
       </Stack>
     </Backdrop>
   );
