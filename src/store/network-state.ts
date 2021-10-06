@@ -25,6 +25,9 @@ import {
   DEFAULT_REGTEST_BIRDCOUNT_CONTRACT,
   DEFAULT_TESTNET_BIRDCOUNT_CONTRACT,
   DEFAULT_LOCALNET_BIRDCOUNT_CONTRACT,
+  DEFAULT_LOCALNET_BITCOIN_EXPLORER,
+  DEFAULT_TESTNET_BITCOIN_EXPLORER,
+  DEFAULT_MAINNET_BITCOIN_EXPLORER
 } from '@utils/constants';
 
 export const currentBirdcountContractState = atom(get => {
@@ -51,6 +54,19 @@ export const currentExplorerState = atom(get => {
       ? DEFAULT_TESTNET_EXPLORER
       : DEFAULT_MAINNET_EXPLORER;
   return defaultExplorer;
+});
+
+export const currentBitcoinExplorerState = atom(get => {
+  const network = get(networkAtom);
+  const defaultBitcoinExplorer =
+    network.getCoreApiUrl() === DEFAULT_LOCALNET_SERVER
+      ? DEFAULT_LOCALNET_BITCOIN_EXPLORER
+      : network.getCoreApiUrl() === DEFAULT_REGTEST_SERVER
+      ? ''
+      : network.getCoreApiUrl() === DEFAULT_TESTNET_SERVER
+      ? DEFAULT_TESTNET_BITCOIN_EXPLORER
+      : DEFAULT_MAINNET_BITCOIN_EXPLORER;
+  return defaultBitcoinExplorer;
 });
 
 export const currentChainState = atom(get => {

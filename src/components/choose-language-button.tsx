@@ -1,25 +1,29 @@
 import React, { useMemo } from 'react';
-
-import { Badge, IconButton, Tooltip } from '@mui/material';
+import MenuList from '@mui/material/MenuList';
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Check from '@mui/icons-material/Check';
 import LanguageIcon from '@mui/icons-material/Language';
 // can't use next/app router until i18n SSG is supported
 //import Link from 'next/link';
-import { Link } from 'react-router-dom';
-
+//import { Link } from 'react-router-dom';
 import { userLocaleAtom, DEFAULT_LOCALE, SUPPORTED_LOCALES, Locale } from '@store/user-locale';
 import { useActiveLocale, navigatorLocale } from '@hooks/use-active-locale';
-
 import { useAtom } from 'jotai';
 import { languageMenuAnchorElAtom, languageMenuAtom } from '@store/language-menu';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 // can't use next/app router until i18n SSG is supported
 //import { useRouter } from 'next/router';
-import { useLocation } from 'react-router-dom';
+//import { useLocation } from 'react-router-dom';
 import { useLocationLinkProps } from '@hooks/use-location-link-props';
+import LanguageLink from '@components/language-link';
 
 const CODE_TO_NAME: { [char: string]: string } = {
   en: 'English',
+  ar: 'العربية',
   it: 'Italiano',
   ru: 'Русский',
 };
@@ -61,10 +65,12 @@ function LanguageMenu() {
         'aria-labelledby': 'choose-language-button',
       }}
     >
-      {SUPPORTED_LOCALES.map(locale => (
-        <LanguageMenuItem locale={locale} active={activeLocale === locale} key={locale} />
-      ))}
-      {/* When next supports i18n with SSG asPath would be preferred here */}
+      <MenuList dense>
+        {SUPPORTED_LOCALES.map(locale => (
+          <LanguageMenuItem locale={locale} active={activeLocale === locale} key={locale} />
+        ))}
+        {/* When next supports i18n with SSG asPath would be preferred here */}
+      </MenuList>
     </Menu>
   );
 }
@@ -88,12 +94,16 @@ function LanguageMenuItem({ locale, active }: { locale: Locale; active: boolean 
   const { to, onClick } = useLocationLinkProps(locale);
 
   if (!to) return null;
-
   return (
     <MenuItem key={locale} onClick={onClick}>
-      <Link to={to}>
-        {CODE_TO_NAME[locale]} {active && 'Active'}
-      </Link>
+      {active && (
+        <ListItemIcon>
+          <Check color="success"/>
+        </ListItemIcon>
+      )}
+      <LanguageLink to={to}>
+        <ListItemText inset={!active}>{CODE_TO_NAME[locale]}</ListItemText>
+      </LanguageLink>
     </MenuItem>
   );
 }

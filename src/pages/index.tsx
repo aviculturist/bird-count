@@ -1,6 +1,5 @@
 import * as React from 'react';
-import LoadingBackdrop from '@components/loading-backdrop';
-import BirdCount from '@components/bird-count';
+import BirdCountApp from '@components/bird-count-app';
 import { GetStaticPropsContext, NextPage } from 'next';
 import { GetQueries, getStaticQueryProps, withInitialQueryData } from 'jotai-query-toolkit/nextjs';
 import { appProviderAtomBuilder } from 'micro-stacks/react';
@@ -15,8 +14,7 @@ import {
 const Index: NextPage<any> = () => {
   return (
     <>
-      <BirdCount />
-      <LoadingBackdrop />
+      <BirdCountApp />
     </>
   );
 };
@@ -39,6 +37,12 @@ const getQueries: GetQueries = (_ctx: GetStaticPropsContext) => [
     'recent-txs', // the query key we're using
     async () => {
       return [];
+    }, // TODO: our fetcher for the server
+  ],
+  [
+    'network-info', // the query key we're using
+    async () => {
+      return {};
     }, // TODO: our fetcher for the server
   ],
 ];
