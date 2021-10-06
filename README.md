@@ -15,6 +15,10 @@ To access BirdCount, use an IPFS gateway link from the
 [latest release](https://github.com/aviculturist/bird-count/releases/latest),
 or visit [bird-count.com](https://bird-count.com).
 
+> The counter is statically set at 15 but will then fetch the counter state
+> dynamically every 3 seconds using whichever network you have selected
+> NOTE: mainnet is the default and localnet only works in development mode
+
 ## Getting Started
 
 To run the integration environment locally, install and run [Docker Desktop](https://www.docker.com/products/docker-desktop).
