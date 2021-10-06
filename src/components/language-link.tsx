@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import {darken, useTheme} from '@mui/material/styles';
+import { Link as ReactRouterDomLink, LinkProps } from 'react-router-dom';
+import { styled } from '@mui/material/styles';
+import { darken } from '@mui/material/styles';
+import { DefaultTheme } from '@mui/system';
 
-const StyledLink = styled(Link)(
-  ({ theme = useTheme() }) => `
+const StyledLink = styled(ReactRouterDomLink)(
+  ({ theme }) => `
   color: ${theme.palette.primary.main};
   text-decoration: none;
   &:focus,
@@ -17,12 +18,11 @@ const StyledLink = styled(Link)(
   :hover {
     color: ${darken(theme.palette.primary.main, 0.2)};
   }
-`,
+`
 );
 
-export default function LanguageLink(props) {
+function LanguageLink(props: LinkProps) {
   return <StyledLink {...props} />;
-
 }
 // const StyledLink = styled(Link)`
 //   text-decoration: none;

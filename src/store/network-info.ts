@@ -27,30 +27,34 @@ async function fetchPrivate(input: RequestInfo, init: RequestInit = {}): Promise
   return fetch(input, { ...DEFAULT_FETCH_OPTIONS, ...init });
 }
 
-export const networkInfoAtom = atomWithQuery<NetworkInfo>('network-info', async get => {
-  const network = get(networkAtom);
+export const networkInfoAtom = atomWithQuery<NetworkInfo>(
+  'network-info',
+  async get => {
+    const network = get(networkAtom);
 
-  const requestHeaders = {
-    Accept: 'application/json',
-  };
+    const requestHeaders = {
+      Accept: 'application/json',
+    };
 
-  const fetchOptions = {
-    method: 'GET',
-    headers: requestHeaders,
-  };
+    const fetchOptions = {
+      method: 'GET',
+      headers: requestHeaders,
+    };
 
-  const defaultNetwork = new StacksMainnet();
-  const url = network ? network.getInfoUrl() : defaultNetwork.getInfoUrl();
-  const response = await fetchPrivate(url, fetchOptions);
-  if (!response.ok) {
-    let msg = '';
-    try {
-      msg = await response.json();
-    } catch (error) {}
-    throw new Error(
-      `Error retrieving info URL. Response ${response.status}: ${response.statusText}. Attempted to fetch ${url} and failed with the message: "${msg}"`
-    );
-  }
-  const networkInfoResult:NetworkInfo = await response.json();
-  return networkInfoResult;
-}, {refetchInterval: 60000} ); // every minute
+    const defaultNetwork = new StacksMainnet();
+    const url = network ? network.getInfoUrl() : defaultNetwork.getInfoUrl();
+    const response = await fetchPrivate(url, fetchOptions);
+    if (!response.ok) {
+      let msg = '';
+      try {
+        msg = await response.json();
+      } catch (error) {}
+      throw new Error(
+        `Error retrieving info URL. Response ${response.status}: ${response.statusText}. Attempted to fetch ${url} and failed with the message: "${msg}"`
+      );
+    }
+    const networkInfoResult: NetworkInfo = await response.json();
+    return networkInfoResult;
+  },
+  { refetchOnMount: true, refetchOnReconnect: true, refetchInterval: 60000 }
+); // every minute

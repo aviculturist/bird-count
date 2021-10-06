@@ -24,7 +24,7 @@ describe('Counter contract', () => {
 
     // When response is wrapped in (ok
     expect(response.isOk()).toBe(true);
-    expect(response).toEqual({"value": 0n});
+    expect(response).toEqual({ value: 0n });
   });
 
   test('increment counter', async () => {

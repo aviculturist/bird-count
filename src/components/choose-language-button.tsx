@@ -8,8 +8,14 @@ import Check from '@mui/icons-material/Check';
 import LanguageIcon from '@mui/icons-material/Language';
 // can't use next/app router until i18n SSG is supported
 //import Link from 'next/link';
-//import { Link } from 'react-router-dom';
-import { userLocaleAtom, DEFAULT_LOCALE, SUPPORTED_LOCALES, Locale } from '@store/user-locale';
+import { Link as ReactRouterDomLink, LinkProps } from 'react-router-dom';
+import {
+  userLocaleAtom,
+  DEFAULT_LOCALE,
+  SUPPORTED_LOCALES,
+  Locale,
+  CODE_TO_NAME,
+} from '@store/user-locale';
 import { useActiveLocale, navigatorLocale } from '@hooks/use-active-locale';
 import { useAtom } from 'jotai';
 import { languageMenuAnchorElAtom, languageMenuAtom } from '@store/language-menu';
@@ -17,16 +23,33 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 // can't use next/app router until i18n SSG is supported
 //import { useRouter } from 'next/router';
+// TODO: Currently missing any location information:
 //import { useLocation } from 'react-router-dom';
 import { useLocationLinkProps } from '@hooks/use-location-link-props';
-import LanguageLink from '@components/language-link';
+//import LanguageLink from '@components/language-link';
+import { styled } from '@mui/material/styles';
+import { darken } from '@mui/material/styles';
 
-const CODE_TO_NAME: { [char: string]: string } = {
-  en: 'English',
-  ar: 'العربية',
-  it: 'Italiano',
-  ru: 'Русский',
-};
+const StyledLink = styled(ReactRouterDomLink)(
+  ({ theme }) => `
+  color: ${theme.palette.primary.main};
+  text-decoration: none;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+  :hover {
+    color: ${darken(theme.palette.primary.main, 0.2)};
+  }
+`
+);
+
+function LanguageLink(props: LinkProps) {
+  return <StyledLink {...props} />;
+}
 
 function LanguageMenu() {
   const [isOpen, setIsOpen] = useAtom(languageMenuAtom);
@@ -41,6 +64,7 @@ function LanguageMenu() {
     setAnchorEl(null);
     setIsOpen(false);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
     setIsOpen(false);
@@ -77,28 +101,16 @@ function LanguageMenu() {
 //LanguageMenu.whyDidYouRender = true
 //export { LanguageMenu };
 
-const useTargetLocale = (activeLocale: Locale) => {
-  const browserLocale = useMemo(() => navigatorLocale(), []);
-
-  if (browserLocale && (browserLocale !== DEFAULT_LOCALE || activeLocale !== DEFAULT_LOCALE)) {
-    if (activeLocale === browserLocale) {
-      return DEFAULT_LOCALE;
-    } else {
-      return browserLocale;
-    }
-  }
-  return null;
-};
-
 function LanguageMenuItem({ locale, active }: { locale: Locale; active: boolean }) {
   const { to, onClick } = useLocationLinkProps(locale);
 
   if (!to) return null;
+
   return (
     <MenuItem key={locale} onClick={onClick}>
       {active && (
         <ListItemIcon>
-          <Check color="success"/>
+          <Check color="success" />
         </ListItemIcon>
       )}
       <LanguageLink to={to}>

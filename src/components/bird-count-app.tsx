@@ -21,17 +21,17 @@ function Copyright() {
   return (
     <>
       <Stack
-          direction="row"
-          justifyContent="flex-end"
-          alignItems="flex-end"
-          spacing={1}
-          sx={{
-            p: 2,
-            position: 'absolute',
-            bottom: 10,
-            left: 10,
-          }}
-        >
+        direction="row"
+        justifyContent="flex-end"
+        alignItems="flex-end"
+        spacing={1}
+        sx={{
+          p: 2,
+          position: 'absolute',
+          bottom: 10,
+          left: 10,
+        }}
+      >
         <Button
           size="small"
           color="inherit"
