@@ -43,9 +43,9 @@ export const currentBirdcountContractState = atom(get => {
   return birdCountContract;
 });
 
-export const currentExplorerState = atom(get => {
+export const currentStacksExplorerState = atom(get => {
   const network = get(networkAtom);
-  const defaultExplorer =
+  const defaultStacksExplorer =
     network.getCoreApiUrl() === DEFAULT_LOCALNET_SERVER
       ? DEFAULT_LOCALNET_EXPLORER
       : network.getCoreApiUrl() === DEFAULT_REGTEST_SERVER
@@ -53,7 +53,7 @@ export const currentExplorerState = atom(get => {
       : network.getCoreApiUrl() === DEFAULT_TESTNET_SERVER
       ? DEFAULT_TESTNET_EXPLORER
       : DEFAULT_MAINNET_EXPLORER;
-  return defaultExplorer;
+  return defaultStacksExplorer;
 });
 
 export const currentBitcoinExplorerState = atom(get => {

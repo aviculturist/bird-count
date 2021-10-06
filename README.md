@@ -151,13 +151,13 @@ Now all of the above as well as a `dnslink`-based name resolution system are han
 
 Anyone running `ipfs` can support the project by pinning the latest version.
 
-First find the hash on the latest release page, or by running:
+First find the CID hash on the latest release page, or by running:
 
 ```bash
 dig +short txt _dnslink.bird-count.com
 "dnslink=/ipfs/<...Content Identifier (CID) of the out folder...>"
 ```
-(alternatively, you can run `ipfs dns bird-count.com` to get the latest hash)
+(alternatively, you can run `ipfs dns bird-count.com` to get the latest CID hash)
 
 To pin this content, run:
 

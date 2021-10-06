@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useAtom } from 'jotai';
 import { networkInfoAtom } from '@store/network-info';
-import { currentExplorerState, currentChainState } from '@store/network-state';
+import { currentStacksExplorerState, currentChainState } from '@store/network-state';
 import CircleIcon from '@mui/icons-material/Circle';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Tooltip from '@mui/material/Tooltip';
@@ -9,7 +9,7 @@ import { t } from '@lingui/macro';
 
 export default function StacksChainTipButton() {
   const [networkInfo] = useAtom(networkInfoAtom);
-  const [currentExplorer] = useAtom(currentExplorerState);
+  const [currentStacksExplorer] = useAtom(currentStacksExplorerState);
   const [currentChain] = useAtom(currentChainState);
 
   return (
@@ -18,7 +18,7 @@ export default function StacksChainTipButton() {
         <LoadingButton
           loading={networkInfo.stacks_tip === undefined}
           loadingPosition="start"
-          href={`${currentExplorer}/block/${networkInfo.stacks_tip}?chain=${currentChain}`}
+          href={`${currentStacksExplorer}/block/${networkInfo.stacks_tip}?chain=${currentChain}`}
           target="_blank"
           startIcon={<CircleIcon />}
           variant="text"

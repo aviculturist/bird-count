@@ -31,6 +31,7 @@ declare global {
     __prefersDarkMode: any;
     __setPrefersDarkMode: any;
     __onPrefChange: any;
+    generateIcon: any;
   }
 }
 

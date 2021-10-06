@@ -157,6 +157,11 @@ export const birdCountAtom = atomWithQuery<number>('bird-count', async get => {
     });
     if (data.okay && data.result) {
       const result = cvToJSON(hexToCV(data.result as string));
+
+      // A favicon counter, because why not  -🐦+ 💪
+      const link = document.querySelector('link[rel="icon"]');
+      global.window.generateIcon(link, '🐦', result.value.value);
+
       return result.value.value;
     } // TODO: failed to fetch
   } catch (_e) {

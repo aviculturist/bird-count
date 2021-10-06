@@ -108,7 +108,12 @@ function BirdCountApp(props: AppProps) {
     <Provider>
       <Head>
         <title>BirdCount</title>
-        <link href="./favicon.ico" rel="icon" />
+        <link
+          rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22></text><text text-anchor=%22end%22 y=%221.9em%22 x=%221.9em%22 font-size=%2250%22>15</text></svg>"
+        />
+
+        {/* <link href="./favicon.ico" rel="icon" /> */}
         <meta content="minimum-scale=1, initial-scale=1, width=device-width" name="viewport" />
       </Head>
       {/* NoSsr because Nextjs doesn't support i18n SSG and HashRouter will fail server-side with Invariant failed: Hash history needs a DOM*/}

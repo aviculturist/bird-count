@@ -56,5 +56,5 @@ export const networkInfoAtom = atomWithQuery<NetworkInfo>(
     const networkInfoResult: NetworkInfo = await response.json();
     return networkInfoResult;
   },
-  { refetchOnMount: true, refetchOnReconnect: true, refetchInterval: 60000 }
+  { refetchInterval: 10000 }
 ); // every minute

@@ -15,13 +15,13 @@ import LaunchIcon from '@mui/icons-material/Launch';
 import { useDrawer } from '@hooks/use-drawer';
 import { useFeed } from '@hooks/use-feed';
 import { toRelativeTime } from '@utils/time';
-import { currentExplorerState, currentChainState } from '@store/network-state';
+import { currentStacksExplorerState, currentChainState } from '@store/network-state';
 import { useAtom } from 'jotai';
 import { t } from '@lingui/macro';
 
 export default function DrawerFeed() {
   const { isDrawer, setIsDrawer } = useDrawer();
-  const [explorer] = useAtom(currentExplorerState);
+  const [explorer] = useAtom(currentStacksExplorerState);
   const [chain] = useAtom(currentChainState);
   const feed = useFeed();
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
