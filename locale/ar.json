@@ -16,5 +16,5 @@
   "Turn off Dark Mode": "قم بإيقاف تشغيل الوضع الداكن",
   "Turn on Dark Mode": "قم بتشغيل الوضع الداكن",
   "the contributors": "المساهمين",
-  "{birdCount, plural, one {# bird} other {# birds}}": "{birdCount, plural, one {طائر #} other {طيور #}}"
+  "{birdCount, plural, one {# bird} other {# birds}}": "{birdCount, plural, one {# طيور} other {# طيور}}"
 }
