@@ -1,8 +1,10 @@
 import * as React from 'react';
+// can't use next/app router until i18n SSG is supported
+//import Link from 'next/link';
 import { Link as ReactRouterDomLink, LinkProps } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { darken } from '@mui/material/styles';
-import { DefaultTheme } from '@mui/system';
+//import { DefaultTheme } from '@mui/system';
 
 const StyledLink = styled(ReactRouterDomLink)(
   ({ theme }) => `

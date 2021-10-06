@@ -8,7 +8,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import Tooltip from '@mui/material/Tooltip';
 import { networkAtom } from 'micro-stacks/react';
 
-export default function BitcoinBlockHeight() {
+export default function BitcoinBlockHeightButton() {
   const [network] = useAtom(networkAtom);
   const [networkInfo] = useAtom(networkInfoAtom);
   const [currentBitcoinExplorer] = useAtom(currentBitcoinExplorerState);

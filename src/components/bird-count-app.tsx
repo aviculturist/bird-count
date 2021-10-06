@@ -13,8 +13,8 @@ import Alert from '@mui/material/Alert';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Tooltip from '@mui/material/Tooltip';
 import Button from '@mui/material/Button';
-import BitcoinBlockHeight from '@components/bitcoin-block-height';
-import StacksChainTip from '@components/stacks-chain-tip';
+import BitcoinBlockHeightButton from '@components/bitcoin-block-height-button';
+import StacksChainTipButton from '@components/stacks-chain-tip-button';
 import { t } from '@lingui/macro';
 
 function Copyright() {
@@ -106,8 +106,8 @@ export default function BirdCountApp() {
             right: 10,
           }}
         >
-          <BitcoinBlockHeight />
-          <StacksChainTip />
+          <BitcoinBlockHeightButton />
+          <StacksChainTipButton />
         </Stack>
       </Box>
       {/* End footer */}

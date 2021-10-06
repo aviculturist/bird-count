@@ -6,7 +6,7 @@ import CircleIcon from '@mui/icons-material/Circle';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Tooltip from '@mui/material/Tooltip';
 
-export default function StacksChainTip() {
+export default function StacksChainTipButton() {
   const [networkInfo] = useAtom(networkInfoAtom);
   const [currentExplorer] = useAtom(currentExplorerState);
   const [currentChain] = useAtom(currentChainState);
