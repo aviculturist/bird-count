@@ -6,6 +6,9 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { birdCountAtom } from '@store/bird-count';
 import { useHandleIncrement } from '@hooks/use-increment';
+import { currentStacksExplorerState, currentChainState } from '@store/network-state';
+import { currentBirdcountContractState } from '@store/network-state';
+
 import { t, plural, Plural } from '@lingui/macro';
 
 // TODO: implement using @clarigen/web
@@ -30,6 +33,9 @@ import { t, plural, Plural } from '@lingui/macro';
 function BirdCountButtonGroup() {
   const [birdCount] = useAtom(birdCountAtom);
   const handleIncrement = useHandleIncrement();
+  const [currentStacksExplorer] = useAtom(currentStacksExplorerState);
+  const [currentChain] = useAtom(currentChainState);
+  const [birdCountContract] = useAtom(currentBirdcountContractState);
 
   // TODO: implement using @clarigen/web
   //const handleDecrement = useHandleDecrement();
@@ -37,11 +43,15 @@ function BirdCountButtonGroup() {
   return (
     <ButtonGroup size="large" variant="contained">
       <Tooltip title={t`Click to decrement`}>
-        <Button onClick={() => handleIncrement()}>
+        <Button href="#" onClick={() => handleIncrement()}>
           <RemoveIcon />
         </Button>
       </Tooltip>
-      <Button>
+      <Button
+        target="_blank"
+        fullWidth={true}
+        href={`${currentStacksExplorer}/txid/${birdCountContract}?chain=${currentChain}`}
+      >
         {t({
           message: plural(birdCount, {
             one: '# bird',
@@ -54,7 +64,7 @@ function BirdCountButtonGroup() {
         <Plural value={birdCount} one="# bird" other="# birds" />
       </Button> */}
       <Tooltip title={t`Click to increment`}>
-        <Button onClick={() => handleIncrement()}>
+        <Button href="#" onClick={() => handleIncrement()}>
           <AddIcon />
         </Button>
       </Tooltip>
