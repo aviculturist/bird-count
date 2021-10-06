@@ -19,7 +19,7 @@ export default function BitcoinBlockHeight() {
           loading={networkInfo.burn_block_height === undefined}
           loadingPosition="start"
           href={`${currentBitcoinExplorer}/block${
-            network.getCoreApiUrl() === DEFAULT_LOCALNET_SERVER && '-height'
+            network.getCoreApiUrl() === DEFAULT_LOCALNET_SERVER ? '-height' : ''
           }/${networkInfo.burn_block_height}`}
           target="_blank"
           startIcon={<CircleIcon />}
