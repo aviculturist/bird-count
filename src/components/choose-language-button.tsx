@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import * as React from 'react';
 import MenuList from '@mui/material/MenuList';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
@@ -6,17 +6,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Check from '@mui/icons-material/Check';
 import LanguageIcon from '@mui/icons-material/Language';
-// can't use next/app router until i18n SSG is supported
-//import Link from 'next/link';
-import { Link as ReactRouterDomLink, LinkProps } from 'react-router-dom';
-import {
-  userLocaleAtom,
-  DEFAULT_LOCALE,
-  SUPPORTED_LOCALES,
-  Locale,
-  CODE_TO_NAME,
-} from '@store/user-locale';
-import { useActiveLocale, navigatorLocale } from '@hooks/use-active-locale';
+import { SUPPORTED_LOCALES, Locale, CODE_TO_NAME } from '@store/user-locale';
+import { useActiveLocale } from '@hooks/use-active-locale';
 import { useAtom } from 'jotai';
 import { languageMenuAnchorElAtom, languageMenuAtom } from '@store/language-menu';
 import Menu from '@mui/material/Menu';
@@ -26,44 +17,14 @@ import MenuItem from '@mui/material/MenuItem';
 // TODO: Currently missing any location information:
 //import { useLocation } from 'react-router-dom';
 import { useLocationLinkProps } from '@hooks/use-location-link-props';
-//import LanguageLink from '@components/language-link';
-import { styled } from '@mui/material/styles';
-import { darken } from '@mui/material/styles';
-
-const StyledLink = styled(ReactRouterDomLink)(
-  ({ theme }) => `
-  color: ${theme.palette.primary.main};
-  text-decoration: none;
-  &:focus,
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    text-decoration: none;
-  }
-  :hover {
-    color: ${darken(theme.palette.primary.main, 0.2)};
-  }
-`
-);
-
-function LanguageLink(props: LinkProps) {
-  return <StyledLink {...props} />;
-}
+import LanguageLink from '@components/language-link';
 
 function LanguageMenu() {
   const [isOpen, setIsOpen] = useAtom(languageMenuAtom);
-  const [userLocale, setUserLocale] = useAtom(userLocaleAtom);
   const [anchorEl, setAnchorEl] = useAtom(languageMenuAnchorElAtom);
 
   const activeLocale = useActiveLocale();
   //console.log('useActiveLocale reports locale from LanguageMenu: ' + activeLocale)
-
-  const handleClick = (localeChoice: Locale) => {
-    setUserLocale(localeChoice);
-    setAnchorEl(null);
-    setIsOpen(false);
-  };
 
   const handleClose = () => {
     setAnchorEl(null);

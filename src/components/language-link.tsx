@@ -24,6 +24,8 @@ const StyledLink = styled(ReactRouterDomLink)(
 function LanguageLink(props: LinkProps) {
   return <StyledLink {...props} />;
 }
+export default LanguageLink;
+
 // const StyledLink = styled(Link)`
 //   text-decoration: none;
 //   color: ${props => props.theme.colors.main};

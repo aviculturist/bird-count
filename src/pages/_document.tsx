@@ -21,10 +21,10 @@ export default class MyDocument extends Document {
         <Head>
           {/* PWA primary color */}
           {/* <meta content={colorMode === 'dark' ? `${darkTheme.palette.primary.main}` : `${lightTheme.palette.primary.main}`} name="theme-color" /> */}
-          <link
+          {/* <link
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
             rel="stylesheet"
-          />
+          /> */}
           <script dangerouslySetInnerHTML={{ __html: scriptTxt }} />
         </Head>
         <body>
