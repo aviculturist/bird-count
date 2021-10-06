@@ -19,7 +19,7 @@ or visit [bird-count.com](https://bird-count.com).
 > dynamically every 3 seconds using whichever network you have selected
 > NOTE: mainnet is the default and localnet only works in development mode
 
-## Getting Started
+## Running BirdCount
 
 To run the integration environment locally, install and run [Docker Desktop](https://www.docker.com/products/docker-desktop).
 
