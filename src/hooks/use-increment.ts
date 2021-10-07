@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { useAtom } from 'jotai';
 import { useTransactionPopup } from 'micro-stacks/react';
+import { useAuth } from 'micro-stacks/react';
 import { LOADING_KEYS } from '@store/loading';
 import { loadingAtom } from '@store/loading';
 import { currentBirdcountContractState } from '@store/network-state';

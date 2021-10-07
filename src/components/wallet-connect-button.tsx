@@ -1,15 +1,31 @@
 import { useAuth } from 'micro-stacks/react';
 import Button from '@mui/material/Button';
+import { installWalletDialogAtom } from '@store/install-wallet-dialog';
+import { useAtom } from 'jotai';
+
 import { t } from '@lingui/macro';
 
 const WalletConnectButton = () => {
   const { isSignedIn, handleSignIn, handleSignOut, isLoading } = useAuth();
+  const [open, setOpen] = useAtom(installWalletDialogAtom);
+
   return (
     <>
       <Button
         variant="contained"
         color="primary"
-        onClick={isSignedIn ? handleSignOut : handleSignIn}
+        onClick={
+          isSignedIn
+            ? () => handleSignOut()
+            : () => {
+                try {
+                  handleSignIn().then(() => setOpen(false));
+                } catch (_e) {
+                  console.log(_e);
+                }
+                setOpen(true);
+              }
+        }
       >
         {isLoading ? t`Loading...` : isSignedIn ? t`Sign out` : t`Connect Stacks Wallet`}
       </Button>

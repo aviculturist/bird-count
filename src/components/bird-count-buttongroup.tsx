@@ -11,6 +11,8 @@ import { currentStacksExplorerState, currentChainState } from '@store/network-st
 import { currentBirdcountContractState } from '@store/network-state';
 import { useAuth } from 'micro-stacks/react';
 import { t, plural, Plural } from '@lingui/macro';
+import { installWalletDialogAtom } from '@store/install-wallet-dialog';
+import InstallWalletDialog from '@components/install-wallet-dialog';
 
 // TODO: implement using @clarigen/web
 // import { useCallback } from 'react';
@@ -35,44 +37,75 @@ function BirdCountButtonGroup() {
   const [birdCount] = useAtom(birdCountAtom);
   const handleIncrement = useHandleIncrement();
   const handleDecrement = useHandleDecrement();
-
   const [currentStacksExplorer] = useAtom(currentStacksExplorerState);
   const [currentChain] = useAtom(currentChainState);
   const [birdCountContract] = useAtom(currentBirdcountContractState);
   const { isSignedIn, handleSignIn } = useAuth();
+  const [open, setOpen] = useAtom(installWalletDialogAtom);
 
   // TODO: implement using @clarigen/web
   //const handleDecrement = useHandleDecrement();
 
   return (
-    <ButtonGroup size="large" variant="contained">
-      <Tooltip title={t`Click to decrement`}>
-        <Button href="#" onClick={isSignedIn ? () => handleDecrement() : () => handleSignIn()}>
-          <RemoveIcon />
+    <>
+      <ButtonGroup size="large" variant="contained">
+        <Tooltip title={t`Click to decrement`}>
+          <Button
+            href="#"
+            onClick={
+              isSignedIn
+                ? () => handleDecrement()
+                : () => {
+                    try {
+                      handleSignIn().then(() => setOpen(false));
+                    } catch (_e) {
+                      console.log(_e);
+                    }
+                    setOpen(true);
+                  }
+            }
+          >
+            <RemoveIcon />
+          </Button>
+        </Tooltip>
+        <Button
+          target="_blank"
+          fullWidth={true}
+          href={`${currentStacksExplorer}/txid/${birdCountContract}?chain=${currentChain}`}
+        >
+          {t({
+            message: plural(birdCount, {
+              one: '# bird',
+              other: '# birds',
+            }),
+          })}
         </Button>
-      </Tooltip>
-      <Button
-        target="_blank"
-        fullWidth={true}
-        href={`${currentStacksExplorer}/txid/${birdCountContract}?chain=${currentChain}`}
-      >
-        {t({
-          message: plural(birdCount, {
-            one: '# bird',
-            other: '# birds',
-          }),
-        })}
-      </Button>
-      {/* Another way to do plurals
+        {/* Another way to do plurals
       <Button>
         <Plural value={birdCount} one="# bird" other="# birds" />
       </Button> */}
-      <Tooltip title={t`Click to increment`}>
-      <Button href="#" onClick={isSignedIn ? () => handleIncrement() : () => handleSignIn()}>
-          <AddIcon />
-        </Button>
-      </Tooltip>
-    </ButtonGroup>
+        <Tooltip title={t`Click to increment`}>
+          <Button
+            href="#"
+            onClick={
+              isSignedIn
+                ? () => handleIncrement()
+                : () => {
+                    try {
+                      handleSignIn().then(() => setOpen(false));
+                    } catch (_e) {
+                      console.log(_e);
+                    }
+                    setOpen(true);
+                  }
+            }
+          >
+            <AddIcon />
+          </Button>
+        </Tooltip>
+      </ButtonGroup>
+      <InstallWalletDialog />
+    </>
   );
 }
 //BirdCountButtonGroup.WhyDidYouRender = true;
