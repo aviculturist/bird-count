@@ -13,6 +13,7 @@ import Alert from '@mui/material/Alert';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Tooltip from '@mui/material/Tooltip';
 import Button from '@mui/material/Button';
+import DeleteApplicationDataButton from '@components/delete-application-data-button';
 import BitcoinBlockHeightButton from '@components/bitcoin-block-height-button';
 import StacksChainTipButton from '@components/stacks-chain-tip-button';
 import { t } from '@lingui/macro';
@@ -108,6 +109,8 @@ export default function BirdCountApp() {
         >
           <BitcoinBlockHeightButton />
           <StacksChainTipButton />
+          <DeleteApplicationDataButton />
+
         </Stack>
       </Box>
       {/* End footer */}
