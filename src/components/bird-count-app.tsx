@@ -1,18 +1,18 @@
 import * as React from 'react';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Link from '@mui/material/Link';
-import DrawerFeed from '@components/drawer-feed';
-import BirdCountButtonGroup from '@components/bird-count-buttongroup';
-import LoadingBackdrop from '@components/loading-backdrop';
-import SimpleSnackbar from '@components/snackbar';
-import MainAppBar from '@components/main-appbar';
+import { Suspense } from 'react';
 import Alert from '@mui/material/Alert';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import Tooltip from '@mui/material/Tooltip';
 import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import DrawerFeed from '@components/drawer-feed';
+import LoadingBackdrop from '@components/loading-backdrop';
+import MainAppBar from '@components/main-appbar';
+import BirdCountButtonGroup from '@components/bird-count-buttongroup';
 import DeleteApplicationDataButton from '@components/delete-application-data-button';
 import BitcoinBlockHeightButton from '@components/bitcoin-block-height-button';
 import StacksChainTipButton from '@components/stacks-chain-tip-button';
@@ -64,7 +64,6 @@ export default function BirdCountApp() {
               pb: 6,
             }}
           >
-            {/* <Container maxWidth="sm"> */}
             <Typography
               component="h1"
               variant="h2"
@@ -76,23 +75,19 @@ export default function BirdCountApp() {
             </Typography>
             <Alert severity="warning">{t`EXTREME ALPHA SOFTWARE: USE AT YOUR OWN RISK`}</Alert>
             <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
-              <BirdCountButtonGroup />
-              <SimpleSnackbar />
+              <Suspense fallback={<CircularProgress />}>
+                <BirdCountButtonGroup />
+              </Suspense>
             </Stack>
-            {/* </Container> */}
           </Box>
-          <DrawerFeed />
+          <Suspense fallback={<CircularProgress />}>
+            <DrawerFeed />
+          </Suspense>
         </main>
       </Container>
 
       {/* Footer */}
       <Box sx={{ p: 6 }} component="footer">
-        {/* <Typography variant="h6" align="center" gutterBottom>
-          .
-        </Typography>
-        <Typography variant="subtitle1" align="center" component="p">
-          .
-        </Typography> */}
         <Copyright />
 
         <Stack
@@ -107,10 +102,13 @@ export default function BirdCountApp() {
             right: 10,
           }}
         >
-          <BitcoinBlockHeightButton />
-          <StacksChainTipButton />
+          <Suspense fallback={<CircularProgress />}>
+            <BitcoinBlockHeightButton />
+          </Suspense>
+          <Suspense fallback={<CircularProgress />}>
+            <StacksChainTipButton />
+          </Suspense>
           <DeleteApplicationDataButton />
-
         </Stack>
       </Box>
       {/* End footer */}
