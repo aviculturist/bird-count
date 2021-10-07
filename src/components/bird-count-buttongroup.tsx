@@ -9,7 +9,7 @@ import { useHandleIncrement } from '@hooks/use-increment';
 import { useHandleDecrement } from '@hooks/use-decrement';
 import { currentStacksExplorerState, currentChainState } from '@store/network-state';
 import { currentBirdcountContractState } from '@store/network-state';
-
+import { useAuth } from 'micro-stacks/react';
 import { t, plural, Plural } from '@lingui/macro';
 
 // TODO: implement using @clarigen/web
@@ -39,6 +39,7 @@ function BirdCountButtonGroup() {
   const [currentStacksExplorer] = useAtom(currentStacksExplorerState);
   const [currentChain] = useAtom(currentChainState);
   const [birdCountContract] = useAtom(currentBirdcountContractState);
+  const { isSignedIn, handleSignIn } = useAuth();
 
   // TODO: implement using @clarigen/web
   //const handleDecrement = useHandleDecrement();
@@ -46,7 +47,7 @@ function BirdCountButtonGroup() {
   return (
     <ButtonGroup size="large" variant="contained">
       <Tooltip title={t`Click to decrement`}>
-        <Button href="#" onClick={() => handleDecrement()}>
+        <Button href="#" onClick={isSignedIn ? () => handleDecrement() : () => handleSignIn()}>
           <RemoveIcon />
         </Button>
       </Tooltip>
@@ -67,7 +68,7 @@ function BirdCountButtonGroup() {
         <Plural value={birdCount} one="# bird" other="# birds" />
       </Button> */}
       <Tooltip title={t`Click to increment`}>
-        <Button href="#" onClick={() => handleIncrement()}>
+      <Button href="#" onClick={isSignedIn ? () => handleIncrement() : () => handleSignIn()}>
           <AddIcon />
         </Button>
       </Tooltip>
