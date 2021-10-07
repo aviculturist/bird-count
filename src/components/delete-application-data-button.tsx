@@ -46,13 +46,10 @@ function DeleteApplicationDataButton() {
           <DeleteIcon />
         </IconButton>
       </Tooltip>
-      <Snackbar
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        action={action}
-      >
-        <Alert severity="success"><Trans>localStorage and sessionStorage cleared</Trans></Alert>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} action={action}>
+        <Alert severity="success">
+          <Trans>localStorage and sessionStorage cleared</Trans>
+        </Alert>
       </Snackbar>
     </>
   );

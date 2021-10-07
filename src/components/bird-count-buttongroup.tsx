@@ -6,6 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { birdCountAtom } from '@store/bird-count';
 import { useHandleIncrement } from '@hooks/use-increment';
+import { useHandleDecrement } from '@hooks/use-decrement';
 import { currentStacksExplorerState, currentChainState } from '@store/network-state';
 import { currentBirdcountContractState } from '@store/network-state';
 
@@ -33,6 +34,8 @@ import { t, plural, Plural } from '@lingui/macro';
 function BirdCountButtonGroup() {
   const [birdCount] = useAtom(birdCountAtom);
   const handleIncrement = useHandleIncrement();
+  const handleDecrement = useHandleDecrement();
+
   const [currentStacksExplorer] = useAtom(currentStacksExplorerState);
   const [currentChain] = useAtom(currentChainState);
   const [birdCountContract] = useAtom(currentBirdcountContractState);
@@ -43,7 +46,7 @@ function BirdCountButtonGroup() {
   return (
     <ButtonGroup size="large" variant="contained">
       <Tooltip title={t`Click to decrement`}>
-        <Button href="#" onClick={() => handleIncrement()}>
+        <Button href="#" onClick={() => handleDecrement()}>
           <RemoveIcon />
         </Button>
       </Tooltip>
