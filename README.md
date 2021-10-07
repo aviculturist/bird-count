@@ -186,7 +186,7 @@ If you'd like to contribute to the project, here's my current TODO list.
 - There is at times an error about a className missmatch when running `yarn run dev`, does not seem to effect production. See e.g., https://github.com/mui-org/material-ui/issues/18018 and https://github.com/mui-org/material-ui/pull/27088
 - Most of the app is wrapped in `NoSsr` because `Next.js` does not currently support `i18n` static `export`. The main implication is that only the English version of the page is built during `export` and translations are loaded dynamically.
 - Because of this limitation, the language pages are implemented using `react-router-dom` `HashRouter` rather than `next` router's `usePath` or domain endpoints, which is less than ideal for SEO but in my view is better than the alternative (no static export).
-- The hosting environment (IPFS) can't produce responsive headers so that limits some interaction options.
+- The hosting environment (IPFS) can't produce responsive headers so that limits some interaction options. For example, the app can't perform an [Accept-Language](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language)/[Content-Language](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Language) negotiation or respond to [Clear-Site-Data](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Clear-Site-Data).
 
 ## Thank You
 
