@@ -6,7 +6,7 @@ import { useAtom } from 'jotai';
 import { t } from '@lingui/macro';
 
 const WalletConnectButton = () => {
-  const { isSignedIn, handleSignIn, handleSignOut, isLoading } = useAuth();
+  const { isSignedIn, handleSignIn, handleSignOut, isLoading, session } = useAuth();
   const [open, setOpen] = useAtom(installWalletDialogAtom);
 
   return (
@@ -19,11 +19,11 @@ const WalletConnectButton = () => {
             ? () => handleSignOut()
             : () => {
                 try {
-                  handleSignIn().then(() => setOpen(false));
+                  handleSignIn();
                 } catch (_e) {
                   console.log(_e);
                 }
-                setOpen(true);
+                !session && setOpen(true);
               }
         }
       >

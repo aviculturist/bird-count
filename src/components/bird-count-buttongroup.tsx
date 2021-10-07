@@ -40,7 +40,7 @@ function BirdCountButtonGroup() {
   const [currentStacksExplorer] = useAtom(currentStacksExplorerState);
   const [currentChain] = useAtom(currentChainState);
   const [birdCountContract] = useAtom(currentBirdcountContractState);
-  const { isSignedIn, handleSignIn } = useAuth();
+  const { isSignedIn, handleSignIn, session } = useAuth();
   const [open, setOpen] = useAtom(installWalletDialogAtom);
 
   // TODO: implement using @clarigen/web
@@ -57,11 +57,11 @@ function BirdCountButtonGroup() {
                 ? () => handleDecrement()
                 : () => {
                     try {
-                      handleSignIn().then(() => setOpen(false));
+                      handleSignIn();
                     } catch (_e) {
                       console.log(_e);
                     }
-                    setOpen(true);
+                    !session && setOpen(true);
                   }
             }
           >
@@ -92,11 +92,11 @@ function BirdCountButtonGroup() {
                 ? () => handleIncrement()
                 : () => {
                     try {
-                      handleSignIn().then(() => setOpen(false));
+                      handleSignIn();
                     } catch (_e) {
                       console.log(_e);
                     }
-                    setOpen(true);
+                    !session && setOpen(true);
                   }
             }
           >
