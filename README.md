@@ -118,7 +118,7 @@ Implementing a `fully static` `SSG` build using `Next.js` `export`, "no compromi
 
 ## A Starter Project
 
-BirdCount is intended to be a starting template for building more functional Stacks apps; it's been built as a proof of concept minimally viable app that's production ready and can be deployed in a censorship resistent way over IPFS. To that end, please fork it and build something!
+BirdCount is intended to be a starting template for building more functional Stacks apps; it's been built as a proof of concept minimally viable app that's production ready and can be statically deployed on a censorship resistant network like IPFS. To that end, please fork it and build something!
 
 Here are some things you can try:
 
@@ -145,7 +145,7 @@ When I started, I used to manually run the above, and I also set up an account a
 ipfs pin remote add --service=pinata /ipfs/<...Content Identifier (CID) of the out folder...>
 ```
 
-Now all of the above as well as a `dnslink`-based name resolution system are handled automatically via the Github [Release](https://github.com/aviculturist/bird-count//actions/workflows/release.yaml) workflow using [Github encrypted secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets). SSL termination is handled using [Cloudflare](https://developers.cloudflare.com/distributed-web/ipfs-gateway) and pinning via [Pinata](https://www.pinata.cloud/).
+Now all of the above as well as a `dnslink`-based name resolution system are handled automatically via the Github [Release](https://github.com/aviculturist/bird-count//actions/workflows/release.yaml) workflow using [Github encrypted secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets). SSL termination is handled using [Cloudflare](https://developers.cloudflare.com/distributed-web/ipfs-gateway) and pinning via [Pinata](https://www.pinata.cloud/). Yes, you have to actually email Cloudflare to ask them to set up the SSL certificate.
 
 ### Pinning the latest releases
 
