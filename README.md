@@ -1,4 +1,4 @@
-# BirdCount
+# -🐦+ BirdCount
 
 [![Release](https://github.com/aviculturist/bird-count//actions/workflows/release.yaml/badge.svg)](https://github.com/aviculturist/bird-count//actions/workflows/release.yamlrelease.yaml)
 [![Lint](https://github.com/aviculturist/bird-count/actions/workflows/lint.yaml/badge.svg)](https://github.com/aviculturist/bird-count/actions/workflows/lint.yml)

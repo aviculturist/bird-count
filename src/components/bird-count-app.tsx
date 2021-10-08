@@ -13,9 +13,11 @@ import DrawerFeed from '@components/drawer-feed';
 import LoadingBackdrop from '@components/loading-backdrop';
 import MainAppBar from '@components/main-appbar';
 import BirdCountButtonGroup from '@components/bird-count-buttongroup';
-import DeleteApplicationDataButton from '@components/delete-application-data-button';
+import DeleteApplicationDataButton from '@components/clear-application-data-button';
 import BitcoinBlockHeightButton from '@components/bitcoin-block-height-button';
 import StacksChainTipButton from '@components/stacks-chain-tip-button';
+import LocalNetworkOfflineSnackbar from '@components/local-network-offline-snackbar';
+import { LocalNetworkOfflineIconButton } from '@components/local-network-offline-snackbar';
 import { t } from '@lingui/macro';
 
 function Copyright() {
@@ -33,6 +35,8 @@ function Copyright() {
           left: 10,
         }}
       >
+        {' '}
+        <LocalNetworkOfflineIconButton />
         <Button
           size="small"
           color="inherit"
@@ -113,6 +117,7 @@ export default function BirdCountApp() {
       </Box>
       {/* End footer */}
       <LoadingBackdrop />
+      <LocalNetworkOfflineSnackbar />
     </>
   );
 }

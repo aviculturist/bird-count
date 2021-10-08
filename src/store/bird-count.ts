@@ -165,7 +165,7 @@ export const birdCountAtom = atomWithQuery<number>('bird-count', async get => {
       return result.value.value;
     } // TODO: failed to fetch
   } catch (_e) {
-    console.error(_e);
+    console.log(_e);
   }
   return 0;
 });

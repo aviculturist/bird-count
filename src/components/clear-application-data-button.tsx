@@ -43,7 +43,7 @@ function DeleteApplicationDataButton() {
             handleClick();
           }}
         >
-          <DeleteIcon />
+          <DeleteIcon fontSize="small" />
         </IconButton>
       </Tooltip>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} action={action}>

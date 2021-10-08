@@ -4,6 +4,7 @@ import {
   Configuration,
   SmartContractsApi,
   TransactionsApi,
+  InfoApi,
 } from '@stacks/blockchain-api-client';
 import { networkAtom } from 'micro-stacks/react';
 
@@ -26,4 +27,9 @@ export const accountsClientAtom = atom(get => {
 export const transactionsClientAtom = atom(get => {
   const config = get(configAtom);
   return new TransactionsApi(config);
+});
+
+export const infoClientAtom = atom(get => {
+  const config = get(configAtom);
+  return new InfoApi(config);
 });

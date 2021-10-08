@@ -1,5 +1,3 @@
-
-
 export default function WalletImage() {
   return (
     <svg className="svgIcon-use" width="97" height="64" viewBox="0 0 97 64" fill="none">
