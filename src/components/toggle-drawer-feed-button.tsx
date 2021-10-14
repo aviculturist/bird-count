@@ -3,7 +3,7 @@ import { useDrawer } from '@hooks/use-drawer';
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import NotificationsNoneTwoToneIcon from '@mui/icons-material/NotificationsNoneTwoTone';
 import { pendingTransactionsCountAtom } from '@store/pending-transactions-count';
 import { useAtom } from 'jotai';
 import { t } from '@lingui/macro';
@@ -17,10 +17,10 @@ function ToggleDrawerFeedButton() {
     pendingTransactionsCountAtom
   );
   return (
-    <IconButton onClick={handleToggleDrawer} color="inherit">
+    <IconButton onClick={handleToggleDrawer} color="primary" size="small">
       <Badge badgeContent={pendingTransactionsCount} color="secondary">
         <Tooltip title={t`Show BirdCount Transactions`}>
-          <NotificationsIcon fontSize="small" />
+          <NotificationsNoneTwoToneIcon fontSize="small" />
         </Tooltip>
       </Badge>
     </IconButton>

@@ -75,7 +75,7 @@
     "@lingui/remote-loader": "^3.11.0",
     "@stacks/eslint-config": "^1.0.9",
     "@stacks/prettier-config": "0.0.8",
-    "@stacks/stacks-blockchain-api-types": "^0.63.1",
+    "@stacks/stacks-blockchain-api-types": "^0.67.1",
     "@testing-library/dom": "^8.5.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.0",

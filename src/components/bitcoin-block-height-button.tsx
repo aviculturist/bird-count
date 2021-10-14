@@ -3,10 +3,9 @@ import { useAtom } from 'jotai';
 import { networkInfoAtom } from '@store/network-info';
 import { DEFAULT_LOCALNET_SERVER } from '@utils/constants';
 import { currentBitcoinExplorerState } from '@store/network-state';
-import CircleIcon from '@mui/icons-material/Circle';
-import LoadingButton from '@mui/lab/LoadingButton';
-import Tooltip from '@mui/material/Tooltip';
 import Button from '@mui/material/Button';
+import FiberManualRecordTwoToneIcon from '@mui/icons-material/FiberManualRecordTwoTone';
+import Tooltip from '@mui/material/Tooltip';
 import { networkAtom } from 'micro-stacks/react';
 import { t } from '@lingui/macro';
 
@@ -17,9 +16,7 @@ export default function BitcoinBlockHeightButton() {
   return (
     <>
       <Tooltip title={t`Bitcoin Block Height`}>
-        <LoadingButton
-          //loading={networkInfo.burn_block_height === undefined}
-          loadingPosition="start"
+        <Button
           href={
             networkInfo.burn_block_height === undefined
               ? '#'
@@ -28,13 +25,13 @@ export default function BitcoinBlockHeightButton() {
                 }/${networkInfo.burn_block_height}`
           }
           target="_blank"
-          startIcon={<CircleIcon />}
+          startIcon={<FiberManualRecordTwoToneIcon />}
           variant="text"
           size="small"
           color={networkInfo.burn_block_height === undefined ? 'error' : 'success'}
         >
           {networkInfo.burn_block_height}
-        </LoadingButton>
+        </Button>
       </Tooltip>
     </>
   );

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
-import CircleIcon from '@mui/icons-material/Circle';
+import FiberManualRecordTwoToneIcon from '@mui/icons-material/FiberManualRecordTwoTone';
 import CloseIcon from '@mui/icons-material/Close';
 import {
   dismissLocalNetworkOfflineSnackbarAtom,
@@ -23,7 +23,7 @@ export function LocalNetworkOfflineIconButton() {
   return (
     <Tooltip title={networkOffline ? t`Network Offline` : t`Network Online`}>
       <IconButton onClick={handleClick} size="small">
-        <CircleIcon color={networkOffline ? 'error' : 'success'} fontSize="small" />
+        <FiberManualRecordTwoToneIcon color={networkOffline ? 'error' : 'success'} fontSize="small" />
       </IconButton>
     </Tooltip>
   );

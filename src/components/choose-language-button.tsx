@@ -6,6 +6,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Check from '@mui/icons-material/Check';
 import LanguageIcon from '@mui/icons-material/Language';
+import LanguageTwoToneIcon from '@mui/icons-material/LanguageTwoTone';
 import { SUPPORTED_LOCALES, Locale, CODE_TO_NAME } from '@store/user-locale';
 import { useActiveLocale } from '@hooks/use-active-locale';
 import { useAtom } from 'jotai';
@@ -93,15 +94,16 @@ function ChooseLanguageButton() {
   return (
     <div>
       <IconButton
+        size="small"
         onClick={handleChooseLanguage}
-        color="inherit"
+        color="primary"
         id="choose-language-button"
         aria-controls="language-menu"
         aria-haspopup="true"
         aria-expanded={isOpen ? 'true' : undefined}
       >
         <Tooltip title={t`Choose Language`}>
-          <LanguageIcon fontSize="small" />
+          <LanguageTwoToneIcon fontSize="small" />
         </Tooltip>
       </IconButton>
       <LanguageMenu />

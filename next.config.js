@@ -6,7 +6,9 @@ const withTM = require('next-transpile-modules')(['@mui/material', '@mui/system'
 
 module.exports = withTM({
   // https://github.com/Velenir/nextjs-ipfs-example/
-  assetPrefix: './',
+  // Testing shows that '' works while './' does not
+  // load assets within subdirs
+  assetPrefix: '',
   trailingSlash: true,
   reactStrictMode: true,
   // env: {

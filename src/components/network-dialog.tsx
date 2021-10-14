@@ -18,7 +18,7 @@ import NoSsr from '@mui/core/NoSsr';
 import { useNetwork } from 'micro-stacks/react';
 import { StacksMainnet, StacksRegtest, StacksMocknet, StacksTestnet } from 'micro-stacks/network';
 import Tooltip from '@mui/material/Tooltip';
-
+import BlurOnTwoToneIcon from '@mui/icons-material/BlurOnTwoTone';
 const networks: Network[] = DEFAULT_NETWORK_LIST;
 
 export interface NetworkDialogProps {
@@ -96,9 +96,9 @@ export default function NetworkDialogButton() {
         <Tooltip title={`Switch Networks`}>
           <Button
             variant="outlined"
-            startIcon={<SettingsIcon fontSize="small" />}
+            startIcon={<BlurOnTwoToneIcon fontSize="small" />}
             onClick={handleClickOpen}
-            color="inherit"
+            color="primary"
           >
             {currentNetwork.name}
           </Button>

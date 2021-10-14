@@ -1,48 +1,69 @@
 import * as React from 'react';
-import { GetStaticPropsContext, NextPage } from 'next';
+import { Suspense } from 'react';
+import { NextPage } from 'next';
 import { GetQueries, getStaticQueryProps, withInitialQueryData } from 'jotai-query-toolkit/nextjs';
 import { appProviderAtomBuilder } from 'micro-stacks/react';
 import { StacksMainnet, StacksMocknet } from 'micro-stacks/network';
 import {
   DEFAULT_MAINNET_SERVER,
-  DEFAULT_REGTEST_SERVER,
   DEFAULT_LOCALNET_SERVER,
   ENV,
 } from '@utils/constants';
+
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+import CircularProgress from '@mui/material/CircularProgress';
+import { t } from '@lingui/macro';
 import MainAppBar from '@components/main-appbar';
-import BirdCountApp from '@components/bird-count-app';
+import DrawerFeed from '@components/drawer-feed';
 import Footer from '@components/footer';
 
-const Index: NextPage<any> = () => {
+const About: NextPage<any> = () => {
   return (
     <>
       <MainAppBar />
-      <BirdCountApp />
-      <Footer />
+      <Container maxWidth="sm">
+        <main>
+          {/* Hero unit */}
+          <Box
+            sx={{
+              //bgcolor: 'background.paper',
+              pt: 8,
+              pb: 6,
+            }}
+          >
+            <Typography
+              component="h1"
+              variant="h2"
+              align="center"
+              gutterBottom
+            >
+              {t`This is the about page.`}
+            </Typography>
+            <Alert severity="warning">{t`EXTREME ALPHA SOFTWARE: USE AT YOUR OWN RISK`}</Alert>
+            <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
+              Nothing here yet
+            </Stack>
+          </Box>
+          <Suspense fallback={<CircularProgress />}>
+            <DrawerFeed />
+          </Suspense>
+        </main>
+      </Container>
+      <Footer/>
     </>
   );
 };
 
 // an array of queries for initial data
+// TODO: how can we combine initial queries from other sources?,
+// spread syntax doesn't work without an iterator.
+// TODO: how to take the state from another page instead of
+// using the statically built state
 const getQueries: GetQueries = (_ctx: GetStaticPropsContext) => [
-  [
-    'bird-count', // the query key we're using
-    async () => {
-      return 15;
-    }, // TODO: our fetcher for the server
-  ],
-  [
-    'pending-txs', // the query key we're using
-    async () => {
-      return [];
-    }, // TODO: our fetcher for the server
-  ],
-  [
-    'recent-txs', // the query key we're using
-    async () => {
-      return [];
-    }, // TODO: our fetcher for the server
-  ],
   [
     'network-info', // the query key we're using
     async () => {
@@ -65,7 +86,6 @@ const getQueries: GetQueries = (_ctx: GetStaticPropsContext) => [
   ],
 ];
 
-//const allQueries = getQueries.concat(getFooterQueries); //[...getFooterQueries, ...getQueries];
 // enable SSG
 export const getStaticProps = getStaticQueryProps(getQueries)(async _ctx => {
   return { props: {}, revalidate: 60 };
@@ -80,7 +100,7 @@ const initialNetwork =
 
 // TODO: icon needs fqd
 export default withInitialQueryData(
-  Index,
+  About,
   appProviderAtomBuilder({
     network: initialNetwork,
     authOptions: {

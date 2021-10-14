@@ -1,6 +1,6 @@
 import * as React from 'react';
 import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import Tooltip from '@mui/material/Tooltip';
 import Snackbar from '@mui/material/Snackbar';
 import CloseIcon from '@mui/icons-material/Close';
@@ -23,9 +23,6 @@ function DeleteApplicationDataButton() {
   };
   const action = (
     <React.Fragment>
-      {/* <Button color="secondary" size="small" onClick={handleClose}>
-        UNDO
-      </Button> */}
       <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
         <CloseIcon fontSize="small" />
       </IconButton>
@@ -33,9 +30,9 @@ function DeleteApplicationDataButton() {
   );
   return (
     <>
-      <Tooltip title={t`Delete in-browser localStorage and sessionStorage`}>
+      <Tooltip title={t`Clear Browser localStorage and sessionStorage`}>
         <IconButton
-          color="warning"
+          color="secondary"
           size="small"
           onClick={() => {
             localStorage.clear();
@@ -43,12 +40,12 @@ function DeleteApplicationDataButton() {
             handleClick();
           }}
         >
-          <DeleteIcon fontSize="small" />
+          <DeleteTwoToneIcon fontSize="small" />
         </IconButton>
       </Tooltip>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} action={action}>
         <Alert severity="success">
-          <Trans>localStorage and sessionStorage cleared</Trans>
+          <Trans>Browser localStorage and sessionStorage Cleared</Trans>
         </Alert>
       </Snackbar>
     </>
