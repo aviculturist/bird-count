@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Suspense } from 'react';
-import { NextPage } from 'next';
+import { GetStaticPropsContext, NextPage } from 'next';
 import { GetQueries, getStaticQueryProps, withInitialQueryData } from 'jotai-query-toolkit/nextjs';
 import { appProviderAtomBuilder } from 'micro-stacks/react';
 import { StacksMainnet, StacksMocknet } from 'micro-stacks/network';
@@ -45,7 +45,7 @@ const About: NextPage<any> = () => {
             </Typography>
             <Alert severity="warning">{t`EXTREME ALPHA SOFTWARE: USE AT YOUR OWN RISK`}</Alert>
             <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
-              Nothing here yet
+              BirdCount
             </Stack>
           </Box>
           <Suspense fallback={<CircularProgress />}>

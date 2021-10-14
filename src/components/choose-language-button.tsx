@@ -5,7 +5,6 @@ import IconButton from '@mui/material/IconButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Check from '@mui/icons-material/Check';
-import LanguageIcon from '@mui/icons-material/Language';
 import LanguageTwoToneIcon from '@mui/icons-material/LanguageTwoTone';
 import { SUPPORTED_LOCALES, Locale, CODE_TO_NAME } from '@store/user-locale';
 import { useActiveLocale } from '@hooks/use-active-locale';
