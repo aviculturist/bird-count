@@ -9,15 +9,14 @@ import NetworkDialogButton from '@components/network-dialog';
 import ToggleDrawerFeedButton from '@components/toggle-drawer-feed-button';
 import WalletConnectButton from '@components/wallet-connect-button';
 import ChooseLanguageButton from '@components/choose-language-button';
+import MainAppbarDrawer from '@components/main-appbar-drawer';
 
 function MainAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="relative" color="transparent" elevation={0}>
         <Toolbar sx={{ columnGap: 1 }}>
-          <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-            <MenuIcon />
-          </IconButton>
+        <MainAppbarDrawer />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             BirdCount
           </Typography>
