@@ -23,7 +23,10 @@ export function LocalNetworkOfflineIconButton() {
   return (
     <Tooltip title={networkOffline ? t`Network Offline` : t`Network Online`}>
       <IconButton onClick={handleClick} size="small">
-        <FiberManualRecordTwoToneIcon color={networkOffline ? 'error' : 'success'} fontSize="small" />
+        <FiberManualRecordTwoToneIcon
+          color={networkOffline ? 'error' : 'success'}
+          fontSize="small"
+        />
       </IconButton>
     </Tooltip>
   );

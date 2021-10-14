@@ -16,7 +16,7 @@ function MainAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="relative" color="transparent" elevation={0}>
         <Toolbar sx={{ columnGap: 1 }}>
-        <MainAppbarDrawer />
+          <MainAppbarDrawer />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             BirdCount
           </Typography>

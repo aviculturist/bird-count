@@ -4,11 +4,7 @@ import { GetStaticPropsContext, NextPage } from 'next';
 import { GetQueries, getStaticQueryProps, withInitialQueryData } from 'jotai-query-toolkit/nextjs';
 import { appProviderAtomBuilder } from 'micro-stacks/react';
 import { StacksMainnet, StacksMocknet } from 'micro-stacks/network';
-import {
-  DEFAULT_MAINNET_SERVER,
-  DEFAULT_LOCALNET_SERVER,
-  ENV,
-} from '@utils/constants';
+import { DEFAULT_MAINNET_SERVER, DEFAULT_LOCALNET_SERVER, ENV } from '@utils/constants';
 
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -35,12 +31,7 @@ const About: NextPage<any> = () => {
               pb: 6,
             }}
           >
-            <Typography
-              component="h1"
-              variant="h2"
-              align="center"
-              gutterBottom
-            >
+            <Typography component="h1" variant="h2" align="center" gutterBottom>
               {t`This is the about page.`}
             </Typography>
             <Alert severity="warning">{t`EXTREME ALPHA SOFTWARE: USE AT YOUR OWN RISK`}</Alert>
@@ -53,7 +44,7 @@ const About: NextPage<any> = () => {
           </Suspense>
         </main>
       </Container>
-      <Footer/>
+      <Footer />
     </>
   );
 };

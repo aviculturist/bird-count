@@ -43,15 +43,14 @@ export const networkInfoAtom = atomWithQuery<NetworkInfo>(
 
     const defaultNetwork = new StacksMainnet();
     const url = network ? network.getInfoUrl() : defaultNetwork.getInfoUrl();
-		try {
+    try {
       const response = await fetchPrivate(url, fetchOptions);
       const networkInfoResult: NetworkInfo = await response.json();
       return networkInfoResult;
-		}
-		catch (_e) {
-			console.log(_e);
-		}
-		return {} as NetworkInfo;
+    } catch (_e) {
+      console.log(_e);
+    }
+    return {} as NetworkInfo;
   },
   { refetchInterval: 10000 }
 ); // every minute
