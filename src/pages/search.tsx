@@ -15,12 +15,7 @@ import { StacksMainnet, StacksMocknet } from 'micro-stacks/network';
 import { DEFAULT_MAINNET_SERVER, DEFAULT_LOCALNET_SERVER, ENV } from '@utils/constants';
 import { GetQueries, getStaticQueryProps, withInitialQueryData } from 'jotai-query-toolkit/nextjs';
 
-import {
-  networkAtom,
-  makeSearchClientAtom,
-  appProviderAtomBuilder,
-  IdWithNetwork,
-} from 'micro-stacks/react';
+import { appProviderAtomBuilder } from 'micro-stacks/react';
 import {
   SearchErrorResult,
   SearchSuccessResult,
@@ -31,7 +26,7 @@ import {
   TxSearchResult,
 } from '@stacks/stacks-blockchain-api-types';
 
-import { atom, useAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import { queryAtom, searchResultsAtom } from '@store/search';
 
 const SearchResults = () => {
