@@ -212,8 +212,8 @@ function useQuery() {
   return typeof q === 'string' ? q : '';
 }
 const Search = () => {
-  const q = useQuery();
-  const [searchResults] = useAtom(searchResultsAtom(q));
+  //const q = useQuery();
+  //const [searchResults] = useAtom(searchResultsAtom(q));
 
   //https://stackoverflow.com/questions/66133814/how-to-get-url-query-string-on-next-js-static-site-generation/67877443#67877443
   // useEffect(() => {
