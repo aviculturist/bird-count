@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Suspense } from 'react';
 import { useEffect } from 'react';
+import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -169,7 +170,7 @@ const MempoolTxSearchResultDisplay = () => {
         <dt>entity_type:</dt>
         <dd>{mem.result.entity_type} </dd>
         <dt>tx_type:</dt>
-        <dd>{mem.tx_data.tx_type} </dd>
+        <dd>{mem.result.tx_data.tx_type} </dd>
       </dl>
     </div>
   );
