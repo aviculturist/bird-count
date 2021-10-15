@@ -31,8 +31,8 @@ import { useAtom } from 'jotai';
 import { queryAtom, searchResultsAtom } from '@store/search';
 
 const SearchResults = () => {
-  const [searchResults] = useAtom(searchResultsAtom);
-
+  const q = useQuery();
+  const [searchResults] = useAtom(searchResultsAtom(q));
   // SearchErrorResult
   if (searchResults && searchResults?.found === false) {
     return <SearchErrorDisplay />;
@@ -64,8 +64,8 @@ const SearchResults = () => {
 };
 
 const SearchErrorDisplay = () => {
-  const [getQuery, setQuery] = useAtom(queryAtom);
-  const [searchResults] = useAtom(searchResultsAtom);
+  const q = useQuery();
+  const [searchResults] = useAtom(searchResultsAtom(q));
   const err = searchResults as SearchErrorResult;
   return (
     <div>
@@ -81,13 +81,13 @@ const SearchErrorDisplay = () => {
 };
 
 const AddressSearchResultDisplay = () => {
-  const [getQuery, setQuery] = useAtom(queryAtom);
-  const [searchResults] = useAtom(searchResultsAtom);
+  const q = useQuery();
+  const [searchResults] = useAtom(searchResultsAtom(q));
   const add = searchResults as AddressSearchResult;
   return (
     <div>
       <Typography align="center" gutterBottom>
-        {t`Address ${getQuery}`}
+        {t`Address ${q}`}
       </Typography>
 
       <dl>
@@ -99,13 +99,13 @@ const AddressSearchResultDisplay = () => {
 };
 
 const BlockSearchResultDisplay = () => {
-  const [getQuery, setQuery] = useAtom(queryAtom);
-  const [searchResults] = useAtom(searchResultsAtom);
+  const q = useQuery();
+  const [searchResults] = useAtom(searchResultsAtom(q));
   const bl = searchResults as BlockSearchResult;
   return (
     <div>
       <Typography align="center" gutterBottom>
-        {t`Block ${getQuery}`}
+        {t`Block ${q}`}
       </Typography>
 
       <dl>
@@ -127,13 +127,13 @@ const BlockSearchResultDisplay = () => {
 };
 
 const ContractSearchResultDisplay = () => {
-  const [getQuery, setQuery] = useAtom(queryAtom);
-  const [searchResults] = useAtom(searchResultsAtom);
+  const q = useQuery();
+  const [searchResults] = useAtom(searchResultsAtom(q));
   const c = searchResults as ContractSearchResult;
   return (
     <div>
       <Typography align="center" gutterBottom>
-        {t`Contract ${getQuery}`}
+        {t`Contract ${q}`}
       </Typography>
 
       <dl>
@@ -155,13 +155,13 @@ const ContractSearchResultDisplay = () => {
 };
 
 const MempoolTxSearchResultDisplay = () => {
-  const [getQuery, setQuery] = useAtom(queryAtom);
-  const [searchResults] = useAtom(searchResultsAtom);
+  const q = useQuery();
+  const [searchResults] = useAtom(searchResultsAtom(q));
   const mem = searchResults as MempoolTxSearchResult;
   return (
     <div>
       <Typography align="center" gutterBottom>
-        {t`Mempool Transaction ${getQuery}`}
+        {t`Mempool Transaction ${q}`}
       </Typography>
 
       <dl>
@@ -177,13 +177,15 @@ const MempoolTxSearchResultDisplay = () => {
 };
 
 const TxSearchResultDisplay = () => {
-  const [getQuery, setQuery] = useAtom(queryAtom);
-  const [searchResults] = useAtom(searchResultsAtom);
+  // const [getQuery, setQuery] = useAtom(queryAtom);
+  // const [searchResults] = useAtom(searchResultsAtom);
+  const q = useQuery();
+  const [searchResults] = useAtom(searchResultsAtom(q));
   const tx = searchResults as TxSearchResult;
   return (
     <div>
       <Typography align="center" gutterBottom>
-        {t`Transaction ${getQuery}`}
+        {t`Transaction ${q}`}
       </Typography>
 
       <dl>
@@ -204,20 +206,24 @@ const TxSearchResultDisplay = () => {
   );
 };
 
-const Search = () => {
-  const [getQuery, setQuery] = useAtom(queryAtom);
+function useQuery() {
   const router = useRouter();
-  const [searchResults] = useAtom(searchResultsAtom);
+  const q = router.asPath.split(/\?/)[1].split(/=/)[1];
+  return typeof q === 'string' ? q : '';
+}
+const Search = () => {
+  const q = useQuery();
+  const [searchResults] = useAtom(searchResultsAtom(q));
 
   //https://stackoverflow.com/questions/66133814/how-to-get-url-query-string-on-next-js-static-site-generation/67877443#67877443
-  useEffect(() => {
-    if (!router.isReady) return;
-    const query = router.query;
-    // TODO: another way to grab the query; this might be super dangerous, should do input validation
-    // const q = router.asPath.split(/\?/)[1].split(/=/)[1]; // e.g., 'q=ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM';
-    //console.log(query);
-    setQuery(typeof query.q === 'string' ? query.q : '');
-  }, [router.isReady, router.query, setQuery]);
+  // useEffect(() => {
+  //   if (!router.isReady) return;
+  //   const query = router.query;
+  //   // TODO: another way to grab the query; this might be super dangerous, should do input validation
+  //   // const q = router.asPath.split(/\?/)[1].split(/=/)[1]; // e.g., 'q=ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM';
+  //   //console.log(query);
+  //   setQuery(typeof query.q === 'string' ? query.q : '');
+  // }, [router.isReady, router.query, setQuery]);
 
   return (
     <>
