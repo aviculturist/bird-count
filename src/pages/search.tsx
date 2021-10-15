@@ -87,7 +87,7 @@ const AddressSearchResultDisplay = () => {
   return (
     <div>
       <Typography align="center" gutterBottom>
-        {t`Address "${getQuery}"`}
+        {t`Address ${getQuery}`}
       </Typography>
 
       <dl>
@@ -105,7 +105,7 @@ const BlockSearchResultDisplay = () => {
   return (
     <div>
       <Typography align="center" gutterBottom>
-        {t`Block "${getQuery}"`}
+        {t`Block ${getQuery}`}
       </Typography>
 
       <dl>
@@ -133,7 +133,7 @@ const ContractSearchResultDisplay = () => {
   return (
     <div>
       <Typography align="center" gutterBottom>
-        {t`Contract "${getQuery}"`}
+        {t`Contract ${getQuery}`}
       </Typography>
 
       <dl>
@@ -161,7 +161,7 @@ const MempoolTxSearchResultDisplay = () => {
   return (
     <div>
       <Typography align="center" gutterBottom>
-        {t`Mempool Transaction "${getQuery}"`}
+        {t`Mempool Transaction ${getQuery}`}
       </Typography>
 
       <dl>
@@ -183,7 +183,7 @@ const TxSearchResultDisplay = () => {
   return (
     <div>
       <Typography align="center" gutterBottom>
-        {t`Transaction "${getQuery}"`}
+        {t`Transaction ${getQuery}`}
       </Typography>
 
       <dl>
