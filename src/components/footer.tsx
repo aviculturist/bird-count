@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Suspense } from 'react';
 import { GetStaticPropsContext } from 'next';
 import { GetQueries, getStaticQueryProps, withInitialQueryData } from 'jotai-query-toolkit/nextjs';
-
+import { GITHUB_URL } from '@utils/constants';
 import Tooltip from '@mui/material/Tooltip';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
@@ -40,16 +40,16 @@ function Copyright() {
         <Button
           sx={{ textTransform: 'none' }}
           size="small"
-          color="primary"
+          color="secondary"
           variant="text"
           target="_blank"
-          href={`https://github.com/aviculturist/bird-count/commit/${buildHash}`}
+          href={`${GITHUB_URL}/commit/${buildHash}`}
         >{`${buildHashShort}`}</Button>
         <Button
           size="small"
           color="inherit"
           target="_blank"
-          href="https://github.com/aviculturist/bird-count/graphs/contributors"
+          href={`${GITHUB_URL}/graphs/contributors`}
         >
           {'© '}
           {t`the contributors`} {new Date().getFullYear()}
