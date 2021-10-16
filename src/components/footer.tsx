@@ -5,6 +5,7 @@ import { GetQueries, getStaticQueryProps, withInitialQueryData } from 'jotai-que
 
 import Tooltip from '@mui/material/Tooltip';
 import Button from '@mui/material/Button';
+import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -18,6 +19,8 @@ import { LocalNetworkOfflineIconButton } from '@components/local-network-offline
 import { t } from '@lingui/macro';
 
 function Copyright() {
+  const buildHash = process.env.NEXT_PUBLIC_COMMIT_HASH || '';
+  const buildHashShort = buildHash.slice(0, 7);
   return (
     <>
       <Stack
@@ -35,6 +38,14 @@ function Copyright() {
         {' '}
         <LocalNetworkOfflineIconButton />
         <Button
+          sx={{ textTransform: 'none' }}
+          size="small"
+          color="primary"
+          variant="text"
+          target="_blank"
+          href={`https://github.com/aviculturist/bird-count/commit/${buildHash}`}
+        >{`${buildHashShort}`}</Button>
+        <Button
           size="small"
           color="inherit"
           target="_blank"
@@ -45,7 +56,7 @@ function Copyright() {
           <Tooltip title={t`Made with Love`}>
             <FavoriteIcon color="error" fontSize="inherit" />
           </Tooltip>
-        </Button>{' '}
+        </Button>
       </Stack>
     </>
   );

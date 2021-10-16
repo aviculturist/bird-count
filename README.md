@@ -171,9 +171,7 @@ ipfs pin add -r /ipfs/<...Content Identifier (CID) of the out folder...>
 
 If you'd like to contribute to the project, here's my current TODO list.
 
-* Generate and display build hashes on the app
 * Better onboarding to connect (or install) the Hiro Wallet
-* Fix some app crashes that may be due to not having `Suspense` fallbacks
 * Integration with `@clarigen/web` to power the web app
 * Scripts to help the community support the IPFS deployment
 * Deployment scripts for contracts (`regtest`, `testnet`, `mainnet`)

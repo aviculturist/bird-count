@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "lingui compile && next dev",
-    "build": "lingui compile && next build",
+    "dev": "export NEXT_PUBLIC_COMMIT_HASH=$(git rev-parse HEAD) && lingui compile && next dev",
+    "build": "export NEXT_PUBLIC_COMMIT_HASH=$(git rev-parse HEAD) && lingui compile && next build",
     "export": "next export",
     "start": "next start",
     "lingui": "lingui extract --clean --overwrite && lingui compile",
