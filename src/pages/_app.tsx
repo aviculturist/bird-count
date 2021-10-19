@@ -1,6 +1,6 @@
 import '../../scripts/wdyr';
 import * as React from 'react';
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 import { Provider } from 'jotai';
 import { HashRouter } from 'react-router-dom';
 import { DarkModeProvider } from '@components/darkmode-context';

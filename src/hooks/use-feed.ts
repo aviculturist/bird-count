@@ -4,13 +4,11 @@ import { useAtomValue } from 'jotai/utils';
 import { useEffect } from 'react';
 import { feedItemsAtom } from '@store/feed';
 import { useImmerAtom } from 'jotai/immer';
-import { pendingTransactionsCountAtom } from '@store/pending-transactions-count';
+import { pendingTxsCountAtom } from '@store/pending-transactions';
 
 export function useFeed() {
   const apiData = useAtomValue(allTransactionsAtom);
-  const [pendingTransactionsCount, setPendingTransactionsCount] = useAtom(
-    pendingTransactionsCountAtom
-  );
+  //const [pendingTxsCount, setPendingTxssCount] = useAtom(pendingTxsCountAtom);
   const [feed, setFeed] = useImmerAtom<Record<string, BirdCount>>(feedItemsAtom);
   // this effect is to update our feed view without causing un-needed re-renders
   // @see https://docs.pmnd.rs/jotai/integrations/immer for immer docs
@@ -26,7 +24,7 @@ export function useFeed() {
       // find our new items that have yet to be added
       const newItems = apiData.filter(item => !feed[item.txid] && item.isPending);
       if (newItems?.length) {
-        setPendingTransactionsCount(newItems.length);
+        //setPendingTxsCount(newItems.length);
         // mutate state with new items
         void setFeed(draft => {
           newItems.forEach(item => {
@@ -56,7 +54,7 @@ export function useFeed() {
         }
       });
     }
-  }, [apiData, feed, setFeed, setPendingTransactionsCount]);
+  }, [apiData, feed, setFeed]);
 
   return Object.values(feed);
 }

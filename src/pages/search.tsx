@@ -30,6 +30,12 @@ import {
 import { useAtom } from 'jotai';
 import { queryAtom, searchResultsAtom } from '@store/search';
 
+function useQuery() {
+  const router = useRouter();
+  const q = router.asPath.split(/\?/)[1].split(/=/)[1];
+  return typeof q === 'string' ? q : '';
+}
+
 const SearchResults = () => {
   const q = useQuery();
   const [searchResults] = useAtom(searchResultsAtom(q));
@@ -206,11 +212,6 @@ const TxSearchResultDisplay = () => {
   );
 };
 
-function useQuery() {
-  const router = useRouter();
-  const q = router.asPath.split(/\?/)[1].split(/=/)[1];
-  return typeof q === 'string' ? q : '';
-}
 const Search = () => {
   //const q = useQuery();
   //const [searchResults] = useAtom(searchResultsAtom(q));

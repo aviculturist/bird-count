@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import DrawerFeed from '@components/drawer-feed';
+import PendingTxsDrawer from '@components/pending-txs-drawer';
 import BirdCountButtonGroup from '@components/bird-count-buttongroup';
 import { t } from '@lingui/macro';
 
@@ -40,7 +40,7 @@ export default function BirdCountApp() {
             </Stack>
           </Box>
           <Suspense fallback={<CircularProgress />}>
-            <DrawerFeed />
+            <PendingTxsDrawer />
           </Suspense>
         </main>
       </Container>

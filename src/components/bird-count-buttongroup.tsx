@@ -13,6 +13,7 @@ import { useAuth } from 'micro-stacks/react';
 import { t, plural, Plural } from '@lingui/macro';
 import { installWalletDialogAtom } from '@store/install-wallet-dialog';
 import InstallWalletDialog from '@components/install-wallet-dialog';
+import TransactionSnackbars from '@components/transaction-snackbar';
 
 // TODO: implement using @clarigen/web
 // import { useCallback } from 'react';
@@ -71,6 +72,7 @@ function BirdCountButtonGroup() {
         <Button
           target="_blank"
           fullWidth={true}
+          // TODO: this isn't quite the right URL
           href={`${currentStacksExplorer}/txid/${birdCountContract}?chain=${currentChain}`}
         >
           {t({
@@ -105,6 +107,7 @@ function BirdCountButtonGroup() {
         </Tooltip>
       </ButtonGroup>
       <InstallWalletDialog />
+      <TransactionSnackbars />
     </>
   );
 }

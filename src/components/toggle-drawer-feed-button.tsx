@@ -1,25 +1,23 @@
 import * as React from 'react';
-import { useDrawer } from '@hooks/use-drawer';
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import NotificationsNoneTwoToneIcon from '@mui/icons-material/NotificationsNoneTwoTone';
-import { pendingTransactionsCountAtom } from '@store/pending-transactions-count';
+import { pendingTxsCountAtom } from '@store/pending-transactions';
 import { useAtom } from 'jotai';
 import { t } from '@lingui/macro';
+import { usePendingTxsDrawer } from '@hooks/use-pending-txs-drawer';
 
 function ToggleDrawerFeedButton() {
-  const { isDrawer, setIsDrawer } = useDrawer();
+  const { isDrawerVisible, setIsDrawerVisible } = usePendingTxsDrawer();
   const handleToggleDrawer = (event: React.MouseEvent<HTMLElement>) => {
-    void setIsDrawer(true);
+    void setIsDrawerVisible(true);
   };
-  const [pendingTransactionsCount, setPendingTransactionsCount] = useAtom(
-    pendingTransactionsCountAtom
-  );
+  const [pendingTxsCount] = useAtom(pendingTxsCountAtom);
   return (
     <IconButton onClick={handleToggleDrawer} color="primary" size="small">
-      <Badge badgeContent={pendingTransactionsCount} color="secondary">
-        <Tooltip title={t`Show BirdCount Transactions`}>
+      <Badge badgeContent={pendingTxsCount} color="secondary">
+        <Tooltip title={t`Pending Transactions`}>
           <NotificationsNoneTwoToneIcon fontSize="small" />
         </Tooltip>
       </Badge>

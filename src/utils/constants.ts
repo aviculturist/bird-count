@@ -1,7 +1,7 @@
 import { Network } from '@store/network-state';
 
 export const ENV = process.env.NEXT_PUBLIC_ENV || '';
-export const GITHUB_URL = process.env.NEXT_PUBLIC_GITHUB_URL || ''
+export const GITHUB_URL = process.env.NEXT_PUBLIC_GITHUB_URL || '';
 export const IS_BROWSER = typeof document !== 'undefined';
 
 export const DEFAULT_MAINNET_SERVER = process.env.NEXT_PUBLIC_MAINNET_API_SERVER || '';

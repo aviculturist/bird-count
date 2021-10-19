@@ -20,7 +20,7 @@ import { useAtom } from 'jotai';
 import { t } from '@lingui/macro';
 
 export default function DrawerFeed() {
-  const { isDrawer, setIsDrawer } = useDrawer();
+  const { isDrawerVisible, setIsDrawerVisible } = useDrawer();
   const [explorer] = useAtom(currentStacksExplorerState);
   const [chain] = useAtom(currentChainState);
   const feed = useFeed();
@@ -32,7 +32,7 @@ export default function DrawerFeed() {
     ) {
       return;
     }
-    setIsDrawer(open);
+    setIsDrawerVisible(open);
   };
 
   const list = () => (
@@ -79,7 +79,7 @@ export default function DrawerFeed() {
 
   return (
     <div>
-      <Drawer anchor="right" open={isDrawer} onClose={toggleDrawer(false)}>
+      <Drawer anchor="right" open={isDrawerVisible} onClose={toggleDrawer(false)}>
         {list()}
       </Drawer>
     </div>
