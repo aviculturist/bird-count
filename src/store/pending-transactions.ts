@@ -1,7 +1,12 @@
-import { atom, useAtom } from 'jotai';
+import { atom } from 'jotai';
 import { atomFamilyWithQuery } from 'jotai-query-toolkit';
 import { networkAtom } from 'micro-stacks/react';
-import type { MempoolTransaction, Transaction } from '@stacks/stacks-blockchain-api-types';
+import type {
+  ContractCallTransaction,
+  MempoolTransaction,
+  TokenTransferTransaction,
+  Transaction,
+} from '@stacks/stacks-blockchain-api-types';
 
 // a simple array of pending transaction ids
 export const pendingTxIdsAtom = atom(Array<string>());
@@ -11,13 +16,6 @@ export const pendingTxsCountAtom = atom(get => {
   const ptxa = get(pendingTxIdsAtom);
   return ptxa.length;
 });
-
-// TODO: seems to be the wrong way to remove from this array
-const RemovePendingTxId = (txid: string) => {
-  const [pendingTxIds, setPendingTxIds] = useAtom(pendingTxIdsAtom);
-  const txs = pendingTxIds.filter(item => item !== txid);
-  setPendingTxIds(txs);
-};
 
 const DEFAULT_FETCH_OPTIONS: RequestInit = {
   referrer: 'no-referrer',
@@ -30,12 +28,21 @@ async function fetchPrivate(input: RequestInfo, init: RequestInit = {}): Promise
 
 export interface UserTransaction {
   txid: string;
-  isPending: boolean;
+  sender: string;
+  function?: string;
+  timestamp: number;
+  txstatus: 'submitted' | 'pending' | 'aborted' | 'dropped' | 'success'; // "submitted" is before node accepts
+}
+
+function isTokenTransferTransaction(
+  tx: Transaction | MempoolTransaction | { error: string }
+): tx is TokenTransferTransaction {
+  return (tx as TokenTransferTransaction).burn_block_time !== undefined;
 }
 
 // An atomFamilyWithQuery for a specific transaction id
-// TODO: is there a way to loop through this for the queries?
-// if so, could make the above array derived atom instead.
+// TODO: is there a way to find all the queries?
+// if so, could make the above array a derived atom instead.
 export const pendingTxAtom = atomFamilyWithQuery<string, UserTransaction>(
   'pending-tx',
   async (get, txid) => {
@@ -51,8 +58,6 @@ export const pendingTxAtom = atomFamilyWithQuery<string, UserTransaction>(
 
     const url = `${networkUrl}/extended/v1/tx/0x${txid}`;
 
-    // TODO: This can fire before the transaction has been received by the node
-    // is there a way to know if this is the first init?
     try {
       const res = await fetchPrivate(url, fetchOptions);
       const tx: Transaction | MempoolTransaction | { error: string } = await res.json();
@@ -60,25 +65,44 @@ export const pendingTxAtom = atomFamilyWithQuery<string, UserTransaction>(
       // TODO: wrongly assumes this is before tx was received, but there could be other errors
       // such as a network change
       if ('error' in tx) {
-        return { txid, isPending: true } as UserTransaction;
+        return {
+          txid,
+          sender: 'error in tx',
+          timestamp: Math.floor(Date.now() / 1000),
+          txstatus: 'submitted',
+        } as UserTransaction;
       }
-      // TODO: how to deal with removing from both array and query?
-      if (tx.tx_status === 'success') {
-        // remove transactions that aren't pending
-        // TODO: wrong way to do it
-        //const txs = pendingTxIds.filter(item => item !== txid);
-        //setPendingTxIds(txs); // breaks rules
-        RemovePendingTxId(txid); // :(
-        pendingTxAtom.remove(txid); // no longer pending, remove from family (but it's still listed in the array)
-        console.log('Removing: ' + txid); // TODO: This never prints to the log
-      }
-      return { txid, isPending: tx.tx_status === 'pending' ? true : false };
+
+      return {
+        txid,
+        sender: tx.sender_address,
+        function: (tx as ContractCallTransaction).contract_call.function_name
+          ? (tx as ContractCallTransaction).contract_call.function_name
+          : undefined,
+        timestamp: (tx as Transaction).burn_block_time
+          ? (tx as Transaction).burn_block_time
+          : (tx as MempoolTransaction).receipt_time,
+        txstatus:
+          tx.tx_status === 'dropped_replace_by_fee' ||
+          tx.tx_status === 'dropped_replace_across_fork' ||
+          tx.tx_status === 'dropped_too_expensive' ||
+          tx.tx_status === 'dropped_stale_garbage_collect'
+            ? 'dropped'
+            : tx.tx_status === 'abort_by_response' || tx.tx_status === 'abort_by_post_condition'
+            ? 'aborted'
+            : tx.tx_status,
+      } as UserTransaction;
     } catch (_e) {
-      // getting an Invalid Hook Call here
       console.log(_e);
     }
     // TODO: When there's an error, does this even return?
-    return { txid, isPending: true } as UserTransaction;
+    return {
+      txid,
+      sender: '',
+      function: 'error?',
+      timestamp: Math.floor(Date.now() / 1000),
+      txstatus: 'submitted',
+    } as UserTransaction;
   },
   { refetchInterval: 30000 }
 ); // every minute

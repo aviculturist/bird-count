@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useAtom } from 'jotai';
 import Button from '@mui/material/Button';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
@@ -7,7 +8,6 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { installWalletDialogAtom } from '@store/install-wallet-dialog';
-import { useAtom } from 'jotai';
 import WalletImage from '@components/wallet-image';
 
 export default function InstallWalletDialog() {

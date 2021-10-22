@@ -1,4 +1,4 @@
-import { Network } from '@store/network-state';
+import { Network } from '@store/current-network-state';
 
 export const ENV = process.env.NEXT_PUBLIC_ENV || '';
 export const GITHUB_URL = process.env.NEXT_PUBLIC_GITHUB_URL || '';

@@ -2,6 +2,7 @@ import { networkAtom } from 'micro-stacks/react';
 import { atomWithQuery } from 'jotai-query-toolkit';
 import { StacksMainnet } from 'micro-stacks/network';
 
+// TODO: eventually rewrite this using the micro-stacks client
 interface NetworkInfo {
   peer_version: number;
   pox_consensus: string;
@@ -52,5 +53,5 @@ export const networkInfoAtom = atomWithQuery<NetworkInfo>(
     }
     return {} as NetworkInfo;
   },
-  { refetchInterval: 10000 }
+  { refetchInterval: 10000 } // onSuccess: () => handleSuccess() TODO
 ); // every minute

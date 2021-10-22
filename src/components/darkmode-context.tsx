@@ -1,10 +1,11 @@
-import React, { ReactNode, useState, useEffect, useContext } from 'react';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { Direction, PaletteMode } from '@mui/material';
+import * as React from 'react';
+import { ReactNode, useEffect, useContext } from 'react';
 import { useAtom } from 'jotai';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { arEG, enUS, itIT, Localization, ruRU } from '@mui/material/locale';
+import { Direction, PaletteMode } from '@mui/material';
 import { darkModeAtom } from '@store/darkmode';
 import { useActiveLocale } from '@hooks/use-active-locale';
-import { arEG, enUS, itIT, Localization, ruRU } from '@mui/material/locale';
 
 const CODE_TO_LOCALE: { [char: string]: Localization } = {
   en: enUS,

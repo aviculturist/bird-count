@@ -1,6 +1,6 @@
 import { smartContractsClientAtom, transactionsClientAtom, accountsClientAtom } from '@store/api';
 import { COUNT_FUNCTION, INCREMENT_FUNCTION, DECREMENT_FUNCTION } from '@utils/constants';
-import { userStxAddressesAtom } from 'micro-stacks/react';
+//import { userStxAddressesAtom } from 'micro-stacks/react';
 import { cvToJSON, hexToCV } from '@stacks/transactions';
 import { atom, useAtom } from 'jotai';
 import { atomWithQuery } from 'jotai-query-toolkit';
@@ -9,7 +9,9 @@ import {
   MempoolTransactionListResponse,
   TransactionResults,
 } from '@blockstack/stacks-blockchain-api-types';
-import { currentBirdcountContractState } from '@store/network-state';
+import { currentBirdcountContractState } from '@store/current-network-state';
+//import { useCallback } from 'react';
+//import { loadingCountAtom } from './loading-count';
 
 export interface BirdCount {
   sender: string;
@@ -24,7 +26,7 @@ export interface BirdCount {
  * A list of the confirmed increment transactions associated with a specific
  * address.
  */
-// TODO: blockstack exports this in .d.ts file so it can't be transpiled
+// TODO: blockstack exports this in .d.ts file so it can't be transpiled :/
 enum GetTransactionListTypeEnum {
   coinbase = 'coinbase',
   token_transfer = 'token_transfer',
@@ -79,8 +81,6 @@ export const pendingTxsAtom = atomWithQuery<BirdCount[]>('pending-txs', async ge
   const birdCountContract = get(currentBirdcountContractState);
   try {
     const txs = await client.getMempoolTransactionList({ limit: 96 });
-    // console.log('all pending increment transactions');
-    // console.log(txs);
     const birdCountTxs = (txs as MempoolTransactionListResponse).results
       .filter(
         tx =>
@@ -137,35 +137,52 @@ export const allTransactionsAtom = atom(get => {
     .sort((a, b) => (a.timestamp > b.timestamp ? -1 : 1)) as BirdCount[];
 });
 
+// TODO
+// const useToggleLoadingCount = () => {
+//   const [isLoadingCount, setIsLoadingCount] = useAtom(loadingCountAtom);
+//   const onBirdCountSuccess = useCallback(() => {
+//     console.log('success');
+//     setIsLoadingCount(false);
+//   }, [setIsLoadingCount]);
+//   return onBirdCountSuccess();
+// };
+
 /*
  * The current count
  */
-export const birdCountAtom = atomWithQuery<number>('bird-count', async get => {
-  const client = get(smartContractsClientAtom);
-  const birdCountContract = get(currentBirdcountContractState);
-  const [contractAddress, contractName] = birdCountContract.split('.');
+export const birdCountAtom = atomWithQuery<number>(
+  'bird-count',
+  async get => {
+    const client = get(smartContractsClientAtom);
+    const birdCountContract = get(currentBirdcountContractState);
+    const [contractAddress, contractName] = birdCountContract.split('.');
 
-  try {
-    const data = await client.callReadOnlyFunction({
-      contractAddress,
-      contractName,
-      functionName: COUNT_FUNCTION,
-      readOnlyFunctionArgs: {
-        sender: contractAddress,
-        arguments: [],
-      },
-    });
-    if (data.okay && data.result) {
-      const result = cvToJSON(hexToCV(data.result as string));
+    try {
+      const data = await client.callReadOnlyFunction({
+        contractAddress,
+        contractName,
+        functionName: COUNT_FUNCTION,
+        readOnlyFunctionArgs: {
+          sender: contractAddress,
+          arguments: [],
+        },
+      });
+      if (data.okay && data.result) {
+        const result = cvToJSON(hexToCV(data.result as string));
 
-      // A favicon counter, because why not  -🐦+ 💪
-      const link = document.querySelector('link[rel="icon"]');
-      global.window.generateIcon(link, '🐦', result.value.value);
+        // A favicon counter, because why not  -🐦+ 💪
+        const link = document.querySelector('link[rel="icon"]');
+        global.window.generateIcon(link, '🐦', result.value.value);
 
-      return result.value.value;
-    } // TODO: failed to fetch
-  } catch (_e) {
-    console.log(_e);
+        return result.value.value;
+      } // TODO: failed to fetch
+    } catch (_e) {
+      console.log(_e);
+    }
+    return 0;
+  },
+  {
+    refetchInterval: 30000,
+    // onSuccess: useToggleLoadingCount, // TODO
   }
-  return 0;
-});
+);

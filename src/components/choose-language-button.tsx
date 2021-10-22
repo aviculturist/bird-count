@@ -1,4 +1,11 @@
 import * as React from 'react';
+// can't use next/app router until i18n SSG is supported
+//import { useRouter } from 'next/router';
+// TODO: Currently missing any location information:
+//import { useLocation } from 'react-router-dom';
+import { useAtom } from 'jotai';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
@@ -8,14 +15,7 @@ import Check from '@mui/icons-material/Check';
 import LanguageTwoToneIcon from '@mui/icons-material/LanguageTwoTone';
 import { SUPPORTED_LOCALES, Locale, CODE_TO_NAME } from '@store/user-locale';
 import { useActiveLocale } from '@hooks/use-active-locale';
-import { useAtom } from 'jotai';
 import { languageMenuAnchorElAtom, languageMenuAtom } from '@store/language-menu';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-// can't use next/app router until i18n SSG is supported
-//import { useRouter } from 'next/router';
-// TODO: Currently missing any location information:
-//import { useLocation } from 'react-router-dom';
 import { useLocationLinkProps } from '@hooks/use-location-link-props';
 import LanguageLink from '@components/language-link';
 import { t } from '@lingui/macro';
@@ -25,7 +25,6 @@ function LanguageMenu() {
   const [anchorEl, setAnchorEl] = useAtom(languageMenuAnchorElAtom);
 
   const activeLocale = useActiveLocale();
-  //console.log('useActiveLocale reports locale from LanguageMenu: ' + activeLocale)
 
   const handleClose = () => {
     setAnchorEl(null);

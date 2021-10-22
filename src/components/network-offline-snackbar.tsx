@@ -1,0 +1,49 @@
+import * as React from 'react';
+import { useAtom } from 'jotai';
+import { networkAtom } from 'micro-stacks/react';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import {
+  networkOfflineSnackbarIsDismissedAtom,
+  networkOfflineAtom,
+} from '@store/network-offline';
+import { t } from '@lingui/macro';
+
+export default function NetworkOfflineSnackbar() {
+  const [networkOffline] = useAtom(networkOfflineAtom);
+  const [network] = useAtom(networkAtom);
+  const [dismissNetworkOfflineSnackbar, setDismissNetworkOfflineSnackbar] = useAtom(
+    networkOfflineSnackbarIsDismissedAtom
+  );
+
+  const handleClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setDismissNetworkOfflineSnackbar(true);
+  };
+
+  const action = (
+    <React.Fragment>
+      <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
+
+  return (
+    <Snackbar
+      open={networkOffline && dismissNetworkOfflineSnackbar === false}
+      autoHideDuration={60000}
+      onClose={handleClose}
+    >
+      <Alert action={action} severity="error">
+        <AlertTitle>{t`Network Problem`}</AlertTitle>
+        {network.getCoreApiUrl()} is unreachable.
+      </Alert>
+    </Snackbar>
+  );
+}

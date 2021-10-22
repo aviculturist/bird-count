@@ -2,24 +2,26 @@ import * as React from 'react';
 import { useAtom } from 'jotai';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import LaunchIcon from '@mui/icons-material/Launch';
-import { currentStacksExplorerState, currentChainState } from '@store/network-state';
+import { currentStacksExplorerState, currentChainState } from '@store/current-network-state';
 import { pendingTxIdsAtom, pendingTxAtom } from '@store/pending-transactions';
+import { truncateMiddle } from '@utils/common';
 import { t } from '@lingui/macro';
 
 function SingleTransactionSnackbar({ txid }: { txid: string }) {
+  const [dismissed, setDismissed] = React.useState(false);
   const [tx, setTx] = useAtom(pendingTxAtom(txid));
   const [explorer] = useAtom(currentStacksExplorerState);
   const [chain] = useAtom(currentChainState);
-  const [pendingTxIds, setPendingTxIds] = useAtom(pendingTxIdsAtom);
 
   const handleClose = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
     if (reason === 'clickaway') {
       return;
     }
-    console.log('click from handleClose, will do something here in the future');
+    setDismissed(true);
   };
 
   const action = (
@@ -33,12 +35,24 @@ function SingleTransactionSnackbar({ txid }: { txid: string }) {
   return (
     <Snackbar
       key={txid}
-      open={tx.isPending === true}
+      open={
+        !dismissed &&
+        (tx.txstatus === 'submitted' ||
+          tx.txstatus == 'pending' ||
+          tx.txstatus === 'aborted' ||
+          tx.txstatus === 'dropped' ||
+          tx.txstatus === 'success')
+      }
       //autoHideDuration={6000}
-      onClose={handleClose}
     >
-      <Alert action={action} severity="success">
-        {txid}
+      <Alert
+        action={action}
+        severity={tx.txstatus === 'submitted' || tx.txstatus === 'pending' ? 'info' : 'success'}
+        onClose={handleClose}
+        sx={{ width: '100%' }}
+      >
+        <AlertTitle>Transaction {tx.txstatus}</AlertTitle>
+        <strong>{truncateMiddle(txid)}</strong>
         <IconButton
           target="_blank"
           href={`${explorer}/txid/${txid}?chain=${chain}`}
@@ -51,7 +65,7 @@ function SingleTransactionSnackbar({ txid }: { txid: string }) {
   );
 }
 
-// TODO: not entirely sure if looping through all pending transactions is correct here
+// TODO: not entirely sure if looping through all pending transactions is the best pattern
 export default function TransactionSnackbars() {
   const [pendingTxIds, setPendingTxIds] = useAtom(pendingTxIdsAtom);
   return (

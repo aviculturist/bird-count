@@ -1,42 +1,28 @@
 import * as React from 'react';
 import { Suspense } from 'react';
-import { GetStaticPropsContext } from 'next';
-import { GetQueries, getStaticQueryProps, withInitialQueryData } from 'jotai-query-toolkit/nextjs';
-import { GITHUB_URL } from '@utils/constants';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
-import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LoadingBackdrop from '@components/loading-backdrop';
-import DeleteApplicationDataButton from '@components/clear-application-data-button';
 import BitcoinBlockHeightButton from '@components/bitcoin-block-height-button';
 import StacksChainTipButton from '@components/stacks-chain-tip-button';
-import LocalNetworkOfflineSnackbar from '@components/local-network-offline-snackbar';
-import { LocalNetworkOfflineIconButton } from '@components/local-network-offline-snackbar';
+import NetworkOfflineSnackbar from '@components/network-offline-snackbar';
+import NetworkStatusIconButton from '@components/network-status-iconbutton';
+import { GITHUB_URL } from '@utils/constants';
 import { t } from '@lingui/macro';
 
-function Copyright() {
+export default function Footer() {
   const buildHash = process.env.NEXT_PUBLIC_COMMIT_HASH || '';
   const buildHashShort = buildHash.slice(0, 7);
   return (
-    <>
-      <Stack
-        direction="row"
-        justifyContent="flex-end"
-        alignItems="flex-end"
-        spacing={1}
-        sx={{
-          p: 2,
-          position: 'absolute',
-          bottom: 10,
-          left: 10,
-        }}
-      >
-        {' '}
-        <LocalNetworkOfflineIconButton />
+    <AppBar position="fixed" color="transparent" elevation={0} sx={{ top: 'auto', bottom: 0 }}>
+      {/* Footer */}
+      <Toolbar>
+        <NetworkStatusIconButton />
         <Button
           sx={{ textTransform: 'none' }}
           size="small"
@@ -52,47 +38,22 @@ function Copyright() {
           href={`${GITHUB_URL}/graphs/contributors`}
         >
           {'© '}
-          {t`the contributors`} {new Date().getFullYear()}
+          {t`contributors`}
           <Tooltip title={t`Made with Love`}>
-            <FavoriteIcon color="error" fontSize="inherit" />
+            <FavoriteIcon sx={{ ml: 1 }} color="error" fontSize="inherit" />
           </Tooltip>
         </Button>
-      </Stack>
-    </>
-  );
-}
-
-export default function Footer() {
-  return (
-    <>
-      {/* Footer */}
-      <Box sx={{ p: 6 }} component="footer">
-        <Copyright />
-
-        <Stack
-          direction="row"
-          justifyContent="flex-end"
-          alignItems="flex-end"
-          spacing={1}
-          sx={{
-            p: 2,
-            position: 'absolute',
-            bottom: 10,
-            right: 10,
-          }}
-        >
-          <Suspense fallback={<CircularProgress />}>
-            <BitcoinBlockHeightButton />
-          </Suspense>
-          <Suspense fallback={<CircularProgress />}>
-            <StacksChainTipButton />
-          </Suspense>
-          <DeleteApplicationDataButton />
-        </Stack>
-      </Box>
+        <Box sx={{ flexGrow: 1 }} />
+        <Suspense fallback={<CircularProgress />}>
+          <BitcoinBlockHeightButton />
+        </Suspense>
+        <Suspense fallback={<CircularProgress />}>
+          <StacksChainTipButton />
+        </Suspense>
+      </Toolbar>
       {/* End footer */}
       <LoadingBackdrop />
-      <LocalNetworkOfflineSnackbar />
-    </>
+      <NetworkOfflineSnackbar />
+    </AppBar>
   );
 }

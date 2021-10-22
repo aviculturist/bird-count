@@ -1,15 +1,15 @@
 import * as React from 'react';
+import { useAtom } from 'jotai';
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import NotificationsNoneTwoToneIcon from '@mui/icons-material/NotificationsNoneTwoTone';
 import { pendingTxsCountAtom } from '@store/pending-transactions';
-import { useAtom } from 'jotai';
+import { useTransactionsDrawer } from '@hooks/use-transactions-drawer';
 import { t } from '@lingui/macro';
-import { usePendingTxsDrawer } from '@hooks/use-pending-txs-drawer';
 
-function ToggleDrawerFeedButton() {
-  const { isDrawerVisible, setIsDrawerVisible } = usePendingTxsDrawer();
+function ToggleTransactionsDrawerButton() {
+  const { isDrawerVisible, setIsDrawerVisible } = useTransactionsDrawer();
   const handleToggleDrawer = (event: React.MouseEvent<HTMLElement>) => {
     void setIsDrawerVisible(true);
   };
@@ -24,4 +24,4 @@ function ToggleDrawerFeedButton() {
     </IconButton>
   );
 }
-export default ToggleDrawerFeedButton;
+export default ToggleTransactionsDrawerButton;

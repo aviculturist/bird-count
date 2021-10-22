@@ -1,5 +1,7 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
+import { useAtom } from 'jotai';
+import { useNetwork } from 'micro-stacks/react';
+import { StacksMainnet, StacksRegtest, StacksMocknet, StacksTestnet } from 'micro-stacks/network';
 import Avatar from '@mui/material/Avatar';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -7,18 +9,11 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
-import SettingsIcon from '@mui/icons-material/Settings';
 import CloudQueueIcon from '@mui/icons-material/CloudQueue';
 import CheckIcon from '@mui/icons-material/Check';
-import { networkDialogAtom } from '@store/network-dialog';
-import { useAtom } from 'jotai';
 import { DEFAULT_NETWORK_LIST } from '@utils/constants';
-import { currentNetworkAtom, Network } from '@store/network-state';
-import NoSsr from '@mui/core/NoSsr';
-import { useNetwork } from 'micro-stacks/react';
-import { StacksMainnet, StacksRegtest, StacksMocknet, StacksTestnet } from 'micro-stacks/network';
-import Tooltip from '@mui/material/Tooltip';
-import BlurOnTwoToneIcon from '@mui/icons-material/BlurOnTwoTone';
+import { currentNetworkAtom, Network } from '@store/current-network-state';
+
 const networks: Network[] = DEFAULT_NETWORK_LIST;
 
 export interface NetworkDialogProps {
@@ -27,7 +22,7 @@ export interface NetworkDialogProps {
   onClose: (index: number) => void;
 }
 
-function NetworkDialog(props: NetworkDialogProps) {
+export default function SelectNetworkDialog(props: NetworkDialogProps) {
   const { onClose, selectedValue, open } = props;
   const { handleSetNetwork } = useNetwork();
   const [currentNetwork, setCurrentNetwork] = useAtom(currentNetworkAtom);
@@ -75,36 +70,5 @@ function NetworkDialog(props: NetworkDialogProps) {
         ))}
       </List>
     </Dialog>
-  );
-}
-
-export default function NetworkDialogButton() {
-  const [open, setOpen] = useAtom(networkDialogAtom);
-  const [currentNetwork] = useAtom(currentNetworkAtom);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (index: number) => {
-    setOpen(false);
-  };
-
-  return (
-    <>
-      <NoSsr>
-        <Tooltip title={`Switch Networks`}>
-          <Button
-            variant="outlined"
-            startIcon={<BlurOnTwoToneIcon fontSize="small" />}
-            onClick={handleClickOpen}
-            color="primary"
-          >
-            {currentNetwork.name}
-          </Button>
-        </Tooltip>
-        <NetworkDialog selectedValue={currentNetwork.index} open={open} onClose={handleClose} />
-      </NoSsr>
-    </>
   );
 }

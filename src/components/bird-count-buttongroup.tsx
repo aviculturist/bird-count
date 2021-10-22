@@ -1,19 +1,23 @@
+import * as React from 'react';
 import { useAtom } from 'jotai';
+import { useAuth } from 'micro-stacks/react';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Tooltip from '@mui/material/Tooltip';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
 import { birdCountAtom } from '@store/bird-count';
+import { currentStacksExplorerState, currentChainState } from '@store/current-network-state';
+import { currentBirdcountContractState } from '@store/current-network-state';
+import { installWalletDialogAtom } from '@store/install-wallet-dialog';
 import { useHandleIncrement } from '@hooks/use-increment';
 import { useHandleDecrement } from '@hooks/use-decrement';
-import { currentStacksExplorerState, currentChainState } from '@store/network-state';
-import { currentBirdcountContractState } from '@store/network-state';
-import { useAuth } from 'micro-stacks/react';
-import { t, plural, Plural } from '@lingui/macro';
-import { installWalletDialogAtom } from '@store/install-wallet-dialog';
 import InstallWalletDialog from '@components/install-wallet-dialog';
-import TransactionSnackbars from '@components/transaction-snackbar';
+import TransactionSnackbars from '@components/transaction-snackbars';
+import BirdCountRefreshFab from '@components/bird-count-refresh-fab';
+import { t, plural } from '@lingui/macro';
 
 // TODO: implement using @clarigen/web
 // import { useCallback } from 'react';
@@ -42,70 +46,88 @@ function BirdCountButtonGroup() {
   const [currentChain] = useAtom(currentChainState);
   const [birdCountContract] = useAtom(currentBirdcountContractState);
   const { isSignedIn, handleSignIn, session } = useAuth();
-  const [open, setOpen] = useAtom(installWalletDialogAtom);
+  const [, setOpen] = useAtom(installWalletDialogAtom);
 
+  // function handleClick() {
+  //   setIsLoadingCount(true);
+  //   const refetch = () => {
+  //     dispatchBirdCount({ type: 'refetch' });
+  //   };
+  //   refetch();
+  //   setIsLoadingCount(false);
+  // }
   // TODO: implement using @clarigen/web
   //const handleDecrement = useHandleDecrement();
 
   return (
     <>
-      <ButtonGroup size="large" variant="contained">
-        <Tooltip title={t`Click to decrement`}>
-          <Button
-            href="#"
-            onClick={
-              isSignedIn
-                ? () => handleDecrement()
-                : () => {
-                    try {
-                      handleSignIn();
-                    } catch (_e) {
-                      console.log(_e);
-                    }
-                    !session && setOpen(true);
+      <Stack sx={{ alignItems: 'center' }} spacing={2}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ m: 1, position: 'relative' }}>
+            <ButtonGroup size="large" variant="contained">
+              <Tooltip title={t`Click to decrement`}>
+                <Button
+                  href="#"
+                  onClick={
+                    isSignedIn
+                      ? () => handleDecrement()
+                      : () => {
+                          try {
+                            handleSignIn();
+                          } catch (_e) {
+                            console.log(_e);
+                          }
+                          !session && setOpen(true);
+                        }
                   }
-            }
-          >
-            <RemoveIcon />
-          </Button>
-        </Tooltip>
-        <Button
-          target="_blank"
-          fullWidth={true}
-          // TODO: this isn't quite the right URL
-          href={`${currentStacksExplorer}/txid/${birdCountContract}?chain=${currentChain}`}
-        >
-          {t({
-            message: plural(birdCount, {
-              one: '# bird',
-              other: '# birds',
-            }),
-          })}
-        </Button>
-        {/* Another way to do plurals
-      <Button>
-        <Plural value={birdCount} one="# bird" other="# birds" />
-      </Button> */}
-        <Tooltip title={t`Click to increment`}>
-          <Button
-            href="#"
-            onClick={
-              isSignedIn
-                ? () => handleIncrement()
-                : () => {
-                    try {
-                      handleSignIn();
-                    } catch (_e) {
-                      console.log(_e);
-                    }
-                    !session && setOpen(true);
+                >
+                  <RemoveIcon />
+                </Button>
+              </Tooltip>
+              <Tooltip title={t`View smart contract`}>
+                <Button
+                  variant="contained"
+                  fullWidth={true}
+                  href={`${currentStacksExplorer}/txid/${birdCountContract}?chain=${currentChain}`}
+                  target="_blank"
+                >
+                  {t({
+                    message: plural(birdCount, {
+                      one: '# bird',
+                      other: '# birds',
+                    }),
+                  })}
+                </Button>
+              </Tooltip>
+              {/* Another way to do plurals
+              <Button>
+                <Plural value={birdCount} one="# bird" other="# birds" />
+              </Button> */}
+              <Tooltip title={t`Click to increment`}>
+                <Button
+                  href="#"
+                  onClick={
+                    isSignedIn
+                      ? () => handleIncrement()
+                      : () => {
+                          try {
+                            handleSignIn();
+                          } catch (_e) {
+                            console.log(_e);
+                          }
+                          !session && setOpen(true);
+                        }
                   }
-            }
-          >
-            <AddIcon />
-          </Button>
-        </Tooltip>
-      </ButtonGroup>
+                >
+                  <AddIcon />
+                </Button>
+              </Tooltip>
+            </ButtonGroup>
+          </Box>
+        </Box>
+        <BirdCountRefreshFab />
+      </Stack>
+
       <InstallWalletDialog />
       <TransactionSnackbars />
     </>

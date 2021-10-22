@@ -1,4 +1,7 @@
 import * as React from 'react';
+import { useEffect } from 'react';
+import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai/utils';
 import IconButton from '@mui/material/IconButton';
 import Pagination from '@mui/material/Pagination';
 import Tooltip from '@mui/material/Tooltip';
@@ -10,40 +13,53 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import AutorenewIcon from '@mui/icons-material/Autorenew';
+import ChangeCircleOutlinedIcon from '@mui/icons-material/ChangeCircleOutlined';
+import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import LaunchIcon from '@mui/icons-material/Launch';
-import { usePendingTxsDrawer } from '@hooks/use-pending-txs-drawer';
-import { pendingTxIdsAtom, pendingTxAtom, UserTransaction } from '@store/pending-transactions';
+import { useTransactionsDrawer } from '@hooks/use-transactions-drawer';
+import { pendingTxIdsAtom, pendingTxAtom } from '@store/pending-transactions';
+import { currentStacksExplorerState, currentChainState } from '@store/current-network-state';
 import { toRelativeTime } from '@utils/time';
-import { currentStacksExplorerState, currentChainState } from '@store/network-state';
-import { useAtom } from 'jotai';
-import { useAtomValue } from 'jotai/utils';
 import { t } from '@lingui/macro';
 
-// combines the initial queued transaction info
-// and the eventually acknowledged mempool info
-export interface UserTransactionDrawerView {
-  txid: string;
-  isPending: boolean;
-  sender: string;
-  function: string;
-  timestamp: number;
-}
-
-export function PendingTxItem({ txid }) {
+export function PendingTxItem({ txid }: { txid: string }) {
   const [explorer] = useAtom(currentStacksExplorerState);
   const [chain] = useAtom(currentChainState);
   const [pendingTxIds, setPendingTxIds] = useAtom(pendingTxIdsAtom);
-  const ptx = useAtomValue(pendingTxAtom(txid));
-  // TODO: will eventually merge UserTransaction and UserTransactionDrawerView
-  // this is just a mockup for now
-  const tx = { ...ptx, sender: 'sender', function: 'function', timestamp: 123 };
+  const tx = useAtomValue(pendingTxAtom(txid));
+
+  useEffect(() => {
+    if (tx.txstatus === 'success') {
+      const txs = pendingTxIds.filter(item => item !== txid);
+      setPendingTxIds(txs); // remove from array
+      pendingTxAtom.remove(txid); // remove from queries
+      console.log('Removing: ' + txid);
+    }
+  });
+
+  // TODO: This can fire before the transaction has been received by the node
+  // is there a way to know if this is the first init?
+  // const TxComponent = ({txid}) => {
+  //   const txData = useAtomValue(txQueryFamily(txid));
+  //   const placeholderTxData = useAtomValue(placeholderTxData(rawTx));
+  //   if(!txData) return <PlaceholderTx data={placeholderTxData} />
+  //   return <TxDataComponent data={txData} />
+  // }
 
   return (
     <ListItem button key={tx.txid}>
       <ListItemIcon>
-        <Tooltip key={tx.txid} title={tx.sender}>
-          {tx.isPending ? <AutorenewIcon /> : <CheckCircleOutlineIcon color="success" />}
+        <Tooltip key={tx.txid} title={tx.txstatus}>
+          {tx.txstatus === 'success' ? (
+            <CheckCircleOutlineIcon color="success" />
+          ) : tx.txstatus === 'submitted' || tx.txstatus === 'pending' ? (
+            <ChangeCircleOutlinedIcon color="info" />
+          ) : tx.txstatus === 'aborted' || tx.txstatus === 'dropped' ? (
+            <CancelOutlinedIcon color="error" />
+          ) : (
+            <HelpOutlineOutlinedIcon color="error" />
+          )}
         </Tooltip>
       </ListItemIcon>
       <Tooltip key={tx.txid} title={tx.txid}>
@@ -67,11 +83,9 @@ export function PendingTxItem({ txid }) {
   );
 }
 
-export default function PendingTxsDrawer() {
-  const { isDrawerVisible, setIsDrawerVisible } = usePendingTxsDrawer();
-  const [explorer] = useAtom(currentStacksExplorerState);
-  const [chain] = useAtom(currentChainState);
-  const [pendingTxIds, setPendingTxIds] = useAtom(pendingTxIdsAtom);
+export default function TransactionsDrawer() {
+  const { isDrawerVisible, setIsDrawerVisible } = useTransactionsDrawer();
+  const [pendingTxIds] = useAtom(pendingTxIdsAtom);
 
   const ptxs = pendingTxIds;
 

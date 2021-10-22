@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useAtom } from 'jotai';
 import IconButton from '@mui/material/IconButton';
 import Pagination from '@mui/material/Pagination';
 import Tooltip from '@mui/material/Tooltip';
@@ -15,8 +16,7 @@ import LaunchIcon from '@mui/icons-material/Launch';
 import { useDrawer } from '@hooks/use-drawer';
 import { useFeed } from '@hooks/use-feed';
 import { toRelativeTime } from '@utils/time';
-import { currentStacksExplorerState, currentChainState } from '@store/network-state';
-import { useAtom } from 'jotai';
+import { currentStacksExplorerState, currentChainState } from '@store/current-network-state';
 import { t } from '@lingui/macro';
 
 export default function DrawerFeed() {

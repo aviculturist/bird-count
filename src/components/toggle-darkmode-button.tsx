@@ -1,11 +1,11 @@
 import * as React from 'react';
 import LightModeTwoToneIcon from '@mui/icons-material/LightModeTwoTone';
 import ModeNightTwoToneIcon from '@mui/icons-material/ModeNightTwoTone';
-import { useDarkModeContext } from '@components/darkmode-context';
 import IconButton from '@mui/material/IconButton';
 import NoSsr from '@mui/core/NoSsr';
 import Tooltip from '@mui/material/Tooltip';
-import { grey } from '@mui/material/colors';
+import { yellow, grey } from '@mui/material/colors';
+import { useDarkModeContext } from '@components/darkmode-context';
 import { t } from '@lingui/macro';
 
 function ToggleDarkModeButton() {
@@ -18,7 +18,7 @@ function ToggleDarkModeButton() {
           <Tooltip title={t`Turn off Dark Mode`}>
             <LightModeTwoToneIcon
               sx={{
-                color: grey[500],
+                color: yellow[500],
               }}
               fontSize="small"
             />
@@ -27,7 +27,7 @@ function ToggleDarkModeButton() {
           <Tooltip title={t`Turn on Dark Mode`}>
             <ModeNightTwoToneIcon
               sx={{
-                color: grey[500],
+                color: grey[900],
               }}
               fontSize="small"
             />

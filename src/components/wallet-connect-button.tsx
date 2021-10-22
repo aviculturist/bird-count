@@ -1,7 +1,8 @@
+import * as React from 'react';
+import { useAtom } from 'jotai';
 import { useAuth } from 'micro-stacks/react';
 import Button from '@mui/material/Button';
 import { installWalletDialogAtom } from '@store/install-wallet-dialog';
-import { useAtom } from 'jotai';
 
 import { t } from '@lingui/macro';
 

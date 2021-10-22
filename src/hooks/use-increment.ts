@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useAtom } from 'jotai';
 import { useTransactionPopup } from 'micro-stacks/react';
-import { currentBirdcountContractState } from '@store/network-state';
+import { currentBirdcountContractState } from '@store/current-network-state';
 import { INCREMENT_FUNCTION } from '@utils/constants';
 import { pendingTxIdsAtom, pendingTxAtom } from '@store/pending-transactions';
 
@@ -14,10 +14,7 @@ export function useHandleIncrement() {
   const onFinish = useCallback(
     data => {
       setPendingTxIds([...pendingTxIds, data.txId]); // adds this txid to the array of pending transactions
-      // creates an atomFamilyWithQuery
-      // TODO: this almost always results in a race condition where the node hasn't processed the tx yet
-      // so the first query fails
-      const ptx = pendingTxAtom(data.txId);
+      void pendingTxAtom(data.txId); // creates an atomFamilyWithQuery to track status
     },
     [pendingTxIds, setPendingTxIds]
   );
