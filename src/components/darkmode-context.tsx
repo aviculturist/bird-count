@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ReactNode, useEffect, useContext } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useAtom } from 'jotai';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { arEG, enUS, itIT, Localization, ruRU } from '@mui/material/locale';
@@ -19,7 +19,7 @@ export interface DarkModeContextInterface {
   toggleDarkMode?: any;
 }
 // https://fettblog.eu/typescript-react/context/
-const DarkModeContext = React.createContext<Partial<DarkModeContextInterface>>({});
+export const DarkModeContext = React.createContext<Partial<DarkModeContextInterface>>({});
 
 // https://newbedev.com/how-to-fix-binding-element-children-implicitly-has-an-any-type-ts-7031
 interface Props {
@@ -74,5 +74,3 @@ export function DarkModeProvider({ children }: { children: ReactNode }) {
     </DarkModeContext.Provider>
   );
 }
-
-export const useDarkModeContext = (): DarkModeContextInterface => useContext(DarkModeContext);

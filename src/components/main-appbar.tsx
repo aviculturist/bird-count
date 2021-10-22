@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import ToggleDarkModeButton from '@components/toggle-darkmode-button';
+import ToggleDarkModeIconButton from '@components/toggle-darkmode-iconbutton';
 import SelectNetworkDialogButton from '@components/select-network-dialog-button';
 import ToggleTransactionsDrawerButton from '@components/toggle-transactions-drawer-button';
 import WalletConnectButton from '@components/wallet-connect-button';
@@ -18,10 +18,15 @@ function MainAppBar() {
       <AppBar position="relative" color="transparent" elevation={0}>
         <Toolbar sx={{ columnGap: 1 }}>
           <MainAppbarDrawer />
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          🐦 BirdCount
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ display: { xs: 'none', sm: 'block' }, flexGrow: 1 }}
+          >
+            🐦 BirdCount
           </Typography>
-          <ToggleDarkModeButton />
+          <ToggleDarkModeIconButton />
           <ToggleTransactionsDrawerButton />
           <SelectNetworkDialogButton />
           <WalletConnectButton />
