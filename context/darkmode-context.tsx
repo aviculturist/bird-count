@@ -18,6 +18,7 @@ export interface DarkModeContextInterface {
   darkMode?: any;
   toggleDarkMode?: any;
 }
+
 // https://fettblog.eu/typescript-react/context/
 export const DarkModeContext = React.createContext<Partial<DarkModeContextInterface>>({});
 

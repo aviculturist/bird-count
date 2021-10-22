@@ -1,9 +1,9 @@
-import '../../scripts/wdyr';
+import '../utils/wdyr';
 import * as React from 'react';
 import { ReactNode, Suspense } from 'react';
 import { Provider } from 'jotai';
 import { HashRouter } from 'react-router-dom';
-import { DarkModeProvider } from '@components/darkmode-context';
+import { DarkModeProvider } from 'context/darkmode-context';
 import CssBaseline from '@mui/material/CssBaseline';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
