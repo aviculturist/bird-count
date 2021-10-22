@@ -8,7 +8,7 @@ module.exports = withTM({
   // https://github.com/Velenir/nextjs-ipfs-example/
   // Testing shows that '' works while './' does not
   // load assets within subdirs
-  assetPrefix: '',
+  assetPrefix: './',
   trailingSlash: true,
   reactStrictMode: true,
   // env: {
