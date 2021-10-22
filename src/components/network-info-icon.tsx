@@ -6,8 +6,8 @@ import FiberManualRecordTwoToneIcon from '@mui/icons-material/FiberManualRecordT
 import CircularProgress from '@mui/material/CircularProgress';
 import { green, red } from '@mui/material/colors';
 import { networkInfoAtom } from '@store/network-info';
-import { networkOfflineAtom } from '@store/network-offline';
-import { loadingInfoAtom } from '@store/loading-info';
+import { networkIsOfflineAtom } from '@store/network-is-offline';
+import { networkInfoIsLoadingAtom } from '@store/network-info-is-loading';
 import BitcoinIcon from '@components/bitcoin-icon';
 import StacksIcon from '@components/stacks-icon';
 
@@ -24,9 +24,9 @@ export default function NetworkInfoIcon({
   left = 6,
   icon = 'network',
 }: NetworkIconProps) {
-  const [networkOffline] = useAtom(networkOfflineAtom);
+  const [networkOffline] = useAtom(networkIsOfflineAtom);
   const [networkInfo, dispatchNetworkInfo] = useAtom(networkInfoAtom);
-  const [isLoadingInfo, setIsLoadingInfo] = useAtom(loadingInfoAtom);
+  const [isLoadingInfo, setIsLoadingInfo] = useAtom(networkInfoIsLoadingAtom);
   const [network] = useAtom(networkAtom);
   const timer = React.useRef<number>();
 

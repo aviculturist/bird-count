@@ -2,17 +2,18 @@ import * as React from 'react';
 import { useAtom } from 'jotai';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
-import { networkOfflineSnackbarIsDismissedAtom, networkOfflineAtom } from '@store/network-offline';
+import { networkOfflineSnackbarIsDismissedAtom } from '@store/network-offline-snackbar-is-dismissed';
+import { networkIsOfflineAtom } from '@store/network-is-offline';
 import NetworkInfoIcon from '@components/network-info-icon';
 import { networkInfoAtom } from '@store/network-info';
-import { loadingInfoAtom } from '@store/loading-info';
+import { networkInfoIsLoadingAtom } from '@store/network-info-is-loading';
 import { t } from '@lingui/macro';
 
 export default function NetworkStatusIconButton() {
-  const [networkOffline] = useAtom(networkOfflineAtom);
+  const [networkOffline] = useAtom(networkIsOfflineAtom);
   const [, setDismissNetworkOfflineSnackbar] = useAtom(networkOfflineSnackbarIsDismissedAtom);
   const [, dispatchNetworkInfo] = useAtom(networkInfoAtom);
-  const [isLoadingInfo, setIsLoadingInfo] = useAtom(loadingInfoAtom);
+  const [isLoadingInfo, setIsLoadingInfo] = useAtom(networkInfoIsLoadingAtom);
 
   const timer = React.useRef<number>();
 

@@ -11,12 +11,12 @@ import { green } from '@mui/material/colors';
 import Fab from '@mui/material/Fab';
 import CheckIcon from '@mui/icons-material/Check';
 import { birdCountAtom } from '@store/bird-count';
-import { countIsLoadingAtom } from '@store/count-is-loading';
+import { birdCountIsLoadingAtom } from '@store/bird-count-is-loading';
 import { t, plural, Plural } from '@lingui/macro';
 
 export default function BirdCountRefreshFab() {
   const [success, setSuccess] = React.useState(false);
-  const [isLoadingCount, setIsLoadingCount] = useAtom(countIsLoadingAtom);
+  const [isLoadingCount, setIsLoadingCount] = useAtom(birdCountIsLoadingAtom);
   const [birdCount, dispatchBirdCount] = useAtom(birdCountAtom);
   const [network] = useAtom(networkAtom);
   const timer = React.useRef<number>();

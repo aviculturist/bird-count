@@ -6,14 +6,12 @@ import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import {
-  networkOfflineSnackbarIsDismissedAtom,
-  networkOfflineAtom,
-} from '@store/network-offline';
+import { networkOfflineSnackbarIsDismissedAtom } from '@store/network-offline-snackbar-is-dismissed';
+import { networkIsOfflineAtom } from '@store/network-is-offline';
 import { t } from '@lingui/macro';
 
 export default function NetworkOfflineSnackbar() {
-  const [networkOffline] = useAtom(networkOfflineAtom);
+  const [networkOffline] = useAtom(networkIsOfflineAtom);
   const [network] = useAtom(networkAtom);
   const [dismissNetworkOfflineSnackbar, setDismissNetworkOfflineSnackbar] = useAtom(
     networkOfflineSnackbarIsDismissedAtom
