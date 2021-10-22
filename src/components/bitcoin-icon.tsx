@@ -2,7 +2,7 @@ import * as React from 'react';
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 import { createSvgIcon } from '@mui/material/utils';
 
-function BitcoinIcon(props) {
+function BitcoinIcon(props:any) {
   return (
     <SvgIcon width="24" height="24" viewBox="0 0 24 24" viewport="0 0 24 24" {...props}>
       <>

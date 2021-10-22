@@ -2,7 +2,7 @@ import * as React from 'react';
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 import { createSvgIcon } from '@mui/material/utils';
 
-function StacksIcon(props) {
+function StacksIcon(props:any) {
 
   return (
     <SvgIcon width="24" height="24" viewBox="-24 -24 144 144" viewport="0 0 24 24" {...props}>
