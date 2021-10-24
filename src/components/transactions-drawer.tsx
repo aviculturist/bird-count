@@ -17,7 +17,7 @@ import ChangeCircleOutlinedIcon from '@mui/icons-material/ChangeCircleOutlined';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import LaunchIcon from '@mui/icons-material/Launch';
-import { useTransactionsDrawer } from '@hooks/use-transactions-drawer';
+import { useTransactionsDrawerIsOpen } from '@hooks/use-transactions-drawer-is-open';
 import { pendingTxIdsAtom, pendingTxAtom } from '@store/pending-transactions';
 import { currentStacksExplorerState, currentChainState } from '@store/current-network-state';
 import { toRelativeTime } from '@utils/time';
@@ -84,7 +84,7 @@ export function PendingTxItem({ txid }: { txid: string }) {
 }
 
 export default function TransactionsDrawer() {
-  const { isDrawerVisible, setIsDrawerVisible } = useTransactionsDrawer();
+  const { transactionsDrawerIsOpen, setTransactionsDrawerIsOpen } = useTransactionsDrawerIsOpen();
   const [pendingTxIds] = useAtom(pendingTxIdsAtom);
 
   const ptxs = pendingTxIds;
@@ -97,7 +97,7 @@ export default function TransactionsDrawer() {
     ) {
       return;
     }
-    setIsDrawerVisible(open);
+    setTransactionsDrawerIsOpen(open);
   };
 
   const list = () => (
@@ -121,7 +121,7 @@ export default function TransactionsDrawer() {
 
   return (
     <div>
-      <Drawer anchor="right" open={isDrawerVisible} onClose={toggleDrawer(false)}>
+      <Drawer anchor="right" open={transactionsDrawerIsOpen} onClose={toggleDrawer(false)}>
         {list()}
       </Drawer>
     </div>

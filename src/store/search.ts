@@ -2,7 +2,39 @@ import { networkAtom } from 'micro-stacks/react';
 import { SearchErrorResult, SearchSuccessResult } from '@stacks/stacks-blockchain-api-types';
 import { atomWithQuery, atomFamilyWithQuery } from 'jotai-query-toolkit';
 import { atom } from 'jotai';
+
 export const queryAtom = atom('');
+
+export interface ResultType {
+  icon?: string;
+  slug?: string;
+  primary_description: string;
+  secondary_description: string;
+  timestamp?: number;
+}
+
+export const searchQueryAtom = atom('');
+export const searchResultAtom = atom<SearchErrorResult | SearchSuccessResult | undefined>(
+  undefined
+);
+export const searchHistoryAtom = atom<{ [key: string]: ResultType }>({});
+export const searchFavoritesAtom = atom<{ [key: string]: ResultType }>({});
+
+// interface Item {
+//   name: string;
+//   price: number;
+// }
+
+// interface Items {
+//   [key: any]: Item;
+// }
+
+// let items: Items = {
+//   "34433ded" : {name: "foo", price: 0.99},
+//   "14d433dee" : {name: "bar", price: 1.99},
+// }
+
+// alert(JSON.stringify(items));
 
 const DEFAULT_FETCH_OPTIONS: RequestInit = {
   referrer: 'no-referrer',

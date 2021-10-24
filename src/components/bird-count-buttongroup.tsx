@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 import { birdCountAtom } from '@store/bird-count';
 import { currentStacksExplorerState, currentChainState } from '@store/current-network-state';
 import { currentBirdcountContractState } from '@store/current-network-state';
-import { installWalletDialogAtom } from '@store/install-wallet-dialog';
+import { installWalletDialogIsOpenAtom } from '@store/install-wallet-dialog-is-open';
 import { useHandleIncrement } from '@hooks/use-increment';
 import { useHandleDecrement } from '@hooks/use-decrement';
 import InstallWalletDialog from '@components/install-wallet-dialog';
@@ -46,7 +46,7 @@ function BirdCountButtonGroup() {
   const [currentChain] = useAtom(currentChainState);
   const [birdCountContract] = useAtom(currentBirdcountContractState);
   const { isSignedIn, handleSignIn, session } = useAuth();
-  const [, setOpen] = useAtom(installWalletDialogAtom);
+  const [, setOpen] = useAtom(installWalletDialogIsOpenAtom);
 
   // function handleClick() {
   //   setIsLoadingCount(true);

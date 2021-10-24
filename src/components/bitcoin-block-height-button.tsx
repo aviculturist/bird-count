@@ -6,7 +6,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { networkInfoAtom } from '@store/network-info';
 import { currentBitcoinExplorerState } from '@store/current-network-state';
 import { DEFAULT_LOCALNET_SERVER } from '@utils/constants';
-import NetworkInfoIcon from '@components/network-info-icon';
+import ProgressIcon from '@components/progress-icon';
 import { t } from '@lingui/macro';
 
 export default function BitcoinBlockHeightButton() {
@@ -24,7 +24,7 @@ export default function BitcoinBlockHeightButton() {
               }/${networkInfo.burn_block_height}`
         }
         target="_blank"
-        startIcon={<NetworkInfoIcon left={2} top={5} size={20} icon="bitcoin" />}
+        startIcon={<ProgressIcon left={2} top={5} size={20} icon="bitcoin" />}
         variant="text"
         size="small"
         color={networkInfo.burn_block_height === undefined ? 'error' : 'success'}

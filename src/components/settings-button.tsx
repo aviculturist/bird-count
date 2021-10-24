@@ -11,7 +11,7 @@ import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined';
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import PrivacyTipOutlinedIcon from '@mui/icons-material/PrivacyTipOutlined';
 import { styled } from '@mui/material/styles';
-import { settingsMenuAnchorElAtom, settingsMenuAtom } from '@store/settings-menu';
+import { settingsMenuAnchorElAtom, settingsMenuIsOpenAtom } from '@store/settings-menu-is-open';
 import ClearApplicationDataMenuItem from '@components/clear-application-data-menuitem';
 import { t } from '@lingui/macro';
 
@@ -21,7 +21,7 @@ const Input = styled('input')({
 });
 
 function SettingsMenu() {
-  const [isOpen, setIsOpen] = useAtom(settingsMenuAtom);
+  const [isOpen, setIsOpen] = useAtom(settingsMenuIsOpenAtom);
   const [anchorEl, setAnchorEl] = useAtom(settingsMenuAnchorElAtom);
 
   const handleClose = () => {
@@ -122,7 +122,7 @@ function SettingsMenu() {
 //export { SettingsMenu };
 
 function SettingButton() {
-  const [isOpen, setIsOpen] = useAtom(settingsMenuAtom);
+  const [isOpen, setIsOpen] = useAtom(settingsMenuIsOpenAtom);
   const [, setAnchorEl] = useAtom(settingsMenuAnchorElAtom);
   const handleChooseSetting = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);

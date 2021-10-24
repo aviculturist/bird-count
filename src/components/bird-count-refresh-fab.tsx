@@ -16,7 +16,7 @@ import { t, plural, Plural } from '@lingui/macro';
 
 export default function BirdCountRefreshFab() {
   const [success, setSuccess] = React.useState(false);
-  const [isLoadingCount, setIsLoadingCount] = useAtom(birdCountIsLoadingAtom);
+  const [countIsLoading, setCountIsLoading] = useAtom(birdCountIsLoadingAtom);
   const [birdCount, dispatchBirdCount] = useAtom(birdCountAtom);
   const [network] = useAtom(networkAtom);
   const timer = React.useRef<number>();
@@ -28,12 +28,12 @@ export default function BirdCountRefreshFab() {
 
   // a visual progress indicator
   const refresh = (e?: React.MouseEvent<HTMLElement>) => {
-    if (!isLoadingCount) {
+    if (!countIsLoading) {
       setSuccess(false);
-      setIsLoadingCount(true);
+      setCountIsLoading(true);
       timer.current = window.setTimeout(() => {
         setSuccess(true);
-        setIsLoadingCount(false);
+        setCountIsLoading(false);
       }, 2000);
       e === undefined || e.preventDefault();
     }
@@ -97,7 +97,7 @@ export default function BirdCountRefreshFab() {
               {success ? <CheckIcon /> : <RefreshOutlinedIcon />}
             </Fab>
 
-            {isLoadingCount && (
+            {countIsLoading && (
               <CircularProgress
                 size={50}
                 sx={{

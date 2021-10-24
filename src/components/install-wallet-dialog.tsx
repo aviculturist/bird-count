@@ -7,11 +7,11 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { installWalletDialogAtom } from '@store/install-wallet-dialog';
-import WalletImage from '@components/wallet-image';
+import { installWalletDialogIsOpenAtom } from '@store/install-wallet-dialog-is-open';
+import WalletImage from '@assets/wallet-image';
 
 export default function InstallWalletDialog() {
-  const [open, setOpen] = useAtom(installWalletDialogAtom);
+  const [open, setOpen] = useAtom(installWalletDialogIsOpenAtom);
 
   const handleClose = () => {
     setOpen(false);

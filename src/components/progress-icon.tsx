@@ -8,22 +8,23 @@ import { green, red } from '@mui/material/colors';
 import { networkInfoAtom } from '@store/network-info';
 import { networkIsOfflineAtom } from '@store/network-is-offline';
 import { networkInfoIsLoadingAtom } from '@store/network-info-is-loading';
-import BitcoinIcon from '@components/bitcoin-icon';
-import StacksIcon from '@components/stacks-icon';
+import BitcoinIcon from '@assets/bitcoin-icon';
+import StacksIcon from '@assets/stacks-icon';
 
-interface NetworkIconProps {
+interface ProgressIconProps {
   size?: number;
   top?: number;
   left?: number;
   icon?: 'network' | 'stacks' | 'bitcoin';
 }
 
-export default function NetworkInfoIcon({
+// Displays a CircularProgress around an icon
+export default function ProgressIcon({
   size = 12,
   top = 9,
   left = 6,
   icon = 'network',
-}: NetworkIconProps) {
+}: ProgressIconProps) {
   const [networkOffline] = useAtom(networkIsOfflineAtom);
   const [networkInfo, dispatchNetworkInfo] = useAtom(networkInfoAtom);
   const [isLoadingInfo, setIsLoadingInfo] = useAtom(networkInfoIsLoadingAtom);

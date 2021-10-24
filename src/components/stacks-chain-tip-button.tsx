@@ -4,7 +4,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Button from '@mui/material/Button';
 import { networkInfoAtom } from '@store/network-info';
 import { currentStacksExplorerState, currentChainState } from '@store/current-network-state';
-import NetworkInfoIcon from '@components/network-info-icon';
+import ProgressIcon from '@components/progress-icon';
 import { t } from '@lingui/macro';
 
 export default function StacksChainTipButton() {
@@ -21,7 +21,7 @@ export default function StacksChainTipButton() {
             : `${currentStacksExplorer}/block/${networkInfo.stacks_tip}?chain=${currentChain}`
         }
         target="_blank"
-        startIcon={<NetworkInfoIcon left={2} top={5} size={20} icon="stacks" />}
+        startIcon={<ProgressIcon left={2} top={5} size={20} icon="stacks" />}
         variant="text"
         size="small"
         color={networkInfo.stacks_tip === undefined ? 'error' : 'success'}

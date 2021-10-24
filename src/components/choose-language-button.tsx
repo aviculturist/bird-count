@@ -15,13 +15,13 @@ import Check from '@mui/icons-material/Check';
 import LanguageTwoToneIcon from '@mui/icons-material/LanguageTwoTone';
 import { SUPPORTED_LOCALES, Locale, CODE_TO_NAME } from '@store/user-locale';
 import { useActiveLocale } from '@hooks/use-active-locale';
-import { languageMenuAnchorElAtom, languageMenuAtom } from '@store/language-menu';
+import { languageMenuAnchorElAtom, languageMenuIsOpenAtom } from '@store/language-menu-is-open';
 import { useLocationLinkProps } from '@hooks/use-location-link-props';
 import LanguageLink from '@components/language-link';
 import { t } from '@lingui/macro';
 
 function LanguageMenu() {
-  const [isOpen, setIsOpen] = useAtom(languageMenuAtom);
+  const [isOpen, setIsOpen] = useAtom(languageMenuIsOpenAtom);
   const [anchorEl, setAnchorEl] = useAtom(languageMenuAnchorElAtom);
 
   const activeLocale = useActiveLocale();
@@ -82,7 +82,7 @@ function LanguageMenuItem({ locale, active }: { locale: Locale; active: boolean 
 }
 
 function ChooseLanguageButton() {
-  const [isOpen, setIsOpen] = useAtom(languageMenuAtom);
+  const [isOpen, setIsOpen] = useAtom(languageMenuIsOpenAtom);
   const [, setAnchorEl] = useAtom(languageMenuAnchorElAtom);
   const handleChooseLanguage = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);

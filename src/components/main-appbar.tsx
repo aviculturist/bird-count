@@ -3,14 +3,13 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import ToggleDarkModeIconButton from '@components/toggle-darkmode-iconbutton';
-import SelectNetworkDialogButton from '@components/select-network-dialog-button';
-import ToggleTransactionsDrawerButton from '@components/toggle-transactions-drawer-button';
+import ToggleTransactionsDrawerIconButton from '@components/toggle-transactions-drawer-iconbutton';
+import ToggleSelectNetworkDialogButton from '@components/toggle-select-network-dialog-button';
+import ToggleSearchDialogButton from '@components/toggle-search-dialog-button';
 import WalletConnectButton from '@components/wallet-connect-button';
 import SettingsButton from '@components/settings-button';
 import ChooseLanguageButton from '@components/choose-language-button';
 import MainAppbarDrawer from '@components/main-appbar-drawer';
-import MainAppbarSearch from '@components/main-appbar-search';
-import Autocomplete from '@mui/material/Autocomplete';
 
 function MainAppBar() {
   return (
@@ -22,14 +21,16 @@ function MainAppBar() {
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: 'none', sm: 'block' }, flexGrow: 1 }}
+            sx={{ display: { xs: 'none', sm: 'block' } }}
           >
             🐦 BirdCount
           </Typography>
+          <Box sx={{ flexGrow: 1 }} />
           <ToggleDarkModeIconButton />
-          <ToggleTransactionsDrawerButton />
-          <SelectNetworkDialogButton />
+          <ToggleSearchDialogButton />
+          <ToggleSelectNetworkDialogButton />
           <WalletConnectButton />
+          <ToggleTransactionsDrawerIconButton />
           <SettingsButton />
           <ChooseLanguageButton />
         </Toolbar>

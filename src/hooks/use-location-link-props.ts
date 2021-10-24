@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom';
 import { userLocaleAtom } from '@store/user-locale';
 import { useAtom } from 'jotai';
 import { useActiveLocale } from '@hooks/use-active-locale';
-import { languageMenuAtom } from '@store/language-menu';
+import { languageMenuIsOpenAtom } from '@store/language-menu-is-open';
 
 export function useLocationLinkProps(locale: Locale | null): {
   to?: LocationDescriptor;
@@ -19,7 +19,7 @@ export function useLocationLinkProps(locale: Locale | null): {
   //console.log('useActiveLocale reports locale from useLocationLinkProps: ' + activeLocale)
 
   const [userLocale, setUserLocale] = useAtom(userLocaleAtom);
-  const [isOpen, setIsOpen] = useAtom(languageMenuAtom);
+  const [isOpen, setIsOpen] = useAtom(languageMenuIsOpenAtom);
 
   return useMemo(
     () =>

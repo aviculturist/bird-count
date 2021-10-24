@@ -4,7 +4,7 @@ import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import { networkOfflineSnackbarIsDismissedAtom } from '@store/network-offline-snackbar-is-dismissed';
 import { networkIsOfflineAtom } from '@store/network-is-offline';
-import NetworkInfoIcon from '@components/network-info-icon';
+import ProgressIcon from '@components/progress-icon';
 import { networkInfoAtom } from '@store/network-info';
 import { networkInfoIsLoadingAtom } from '@store/network-info-is-loading';
 import { t } from '@lingui/macro';
@@ -39,7 +39,7 @@ export default function NetworkStatusIconButton() {
         size="small"
         color={networkOffline ? 'error' : 'success'}
       >
-        <NetworkInfoIcon size={18} left={8} top={8} />
+        <ProgressIcon size={18} left={8} top={8} />
       </IconButton>
     </Tooltip>
   );

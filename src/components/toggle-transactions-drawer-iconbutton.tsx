@@ -5,13 +5,13 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import NotificationsNoneTwoToneIcon from '@mui/icons-material/NotificationsNoneTwoTone';
 import { pendingTxsCountAtom } from '@store/pending-transactions';
-import { useTransactionsDrawer } from '@hooks/use-transactions-drawer';
+import { useTransactionsDrawerIsOpen } from '@hooks/use-transactions-drawer-is-open';
 import { t } from '@lingui/macro';
 
-function ToggleTransactionsDrawerButton() {
-  const { isDrawerVisible, setIsDrawerVisible } = useTransactionsDrawer();
+function ToggleTransactionsDrawerIconButton() {
+  const { transactionsDrawerIsOpen, setTransactionsDrawerIsOpen } = useTransactionsDrawerIsOpen();
   const handleToggleDrawer = (event: React.MouseEvent<HTMLElement>) => {
-    void setIsDrawerVisible(true);
+    void setTransactionsDrawerIsOpen(true);
   };
   const [pendingTxsCount] = useAtom(pendingTxsCountAtom);
   return (
@@ -24,4 +24,4 @@ function ToggleTransactionsDrawerButton() {
     </IconButton>
   );
 }
-export default ToggleTransactionsDrawerButton;
+export default ToggleTransactionsDrawerIconButton;
