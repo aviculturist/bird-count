@@ -126,7 +126,6 @@ export default function AutocompleteSearch() {
             primary_description: (searchResult as BlockSearchResult)?.result?.entity_id,
             secondary_description: (searchResult as BlockSearchResult)?.result?.entity_type,
             timestamp: (searchResult as BlockSearchResult)?.result?.block_data?.burn_block_time,
-
           },
         ] as readonly ResultType[];
         break;
@@ -163,7 +162,6 @@ export default function AutocompleteSearch() {
             primary_description: (searchResult as TxSearchResult)?.result?.entity_id,
             secondary_description: (searchResult as TxSearchResult)?.result?.entity_type,
             timestamp: (searchResult as TxSearchResult)?.result?.tx_data?.burn_block_time,
-
           },
         ] as readonly ResultType[];
         break;

@@ -7,6 +7,11 @@ interface TransactionsDrawer {
 }
 
 export function useTransactionsDrawerIsOpen(): TransactionsDrawer {
-  const [transactionsDrawerIsOpen, setTransactionsDrawerIsOpen] = useAtom(transactionsDrawerIsOpenAtom);
-  return { transactionsDrawerIsOpen: transactionsDrawerIsOpen, setTransactionsDrawerIsOpen: setTransactionsDrawerIsOpen };
+  const [transactionsDrawerIsOpen, setTransactionsDrawerIsOpen] = useAtom(
+    transactionsDrawerIsOpenAtom
+  );
+  return {
+    transactionsDrawerIsOpen: transactionsDrawerIsOpen,
+    setTransactionsDrawerIsOpen: setTransactionsDrawerIsOpen,
+  };
 }

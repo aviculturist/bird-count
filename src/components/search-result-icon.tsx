@@ -11,10 +11,7 @@ const SearchResultIcon = ({ icon }: { icon: string | undefined }) => {
   switch (icon) {
     case 'standard_address':
       return (
-        <Box
-          component={AccountBalanceWalletOutlinedIcon}
-          sx={{ color: 'text.secondary', mr: 2 }}
-        />
+        <Box component={AccountBalanceWalletOutlinedIcon} sx={{ color: 'text.secondary', mr: 2 }} />
       );
 
     case 'block_hash':

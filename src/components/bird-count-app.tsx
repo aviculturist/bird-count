@@ -47,7 +47,13 @@ export default function BirdCountApp() {
                 <AlertTitle>Core Values</AlertTitle>
                 {t`BirdCount is a starter app that "can't be evil".`}{' '}
                 <strong>
-                  <a rel="noreferrer" target="_blank" href="https://github.com/aviculturist/bird-count#--birdcount">Learn more.</a>
+                  <a
+                    rel="noreferrer"
+                    target="_blank"
+                    href="https://github.com/aviculturist/bird-count#--birdcount"
+                  >
+                    Learn more.
+                  </a>
                 </strong>
               </Alert>
             </Stack>

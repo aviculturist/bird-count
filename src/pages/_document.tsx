@@ -79,8 +79,7 @@ export default class MyDocument extends Document {
           <script dangerouslySetInnerHTML={{ __html: scriptTxt }} />
           <script defer dangerouslySetInnerHTML={{ __html: faviconCounterScriptTxt }} />
           <style
-            dangerouslySetInnerHTML=
-            {{
+            dangerouslySetInnerHTML={{
               __html: `
               #background-radial-gradient {
                 position: fixed;
