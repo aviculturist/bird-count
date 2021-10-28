@@ -20,7 +20,7 @@ import { ResultType, searchQueryAtom, searchResultAtom, searchHistoryAtom } from
 import SearchResultIcon from '@components/search-result-icon';
 
 const StyledA = styled('a')(
-  ({ theme }: { theme: any }) => `
+  ({ theme }) => `
   color: ${theme.palette.primary.main};
   text-decoration: none;
   &:focus,
