@@ -11,12 +11,12 @@ import { green } from '@mui/material/colors';
 import Fab from '@mui/material/Fab';
 import CheckIcon from '@mui/icons-material/Check';
 import { birdCountAtom } from '@store/bird-count';
-import { birdCountIsLoadingAtom } from '@store/bird-count-is-loading';
+import { useBirdcountLoading } from '@hooks/use-bird-count-loading';
 import { t, plural, Plural } from '@lingui/macro';
 
 export default function BirdCountRefreshFab() {
   const [success, setSuccess] = React.useState(false);
-  const [countIsLoading, setCountIsLoading] = useAtom(birdCountIsLoadingAtom);
+  const { birdcountIsLoading, setBirdcountIsLoading } = useBirdcountLoading();
   const [birdCount, dispatchBirdCount] = useAtom(birdCountAtom);
   const { network } = useNetwork();
   const timer = React.useRef<number>();
@@ -28,12 +28,12 @@ export default function BirdCountRefreshFab() {
 
   // a visual progress indicator
   const refresh = (e?: React.MouseEvent<HTMLElement>) => {
-    if (!countIsLoading) {
+    if (!birdcountIsLoading) {
       setSuccess(false);
-      setCountIsLoading(true);
+      setBirdcountIsLoading(true);
       timer.current = window.setTimeout(() => {
         setSuccess(true);
-        setCountIsLoading(false);
+        setBirdcountIsLoading(false);
       }, 2000);
       e === undefined || e.preventDefault();
     }
@@ -97,7 +97,7 @@ export default function BirdCountRefreshFab() {
               {success ? <CheckIcon /> : <RefreshOutlinedIcon />}
             </Fab>
 
-            {countIsLoading && (
+            {birdcountIsLoading && (
               <CircularProgress
                 size={50}
                 sx={{

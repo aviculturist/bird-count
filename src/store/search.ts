@@ -2,6 +2,7 @@ import { networkAtom } from 'micro-stacks/react';
 import { SearchErrorResult, SearchSuccessResult } from '@stacks/stacks-blockchain-api-types';
 import { atomWithQuery, atomFamilyWithQuery } from 'jotai-query-toolkit';
 import { atom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
 
 export const queryAtom = atom('');
 
@@ -17,8 +18,14 @@ export const searchQueryAtom = atom('');
 export const searchResultAtom = atom<SearchErrorResult | SearchSuccessResult | undefined>(
   undefined
 );
-export const searchHistoryAtom = atom<{ [key: string]: ResultType }>({});
-export const searchFavoritesAtom = atom<{ [key: string]: ResultType }>({});
+export const searchHistoryAtom = atomWithStorage(
+  'searchHistory',
+  <{ [key: string]: ResultType }>{}
+);
+export const searchFavoritesAtom = atomWithStorage(
+  'searchFavorites',
+  <{ [key: string]: ResultType }>{}
+);
 
 // interface Item {
 //   name: string;

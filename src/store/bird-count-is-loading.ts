@@ -1,3 +1,3 @@
 import { atom } from 'jotai';
 
-export const birdCountIsLoadingAtom = atom(false);
+export const birdcountIsLoadingAtom = atom(false);
