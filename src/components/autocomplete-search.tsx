@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { networkAtom } from 'micro-stacks/react';
+import { useNetwork } from 'micro-stacks/react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
@@ -20,7 +20,7 @@ import { ResultType, searchQueryAtom, searchResultAtom, searchHistoryAtom } from
 import SearchResultIcon from '@components/search-result-icon';
 
 const StyledA = styled('a')(
-  ({ theme }: {theme:any}) => `
+  ({ theme }: { theme: any }) => `
   color: ${theme.palette.primary.main};
   text-decoration: none;
   &:focus,
@@ -54,7 +54,7 @@ export default function AutocompleteSearch() {
   const [searchResult, setSearchResult] = useAtom(searchResultAtom);
   const [searchHistory, setSearchHistory] = useAtom(searchHistoryAtom);
   const [q, setQ] = useAtom(searchQueryAtom);
-  const [network] = useAtom(networkAtom);
+  const { network } = useNetwork();
 
   async function fetch() {
     const networkUrl = network.getCoreApiUrl();

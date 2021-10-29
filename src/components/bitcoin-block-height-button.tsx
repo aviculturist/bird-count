@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useAtom } from 'jotai';
-import { networkAtom } from 'micro-stacks/react';
+import { useNetwork } from 'micro-stacks/react';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import { networkInfoAtom } from '@store/network-info';
@@ -10,7 +10,7 @@ import ProgressIcon from '@components/progress-icon';
 import { t } from '@lingui/macro';
 
 export default function BitcoinBlockHeightButton() {
-  const [network] = useAtom(networkAtom);
+  const { network } = useNetwork();
   const [networkInfo] = useAtom(networkInfoAtom);
   const [currentBitcoinExplorer] = useAtom(currentBitcoinExplorerState);
   return (

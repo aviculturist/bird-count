@@ -6,6 +6,7 @@ import {
   TransactionsApi,
   InfoApi,
 } from '@stacks/blockchain-api-client';
+// can't use hook here, so use the atom directly
 import { networkAtom } from 'micro-stacks/react';
 
 // set network

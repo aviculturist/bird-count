@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useAtom } from 'jotai';
-import { networkAtom } from 'micro-stacks/react';
+import { useNetwork } from 'micro-stacks/react';
 import FiberManualRecordTwoToneIcon from '@mui/icons-material/FiberManualRecordTwoTone';
 import CircularProgress from '@mui/material/CircularProgress';
 import { green, red } from '@mui/material/colors';
@@ -28,7 +28,7 @@ export default function ProgressIcon({
   const [networkOffline] = useAtom(networkIsOfflineAtom);
   const [networkInfo, dispatchNetworkInfo] = useAtom(networkInfoAtom);
   const [isLoadingInfo, setIsLoadingInfo] = useAtom(networkInfoIsLoadingAtom);
-  const [network] = useAtom(networkAtom);
+  const { network } = useNetwork();
   const timer = React.useRef<number>();
 
   // fetch latest data

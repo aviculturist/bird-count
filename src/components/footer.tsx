@@ -56,7 +56,7 @@ export default function Footer() {
       {/* End footer */}
       <LoadingBackdrop />
       <Suspense fallback={<CircularProgress />}>
-      <NetworkOfflineSnackbar />
+        <NetworkOfflineSnackbar />
       </Suspense>
     </AppBar>
   );

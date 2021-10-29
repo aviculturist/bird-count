@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useAtom } from 'jotai';
-import { networkAtom } from 'micro-stacks/react';
+import { useNetwork } from 'micro-stacks/react';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
@@ -12,7 +12,7 @@ import { t } from '@lingui/macro';
 
 export default function NetworkOfflineSnackbar() {
   const [networkOffline] = useAtom(networkIsOfflineAtom);
-  const [network] = useAtom(networkAtom);
+  const { network } = useNetwork();
   const [dismissNetworkOfflineSnackbar, setDismissNetworkOfflineSnackbar] = useAtom(
     networkOfflineSnackbarIsDismissedAtom
   );

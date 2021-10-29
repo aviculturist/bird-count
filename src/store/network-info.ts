@@ -1,3 +1,5 @@
+import * as React from 'react';
+// can't use hook here, so use the atom directly
 import { networkAtom } from 'micro-stacks/react';
 import { atomWithQuery } from 'jotai-query-toolkit';
 import { StacksMainnet } from 'micro-stacks/network';

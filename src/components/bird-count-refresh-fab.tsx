@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useAtom } from 'jotai';
-import { networkAtom } from 'micro-stacks/react';
+import { useNetwork } from 'micro-stacks/react';
 import Tooltip from '@mui/material/Tooltip';
 import RefreshOutlinedIcon from '@mui/icons-material/RefreshOutlined';
 import Stack from '@mui/material/Stack';
@@ -18,7 +18,7 @@ export default function BirdCountRefreshFab() {
   const [success, setSuccess] = React.useState(false);
   const [countIsLoading, setCountIsLoading] = useAtom(birdCountIsLoadingAtom);
   const [birdCount, dispatchBirdCount] = useAtom(birdCountAtom);
-  const [network] = useAtom(networkAtom);
+  const { network } = useNetwork();
   const timer = React.useRef<number>();
 
   // fetch latest data
