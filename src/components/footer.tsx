@@ -22,7 +22,9 @@ export default function Footer() {
     <AppBar position="fixed" color="transparent" elevation={0} sx={{ top: 'auto', bottom: 0 }}>
       {/* Footer */}
       <Toolbar>
-        <NetworkStatusIconButton />
+        <Suspense fallback={<CircularProgress />}>
+          <NetworkStatusIconButton />
+        </Suspense>
         <Button
           sx={{ textTransform: 'none' }}
           size="small"
@@ -53,7 +55,9 @@ export default function Footer() {
       </Toolbar>
       {/* End footer */}
       <LoadingBackdrop />
+      <Suspense fallback={<CircularProgress />}>
       <NetworkOfflineSnackbar />
+      </Suspense>
     </AppBar>
   );
 }
