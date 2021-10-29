@@ -7,7 +7,7 @@ import { darken } from '@mui/material/styles';
 //import { DefaultTheme } from '@mui/system';
 
 const StyledLink = styled(ReactRouterDomLink)(
-  ({ theme }) => `
+  ({ theme }: {theme:any}) => `
   color: ${theme.palette.primary.main};
   text-decoration: none;
   &:focus,

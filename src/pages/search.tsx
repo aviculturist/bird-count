@@ -10,13 +10,13 @@ import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
 import { t } from '@lingui/macro';
 import MainAppBar from '@components/main-appbar';
-import DrawerFeed from '@components/drawer-feed';
+import MainAppbarDrawer from '@components/main-appbar-drawer';
 import Footer from '@components/footer';
 import { StacksMainnet, StacksMocknet } from 'micro-stacks/network';
 import { DEFAULT_MAINNET_SERVER, DEFAULT_LOCALNET_SERVER, ENV } from '@utils/constants';
 import { GetQueries, getStaticQueryProps, withInitialQueryData } from 'jotai-query-toolkit/nextjs';
 
-import { appProviderAtomBuilder } from 'micro-stacks/react';
+import { buildMicroStacksAtoms } from 'micro-stacks/react';
 import {
   SearchErrorResult,
   SearchSuccessResult,
@@ -246,7 +246,7 @@ const Search = () => {
             </Stack>
           </Box>
           <Suspense fallback={<CircularProgress />}>
-            <DrawerFeed />
+            <MainAppbarDrawer />
           </Suspense>
         </main>
       </Container>
@@ -301,7 +301,7 @@ const initialNetwork =
 // TODO: icon needs fqd
 export default withInitialQueryData(
   Search,
-  appProviderAtomBuilder({
+  buildMicroStacksAtoms({
     network: initialNetwork,
     authOptions: {
       appDetails: {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { GetStaticPropsContext, NextPage } from 'next';
 import { GetQueries, getStaticQueryProps, withInitialQueryData } from 'jotai-query-toolkit/nextjs';
-import { appProviderAtomBuilder } from 'micro-stacks/react';
+import { buildMicroStacksAtoms } from 'micro-stacks/react';
 import { StacksMainnet, StacksMocknet } from 'micro-stacks/network';
 import {
   DEFAULT_MAINNET_SERVER,
@@ -81,7 +81,7 @@ const initialNetwork =
 // TODO: icon needs fqd
 export default withInitialQueryData(
   Index,
-  appProviderAtomBuilder({
+  buildMicroStacksAtoms({
     network: initialNetwork,
     authOptions: {
       appDetails: {
