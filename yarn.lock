@@ -1240,7 +1240,7 @@
     schema-inspector "^1.7.0"
     zone-file "^1.0.0"
 
-"@stacks/stacks-blockchain-api-types@^0.70.0":
+"@stacks/stacks-blockchain-api-types@^0.70.1":
   version "0.70.1"
   resolved "https://registry.yarnpkg.com/@stacks/stacks-blockchain-api-types/-/stacks-blockchain-api-types-0.70.1.tgz#f671b156bd3123ee592804e1d686122eb8063c12"
   integrity sha512-KM+J+954udj+80EuUxD+C/SUsKyGe1tQONM8z3eVSzEwnQi70FF9WVk8j+Dtk6q6TyR6IR2PM13Mj5yMTzRbKQ==
