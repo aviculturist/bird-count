@@ -2,8 +2,6 @@ import * as React from 'react';
 import { GetStaticPropsContext, NextPage } from 'next';
 import { GetQueries, getStaticQueryProps } from 'jotai-query-toolkit/nextjs';
 import { wrapWithMicroStacks } from '@micro-stacks/nextjs';
-
-import { buildMicroStacksAtoms } from '@micro-stacks/nextjs';
 import { StacksMainnet, StacksMocknet } from 'micro-stacks/network';
 import {
   DEFAULT_MAINNET_SERVER,
