@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { GetStaticPropsContext, NextPage } from 'next';
-import { GetQueries, getStaticQueryProps, withInitialQueryData } from 'jotai-query-toolkit/nextjs';
+import { GetQueries, getStaticQueryProps } from 'jotai-query-toolkit/nextjs';
+import { wrapWithMicroStacks } from '@micro-stacks/nextjs';
+
 import { buildMicroStacksAtoms } from '@micro-stacks/nextjs';
 import { StacksMainnet, StacksMocknet } from 'micro-stacks/network';
 import {
@@ -65,7 +67,6 @@ const getQueries: GetQueries = (_ctx: GetStaticPropsContext) => [
   ],
 ];
 
-//const allQueries = getQueries.concat(getFooterQueries); //[...getFooterQueries, ...getQueries];
 // enable SSG
 export const getStaticProps = getStaticQueryProps(getQueries)(async _ctx => {
   return { props: {}, revalidate: 60 };
@@ -78,16 +79,14 @@ const initialNetwork =
     ? new StacksMocknet({ url: DEFAULT_LOCALNET_SERVER })
     : new StacksMainnet({ url: DEFAULT_MAINNET_SERVER });
 
-// TODO: icon needs fqd
-export default withInitialQueryData(
-  Index,
-  buildMicroStacksAtoms({
-    network: initialNetwork,
-    authOptions: {
-      appDetails: {
-        name: 'BirdCount',
-        icon: './stx-favicon.png',
-      },
+const withMicroStacks = wrapWithMicroStacks({
+  network: initialNetwork,
+  authOptions: {
+    appDetails: {
+      name: 'BirdCount',
+      icon: './stx-favicon.png',
     },
-  })
-);
+  },
+});
+
+export default withMicroStacks(Index);
