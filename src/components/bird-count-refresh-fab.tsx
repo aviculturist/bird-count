@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useAtom } from 'jotai';
-import { useNetwork } from 'micro-stacks/react';
+import { useNetwork } from '@micro-stacks/react';
 import Tooltip from '@mui/material/Tooltip';
 import RefreshOutlinedIcon from '@mui/icons-material/RefreshOutlined';
 import Stack from '@mui/material/Stack';

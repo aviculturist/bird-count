@@ -1,4 +1,4 @@
-import { networkAtom } from 'micro-stacks/react';
+import { networkAtom } from '@micro-stacks/react';
 import { SearchErrorResult, SearchSuccessResult } from '@stacks/stacks-blockchain-api-types';
 import { atomWithQuery, atomFamilyWithQuery } from 'jotai-query-toolkit';
 import { atom } from 'jotai';

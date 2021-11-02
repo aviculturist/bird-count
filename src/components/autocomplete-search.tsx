@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useNetwork } from 'micro-stacks/react';
+import { useNetwork } from '@micro-stacks/react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';

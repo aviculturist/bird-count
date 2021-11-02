@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useAtom } from 'jotai';
-import { useNetwork } from 'micro-stacks/react';
+import { useNetwork } from '@micro-stacks/react';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';

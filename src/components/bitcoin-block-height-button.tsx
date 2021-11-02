@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useAtom } from 'jotai';
-import { useNetwork } from 'micro-stacks/react';
+import { useNetwork } from '@micro-stacks/react';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import { networkInfoAtom } from '@store/network-info';

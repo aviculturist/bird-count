@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useAuth } from 'micro-stacks/react';
+import { useAuth } from '@micro-stacks/react';
 import Typography from '@mui/material/Typography';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';

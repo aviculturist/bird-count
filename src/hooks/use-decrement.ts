@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useAtom } from 'jotai';
-import { useTransactionPopup } from 'micro-stacks/react';
+import { useTransactionPopup } from '@micro-stacks/react';
 import { currentBirdcountContractState } from '@store/current-network-state';
 import { DECREMENT_FUNCTION } from '@utils/constants';
 import { pendingTxIdsAtom, pendingTxAtom } from '@store/pending-transactions';

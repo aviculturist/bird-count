@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useAtom } from 'jotai';
-import { useAuth } from 'micro-stacks/react';
+import { useAuth } from '@micro-stacks/react';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Tooltip from '@mui/material/Tooltip';

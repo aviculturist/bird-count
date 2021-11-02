@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useAtom } from 'jotai';
-import { useNetwork } from 'micro-stacks/react';
+import { useNetwork } from '@micro-stacks/react';
 import FiberManualRecordTwoToneIcon from '@mui/icons-material/FiberManualRecordTwoTone';
 import CircularProgress from '@mui/material/CircularProgress';
 import { green, red } from '@mui/material/colors';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useAtom } from 'jotai';
-import { useNetwork } from 'micro-stacks/react';
+import { useNetwork } from '@micro-stacks/react';
 import { StacksMainnet, StacksRegtest, StacksMocknet, StacksTestnet } from 'micro-stacks/network';
 import Avatar from '@mui/material/Avatar';
 import List from '@mui/material/List';

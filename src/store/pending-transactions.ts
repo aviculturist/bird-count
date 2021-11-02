@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 import { atomFamilyWithQuery } from 'jotai-query-toolkit';
-import { networkAtom } from 'micro-stacks/react';
+import { networkAtom } from '@micro-stacks/react';
 import type {
   ContractCallTransaction,
   MempoolTransaction,

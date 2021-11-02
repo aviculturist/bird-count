@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 // can't use hook here, so use the atom directly
-import { networkAtom } from 'micro-stacks/react';
+import { networkAtom } from '@micro-stacks/react';
 import { atomWithStorage } from 'jotai/utils';
 
 export interface Network {

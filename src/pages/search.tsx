@@ -16,7 +16,7 @@ import { StacksMainnet, StacksMocknet } from 'micro-stacks/network';
 import { DEFAULT_MAINNET_SERVER, DEFAULT_LOCALNET_SERVER, ENV } from '@utils/constants';
 import { GetQueries, getStaticQueryProps, withInitialQueryData } from 'jotai-query-toolkit/nextjs';
 
-import { buildMicroStacksAtoms } from 'micro-stacks/react';
+import { buildMicroStacksAtoms } from '@micro-stacks/react';
 import {
   SearchErrorResult,
   SearchSuccessResult,
