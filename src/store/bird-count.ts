@@ -1,8 +1,7 @@
-import { smartContractsClientAtom, transactionsClientAtom, accountsClientAtom } from '@store/api';
+import { smartContractsClientAtom, transactionsClientAtom } from '@store/api';
 import { COUNT_FUNCTION, INCREMENT_FUNCTION, DECREMENT_FUNCTION } from '@utils/constants';
-//import { userStxAddressesAtom } from '@micro-stacks/react';
 import { cvToJSON, hexToCV } from '@stacks/transactions';
-import { atom, useAtom } from 'jotai';
+import { atom } from 'jotai';
 import { atomWithQuery } from 'jotai-query-toolkit';
 import {
   ContractCallTransaction,
@@ -10,8 +9,6 @@ import {
   TransactionResults,
 } from '@blockstack/stacks-blockchain-api-types';
 import { currentBirdcountContractState } from '@store/current-network-state';
-//import { useCallback } from 'react';
-//import { loadingCountAtom } from './loading-count';
 
 export interface BirdCount {
   sender: string;
