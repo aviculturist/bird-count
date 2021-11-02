@@ -1,13 +1,10 @@
 import * as React from 'react';
-import { GetStaticPropsContext, NextPage } from 'next';
-import { GetQueries, getStaticQueryProps } from 'jotai-query-toolkit/nextjs';
-import { wrapWithMicroStacks } from '@micro-stacks/nextjs';
-import { StacksMainnet, StacksMocknet } from 'micro-stacks/network';
+import {NextPage} from 'next';
+import {GetQueries, getStaticQueryProps} from 'jotai-query-toolkit/nextjs';
+import {wrapWithMicroStacks} from '@micro-stacks/nextjs';
+import {StacksMainnet} from 'micro-stacks/network';
 import {
   DEFAULT_MAINNET_SERVER,
-  DEFAULT_REGTEST_SERVER,
-  DEFAULT_LOCALNET_SERVER,
-  ENV,
 } from '@utils/constants';
 import MainAppBar from '@components/main-appbar';
 import BirdCountApp from '@components/bird-count-app';
@@ -16,15 +13,15 @@ import Footer from '@components/footer';
 const Index: NextPage<any> = () => {
   return (
     <>
-      <MainAppBar />
-      <BirdCountApp />
-      <Footer />
+      <MainAppBar/>
+      <BirdCountApp/>
+      <Footer/>
     </>
   );
 };
 
 // an array of queries for initial data
-const getQueries: GetQueries = (_ctx: GetStaticPropsContext) => [
+const getQueries: GetQueries = () => [
   [
     'bird-count', // the query key we're using
     async () => {
@@ -67,15 +64,12 @@ const getQueries: GetQueries = (_ctx: GetStaticPropsContext) => [
 
 // enable SSG
 export const getStaticProps = getStaticQueryProps(getQueries)(async _ctx => {
-  return { props: {}, revalidate: 60 };
+  return {props: {}, revalidate: 60};
 });
 
 // .env.development and .env.production are source of truth for NEXT_PUBLIC_ENV
 // in development, default to localnet, in production, mainnet
-const initialNetwork =
-  ENV === 'development'
-    ? new StacksMocknet({ url: DEFAULT_LOCALNET_SERVER })
-    : new StacksMainnet({ url: DEFAULT_MAINNET_SERVER });
+const initialNetwork = new StacksMainnet({url: DEFAULT_MAINNET_SERVER});
 
 const withMicroStacks = wrapWithMicroStacks({
   network: initialNetwork,

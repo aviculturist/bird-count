@@ -1,21 +1,20 @@
-const withTM = require('next-transpile-modules')(['@mui/material', '@mui/system']); // pass the modules you would like to see transpiled
+// const withTM = require('next-transpile-modules')(['@mui/material', '@mui/system']); // pass the modules you would like to see transpiled
 
-// Disabled until SSG supported
-// const linguiConfig = require('./lingui.config.js')
-// const { locales, sourceLocale } = linguiConfig
-
-module.exports = withTM({
+/** @type {import('next').NextConfig} */
+module.exports = ({
+  experimental: {
+    esmExternals: true,
+  },
   // https://github.com/Velenir/nextjs-ipfs-example/
   // Testing shows that '' works while './' does not
   // load assets within subdirs
   assetPrefix: './',
   trailingSlash: true,
   reactStrictMode: true,
-  // env: {
-  //   SC_ATTR: 'bc',
-  // },
+  webpack(config, {isServer}) {
+    const fallback = config.resolve.fallback || (config.resolve.fallback = {});
+    if (!isServer) fallback['crypto'] = fallback['stream'] = false;
 
-  webpack: config => {
     config.module.rules = [
       ...config.module.rules,
       {
@@ -29,10 +28,4 @@ module.exports = withTM({
     };
     return config;
   },
-  // Disabled until SSG supported
-  // i18n: {
-  //   localeDetection: false,
-  //   locales,
-  //   defaultLocale: sourceLocale,
-  // },
 });
