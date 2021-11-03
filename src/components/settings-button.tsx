@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useAtom } from 'jotai';
+import { useGaia } from '@micro-stacks/react';
 import Menu from '@mui/material/Menu';
 import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
@@ -13,6 +14,7 @@ import PrivacyTipOutlinedIcon from '@mui/icons-material/PrivacyTipOutlined';
 import { styled } from '@mui/material/styles';
 import { settingsMenuAnchorElAtom, settingsMenuIsOpenAtom } from '@store/settings-menu-is-open';
 import ClearApplicationDataMenuItem from '@components/clear-application-data-menuitem';
+import SafeSuspense from '@components/safe-suspense';
 import { t } from '@lingui/macro';
 
 // used for the localStorage import
@@ -23,6 +25,16 @@ const Input = styled('input')({
 function SettingsMenu() {
   const [isOpen, setIsOpen] = useAtom(settingsMenuIsOpenAtom);
   const [anchorEl, setAnchorEl] = useAtom(settingsMenuAnchorElAtom);
+  const { getFile, putFile } = useGaia();
+
+  const handlePut = () => {
+    try {
+      putFile('localStorage.json', JSON.stringify(localStorage), {encrypt: true});
+    } catch (_e) {
+      console.log(_e);
+    }
+
+  };
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -95,6 +107,14 @@ function SettingsMenu() {
           </ListItemIcon>
           <ListItemText inset={false}>Export localStorage</ListItemText>
         </MenuItem>
+        <MenuItem onClick={handlePut}>
+          <ListItemIcon>
+            <IconButton size="small" color="primary">
+              <DownloadOutlinedIcon />
+            </IconButton>
+          </ListItemIcon>
+          <ListItemText inset={false}>Put encrypted localStorage on Gaia</ListItemText>
+        </MenuItem>
         <Tooltip title={t`Coming soon!`}>
           <label htmlFor="icon-button-file">
             <Input accept="application/json" id="icon-button-file" type="file" />
@@ -130,7 +150,7 @@ function SettingButton() {
   };
 
   return (
-    <div>
+    <SafeSuspense fallback={<IconButton size="small"><PrivacyTipOutlinedIcon fontSize="small" /></IconButton>}>
       <IconButton
         size="small"
         onClick={handleChooseSetting}
@@ -145,7 +165,7 @@ function SettingButton() {
         </Tooltip>
       </IconButton>
       <SettingsMenu />
-    </div>
+    </SafeSuspense>
   );
 }
 export default SettingButton;

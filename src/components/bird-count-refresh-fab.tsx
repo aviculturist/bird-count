@@ -59,6 +59,7 @@ export default function BirdCountRefreshFab() {
   }, []);
 
   // run once after initial render
+  // TODO: see here https://stackoverflow.com/questions/60018255/react-hook-useeffect-has-a-missing-dependency-when-passing-empty-array-as-second
   useEffect(() => {
     console.log('fetch birdCount once after initial render');
     refetch();

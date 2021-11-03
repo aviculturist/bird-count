@@ -888,35 +888,35 @@
   resolved "https://registry.yarnpkg.com/@ltd/j-toml/-/j-toml-1.12.2.tgz#994c1792d07ca21421d4a75fef0dd0b60f7a1c8b"
   integrity sha512-mGbbuiYwnBBBfkupwGbRH9qkOuT40RoPvzbSStAy57PfTWG6nRYOLAB6lplOafIIqBM3wzDPF9/64n3tfO0how==
 
-"@micro-stacks/nextjs@0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@micro-stacks/nextjs/-/nextjs-0.0.4.tgz#7decf044833d6366b2b0f7ace2ae883df5e867cd"
-  integrity sha512-cn8eib3fFhstkd0baL4jEGqWZlxRSRAldZTLIFDynyY6yEBk5z5EGCi6QhGnHW6iORSSefGAAlyvSba5hiOU3w==
+"@micro-stacks/nextjs@0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@micro-stacks/nextjs/-/nextjs-0.0.5.tgz#0184980aae21f605c32c044a110c9f3203c842a0"
+  integrity sha512-UBawa00Pv8/KmgJHdyI7+mkiI+5qkSAhHL2i6ijN6KR0NuIyz4eiEiXCpJgI866MzOiq4rpQkqdWIXX8+ft2/g==
   dependencies:
-    "@micro-stacks/query" "0.0.4"
-    "@micro-stacks/react" "0.0.4"
+    "@micro-stacks/query" "0.0.5"
+    "@micro-stacks/react" "0.0.5"
     jotai ">=1.4.2"
     jotai-query-toolkit "^0.1.16"
     micro-stacks ">=0.1.0"
     next "^12.0.1"
     nookies "^2.5.2"
 
-"@micro-stacks/query@0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@micro-stacks/query/-/query-0.0.4.tgz#2e70d437ea38245725c8ea4314d30327b586423e"
-  integrity sha512-gx7glORPbrr4CAkt1MYs7PwCbL/lJilaeUjmvCWgMHLrZiLNms7g1jgxosKWIV/sYIKXXPHldYj0Uz1pG3eVFw==
+"@micro-stacks/query@0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@micro-stacks/query/-/query-0.0.5.tgz#083253b594276d7a8b6cbe5969fe0a3375ee9513"
+  integrity sha512-UM+i4Ymjj/Yq+jOhvQ0AESBbJqPX2GBRIW0SzX6dm6zY4TqKQBT1fYsaLdp48gz+zKDHxyaX9GpbEjGbR9/Rmg==
   dependencies:
-    "@micro-stacks/react" "0.0.4"
+    "@micro-stacks/react" "0.0.5"
     jotai ">=1.4.2"
     jotai-query-toolkit "^0.1.16"
     micro-stacks ">=0.1.0"
     next "^12.0.1"
     nookies "^2.5.2"
 
-"@micro-stacks/react@0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@micro-stacks/react/-/react-0.0.4.tgz#285e0f88b28d46732ce148d33715a632f98f7f4f"
-  integrity sha512-pc9ZYH9WwM2XiqQo3Dj4H3YbU1sNuBa2ngbzlvGWoMvaf7gip8u4n965MptNo2JHJyHluYQvbdRl/eq41XffxA==
+"@micro-stacks/react@0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@micro-stacks/react/-/react-0.0.5.tgz#b5c9a43bfb3e438f760e249bc761a5c8b8d189dc"
+  integrity sha512-QmW6mDq6VbMgE6dxHYnnQ7BpN4NrjSXE4iQ1HhnHKQGveFTAlMNecBh32cB/YTz1+B1MUe4w+zFQyiMoj5hKlQ==
   dependencies:
     jotai ">=1.4.2"
     micro-stacks ">=0.1.0"
