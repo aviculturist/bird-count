@@ -1,10 +1,15 @@
 import * as React from 'react';
 import { Suspense } from 'react';
-import { GetStaticPropsContext, NextPage } from 'next';
-import { GetQueries, getStaticQueryProps, withInitialQueryData } from 'jotai-query-toolkit/nextjs';
-import { buildMicroStacksAtoms } from '@micro-stacks/react';
+import { NextPage } from 'next';
+import { GetQueries, getStaticQueryProps } from 'jotai-query-toolkit/nextjs';
+import { wrapWithMicroStacks } from '@micro-stacks/nextjs';
 import { StacksMainnet, StacksMocknet } from 'micro-stacks/network';
-import { DEFAULT_MAINNET_SERVER, DEFAULT_LOCALNET_SERVER, ENV } from '@utils/constants';
+import {
+  DEFAULT_MAINNET_SERVER,
+  DEFAULT_REGTEST_SERVER,
+  DEFAULT_LOCALNET_SERVER,
+  ENV,
+} from '@utils/constants';
 
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -54,7 +59,7 @@ const About: NextPage<any> = () => {
 // spread syntax doesn't work without an iterator.
 // TODO: how to take the state from another page instead of
 // using the statically built state
-const getQueries: GetQueries = (_ctx: GetStaticPropsContext) => [
+const getQueries: GetQueries = _ctx => [
   [
     'network-info', // the query key we're using
     async () => {
@@ -90,15 +95,14 @@ const initialNetwork =
     : new StacksMainnet({ url: DEFAULT_MAINNET_SERVER });
 
 // TODO: icon needs fqd
-export default withInitialQueryData(
-  About,
-  buildMicroStacksAtoms({
-    network: initialNetwork,
-    authOptions: {
-      appDetails: {
-        name: 'BirdCount',
-        icon: './stx-favicon.png',
-      },
+const withMicroStacks = wrapWithMicroStacks({
+  network: initialNetwork,
+  authOptions: {
+    appDetails: {
+      name: 'BirdCount',
+      icon: './stx-favicon.png',
     },
-  })
-);
+  },
+});
+
+export default withMicroStacks(About);

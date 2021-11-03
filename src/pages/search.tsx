@@ -3,6 +3,15 @@ import { Suspense } from 'react';
 import { useEffect } from 'react';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
+import { GetQueries, getStaticQueryProps } from 'jotai-query-toolkit/nextjs';
+import { wrapWithMicroStacks } from '@micro-stacks/nextjs';
+import { StacksMainnet, StacksMocknet } from 'micro-stacks/network';
+import {
+  DEFAULT_MAINNET_SERVER,
+  DEFAULT_REGTEST_SERVER,
+  DEFAULT_LOCALNET_SERVER,
+  ENV,
+} from '@utils/constants';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -12,11 +21,7 @@ import { t } from '@lingui/macro';
 import MainAppBar from '@components/main-appbar';
 import MainAppbarDrawer from '@components/main-appbar-drawer';
 import Footer from '@components/footer';
-import { StacksMainnet, StacksMocknet } from 'micro-stacks/network';
-import { DEFAULT_MAINNET_SERVER, DEFAULT_LOCALNET_SERVER, ENV } from '@utils/constants';
-import { GetQueries, getStaticQueryProps, withInitialQueryData } from 'jotai-query-toolkit/nextjs';
 
-import { buildMicroStacksAtoms } from '@micro-stacks/react';
 import {
   SearchErrorResult,
   SearchSuccessResult,
@@ -298,16 +303,14 @@ const initialNetwork =
     ? new StacksMocknet({ url: DEFAULT_LOCALNET_SERVER })
     : new StacksMainnet({ url: DEFAULT_MAINNET_SERVER });
 
-// TODO: icon needs fqd
-export default withInitialQueryData(
-  Search,
-  buildMicroStacksAtoms({
-    network: initialNetwork,
-    authOptions: {
-      appDetails: {
-        name: 'BirdCount',
-        icon: './stx-favicon.png',
-      },
+const withMicroStacks = wrapWithMicroStacks({
+  network: initialNetwork,
+  authOptions: {
+    appDetails: {
+      name: 'BirdCount',
+      icon: './stx-favicon.png',
     },
-  })
-);
+  },
+});
+
+export default withMicroStacks(Search);

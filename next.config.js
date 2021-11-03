@@ -1,13 +1,11 @@
-// const withTM = require('next-transpile-modules')(['@mui/material', '@mui/system']); // pass the modules you would like to see transpiled
+const withTM = require('next-transpile-modules')(['@mui/material', '@mui/system']); // pass the modules you would like to see transpiled
 
 /** @type {import('next').NextConfig} */
-module.exports = ({
-  experimental: {
-    esmExternals: true,
-  },
+module.exports = withTM({
+  // experimental: {
+  //   esmExternals: true,
+  // },
   // https://github.com/Velenir/nextjs-ipfs-example/
-  // Testing shows that '' works while './' does not
-  // load assets within subdirs
   assetPrefix: './',
   trailingSlash: true,
   reactStrictMode: true,
