@@ -3,14 +3,14 @@ import { useAtom } from 'jotai';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import { networkOfflineSnackbarIsDismissedAtom } from '@store/network-offline-snackbar-is-dismissed';
-import { networkIsOfflineAtom } from '@store/network-is-offline';
+import { useNetworkIsOffline } from '@hooks/use-network-is-offline';
 import ProgressIcon from '@components/progress-icon';
 import { networkInfoAtom } from '@store/network-info';
 import { networkInfoIsLoadingAtom } from '@store/network-info-is-loading';
 import { t } from '@lingui/macro';
 
 export default function NetworkStatusIconButton() {
-  const [networkOffline] = useAtom(networkIsOfflineAtom);
+  const { networkIsOffline } = useNetworkIsOffline();
   const [, setDismissNetworkOfflineSnackbar] = useAtom(networkOfflineSnackbarIsDismissedAtom);
   const [, dispatchNetworkInfo] = useAtom(networkInfoAtom);
   const [isLoadingInfo, setIsLoadingInfo] = useAtom(networkInfoIsLoadingAtom);
@@ -33,11 +33,11 @@ export default function NetworkStatusIconButton() {
   };
 
   return (
-    <Tooltip title={networkOffline ? t`Network Offline` : t`Network Online`}>
+    <Tooltip title={networkIsOffline ? t`Network Offline` : t`Network Online`}>
       <IconButton
         onClick={() => refetch()}
         size="small"
-        color={networkOffline ? 'error' : 'success'}
+        color={networkIsOffline ? 'error' : 'success'}
       >
         <ProgressIcon size={18} left={8} top={8} />
       </IconButton>

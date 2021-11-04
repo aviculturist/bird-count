@@ -33,7 +33,6 @@ function SettingsMenu() {
     } catch (_e) {
       console.log(_e);
     }
-
   };
 
   const handleClose = () => {

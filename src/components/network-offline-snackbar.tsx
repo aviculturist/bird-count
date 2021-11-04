@@ -7,11 +7,11 @@ import AlertTitle from '@mui/material/AlertTitle';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { networkOfflineSnackbarIsDismissedAtom } from '@store/network-offline-snackbar-is-dismissed';
-import { networkIsOfflineAtom } from '@store/network-is-offline';
+import { useNetworkIsOffline } from '@hooks/use-network-is-offline';
 import { t } from '@lingui/macro';
 
 export default function NetworkOfflineSnackbar() {
-  const [networkOffline] = useAtom(networkIsOfflineAtom);
+  const { networkIsOffline } = useNetworkIsOffline();
   const { network } = useNetwork();
   const [dismissNetworkOfflineSnackbar, setDismissNetworkOfflineSnackbar] = useAtom(
     networkOfflineSnackbarIsDismissedAtom
@@ -34,7 +34,7 @@ export default function NetworkOfflineSnackbar() {
 
   return (
     <Snackbar
-      open={networkOffline && dismissNetworkOfflineSnackbar === false}
+      open={networkIsOffline && dismissNetworkOfflineSnackbar === false}
       autoHideDuration={60000}
       onClose={handleClose}
     >

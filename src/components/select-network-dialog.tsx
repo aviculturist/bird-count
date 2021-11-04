@@ -22,7 +22,7 @@ export interface NetworkDialogProps {
   onClose: (index: number) => void;
 }
 
-export default function SelectNetworkDialog(props: NetworkDialogProps) {
+const SelectNetworkDialog = (props: NetworkDialogProps) => {
   const { onClose, selectedValue, open } = props;
   const { handleSetNetwork } = useNetwork();
   const [currentNetwork, setCurrentNetwork] = useAtom(currentNetworkAtom);
@@ -30,19 +30,19 @@ export default function SelectNetworkDialog(props: NetworkDialogProps) {
     onClose(selectedValue);
   };
 
-  const handleListItemClick = (index: number) => {
+  const handleSelectNetwork = (index: number) => {
     // used to select and display user selections
-    setCurrentNetwork(DEFAULT_NETWORK_LIST[index]);
+    setCurrentNetwork(networks[index]);
 
     // sets the currently active network used by the wallet
     handleSetNetwork(
       index === 0
-        ? new StacksMainnet({ url: DEFAULT_NETWORK_LIST[index].url })
+        ? new StacksMainnet({ url: networks[index].url })
         : index === 1
-        ? new StacksTestnet({ url: DEFAULT_NETWORK_LIST[index].url })
+        ? new StacksTestnet({ url: networks[index].url })
         : index === 2
-        ? new StacksRegtest({ url: DEFAULT_NETWORK_LIST[index].url })
-        : new StacksMocknet({ url: DEFAULT_NETWORK_LIST[index].url })
+        ? new StacksRegtest({ url: networks[index].url })
+        : new StacksMocknet({ url: networks[index].url })
     );
     onClose(index);
   };
@@ -52,7 +52,7 @@ export default function SelectNetworkDialog(props: NetworkDialogProps) {
       <DialogTitle>Select network</DialogTitle>
       <List sx={{ pt: 0 }}>
         {networks.map(network => (
-          <ListItem button onClick={() => handleListItemClick(network.index)} key={network.index}>
+          <ListItem button onClick={() => handleSelectNetwork(network.index)} key={network.index}>
             <ListItemAvatar>
               <Avatar>
                 {currentNetwork.index === network.index ? (
@@ -72,3 +72,5 @@ export default function SelectNetworkDialog(props: NetworkDialogProps) {
     </Dialog>
   );
 }
+
+export default SelectNetworkDialog;

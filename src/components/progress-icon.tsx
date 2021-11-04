@@ -6,7 +6,7 @@ import FiberManualRecordTwoToneIcon from '@mui/icons-material/FiberManualRecordT
 import CircularProgress from '@mui/material/CircularProgress';
 import { green, red } from '@mui/material/colors';
 import { networkInfoAtom } from '@store/network-info';
-import { networkIsOfflineAtom } from '@store/network-is-offline';
+import { useNetworkIsOffline } from '@hooks/use-network-is-offline';
 import { networkInfoIsLoadingAtom } from '@store/network-info-is-loading';
 import BitcoinIcon from '@assets/bitcoin-icon';
 import StacksIcon from '@assets/stacks-icon';
@@ -25,7 +25,7 @@ export default function ProgressIcon({
   left = 6,
   icon = 'network',
 }: ProgressIconProps) {
-  const [networkOffline] = useAtom(networkIsOfflineAtom);
+  const { networkIsOffline } = useNetworkIsOffline();
   const [networkInfo, dispatchNetworkInfo] = useAtom(networkInfoAtom);
   const [isLoadingInfo, setIsLoadingInfo] = useAtom(networkInfoIsLoadingAtom);
   const { network } = useNetwork();
@@ -73,13 +73,13 @@ export default function ProgressIcon({
       ) : icon === 'stacks' ? (
         <StacksIcon />
       ) : (
-        <FiberManualRecordTwoToneIcon color={networkOffline ? 'error' : 'success'} />
+        <FiberManualRecordTwoToneIcon color={networkIsOffline ? 'error' : 'success'} />
       )}
       {isLoadingInfo && (
         <CircularProgress
           size={size}
           sx={{
-            color: networkOffline ? red[200] : green[200],
+            color: networkIsOffline ? red[200] : green[200],
             position: 'absolute',
             top: { top },
             left: { left },
