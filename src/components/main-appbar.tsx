@@ -10,6 +10,8 @@ import WalletConnectButton from '@components/wallet-connect-button';
 import SettingsButton from '@components/settings-button';
 import ChooseLanguageButton from '@components/choose-language-button';
 import MainAppbarDrawer from '@components/main-appbar-drawer';
+import SafeSuspense from '@components/safe-suspense';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function MainAppBar() {
   return (
@@ -31,7 +33,9 @@ function MainAppBar() {
           <ToggleSelectNetworkDialogButton />
           <WalletConnectButton />
           <ToggleTransactionsDrawerIconButton />
-          <SettingsButton />
+          <SafeSuspense fallback={<CircularProgress />}>
+            <SettingsButton />
+          </SafeSuspense>
           <ChooseLanguageButton />
         </Toolbar>
       </AppBar>

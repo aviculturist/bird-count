@@ -1,4 +1,4 @@
-import { Network } from '@store/current-network-state';
+import { Network } from '@store/networks';
 
 export const ENV = process.env.NEXT_PUBLIC_ENV || '';
 export const GITHUB_URL = process.env.NEXT_PUBLIC_GITHUB_URL || '';
@@ -36,28 +36,28 @@ export const DECREMENT_FUNCTION = 'decrement';
 
 export const DEFAULT_NETWORK_LIST: Network[] = [
   {
-    index: 0,
+    //index: 0,
     name: 'mainnet',
     label: 'stacks.co',
     chain: 'mainnet',
     url: DEFAULT_MAINNET_SERVER,
   },
   {
-    index: 1,
+    //index: 1,
     name: 'testnet',
     label: 'stacks.co',
     chain: 'testnet',
     url: DEFAULT_TESTNET_SERVER,
   },
   {
-    index: 2,
+    //index: 2,
     name: 'regtest',
     label: 'stacks.co',
     chain: 'testnet',
     url: DEFAULT_REGTEST_SERVER,
   },
   {
-    index: 3,
+    //index: 3,
     name: 'localnet',
     label: 'localhost',
     chain: 'testnet',

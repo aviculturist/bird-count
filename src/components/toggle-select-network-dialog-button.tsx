@@ -4,19 +4,15 @@ import Tooltip from '@mui/material/Tooltip';
 import BlurOnTwoToneIcon from '@mui/icons-material/BlurOnTwoTone';
 import Button from '@mui/material/Button';
 import { networkDialogIsOpenAtom } from '@store/network-dialog-is-open';
-import { currentNetworkAtom } from '@store/current-network-state';
 import SelectNetworkDialog from '@components/select-network-dialog';
+import { useNetworks } from '@hooks/use-networks';
 
 export default function ToggleSelectNetworkDialogButton() {
-  const [open, setOpen] = useAtom(networkDialogIsOpenAtom);
-  const [currentNetwork] = useAtom(currentNetworkAtom);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (index: number) => {
-    setOpen(false);
+  const [, setNetworkDialogIsOpen] = useAtom(networkDialogIsOpenAtom);
+  const { networks, currentNetworkIndex } = useNetworks();
+  const currentNetwork = networks[currentNetworkIndex];
+  const handleOpenNetworkDialog = () => {
+    setNetworkDialogIsOpen(true);
   };
 
   return (
@@ -25,13 +21,13 @@ export default function ToggleSelectNetworkDialogButton() {
         <Button
           variant="outlined"
           startIcon={<BlurOnTwoToneIcon fontSize="small" />}
-          onClick={handleClickOpen}
+          onClick={handleOpenNetworkDialog}
           color="primary"
         >
           {currentNetwork.name}
         </Button>
       </Tooltip>
-      <SelectNetworkDialog selectedValue={currentNetwork.index} open={open} onClose={handleClose} />
+      <SelectNetworkDialog />
     </>
   );
 }
