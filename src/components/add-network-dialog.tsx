@@ -1,30 +1,23 @@
 import * as React from 'react';
+import { useAtom } from 'jotai';
+import { Formik, Form, Field } from 'formik';
+import { TextField } from 'formik-mui';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-
-import { Formik, Form, Field } from 'formik';
-import { TextField } from 'formik-mui';
-
-import { useAtom } from 'jotai';
-import { addNetworkDialogIsOpenAtom } from '@store/add-network-dialog-is-open';
 import LinearProgress from '@mui/material/LinearProgress';
+import { addNetworkDialogIsOpenAtom } from '@store/add-network-dialog-is-open';
 import { useNetworks } from '@hooks/use-networks';
 import { Network } from '@store/networks';
 
 export default function AddNetworkDialog() {
   const [open, setOpen] = useAtom(addNetworkDialogIsOpenAtom);
-  const { networks, handleAddNetwork } = useNetworks();
+  const { handleAddNetwork } = useNetworks();
 
   const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleAdd = (e: React.FormEvent<HTMLElement>) => {
-    console.log(e);
     setOpen(false);
   };
 

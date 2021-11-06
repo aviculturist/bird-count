@@ -1,11 +1,7 @@
 import { atom } from 'jotai';
 import { networkAtom } from '@micro-stacks/react';
-import { atomWithStorage } from 'jotai/utils';
-import { Network } from '@store/networks';
 
 import {
-  DEFAULT_NETWORK_LIST,
-  DEFAULT_NETWORK_INDEX,
   DEFAULT_MAINNET_SERVER,
   DEFAULT_TESTNET_SERVER,
   DEFAULT_REGTEST_SERVER,
@@ -62,14 +58,9 @@ export const currentBitcoinExplorerState = atom(get => {
   return defaultBitcoinExplorer;
 });
 
+// TODO: this needs to be deprecated, other mainnets could be added
 export const currentChainState = atom(get => {
   const network = get(networkAtom);
   const defaultChain = network.getCoreApiUrl() === DEFAULT_MAINNET_SERVER ? 'mainnet' : 'testnet';
   return defaultChain;
 });
-
-// deprecated, refactored and moved to store/networks
-// export const currentNetworkAtom = atomWithStorage<Network>(
-//   'network',
-//   DEFAULT_NETWORK_LIST[DEFAULT_NETWORK_INDEX]
-// );
