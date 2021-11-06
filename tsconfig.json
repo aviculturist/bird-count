@@ -51,6 +51,9 @@
       "@utils/*": [
         "src/utils/*"
       ],
+      "@context/*": [
+        "src/context/*"
+      ],
       "@mui/styled-engine": [
         "../node_modules/@mui/styled-engine-sc"
       ]
