@@ -35,6 +35,27 @@ import {
 import { networkDialogIsOpenAtom } from '@store/network-dialog-is-open';
 import { addNetworkDialogIsOpenAtom } from '@store/add-network-dialog-is-open';
 import SafeSuspense from '@components/safe-suspense';
+import Chip from '@mui/material/Chip';
+
+interface NetworkStatusCircularProgressProps {
+  color: 'success' | 'warning';
+}
+
+const NetworkStatusCircularProgress = ({ color }: NetworkStatusCircularProgressProps) => {
+  return (
+    <CircularProgress
+      color={color}
+      size={40}
+      sx={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        zIndex: 1,
+        width: 0,
+      }}
+    />
+  );
+};
 
 const NetworkListItem = ({ network, index }: { network: any; index: number }) => {
   const {
@@ -70,9 +91,11 @@ const NetworkListItem = ({ network, index }: { network: any; index: number }) =>
     setOpen(false);
   };
 
-  // fetch latest data
+  const isCustom = index >= 4 ? true : false;
+
+  // fetch status onClick
   const timer = React.useRef<number>();
-  const refetch = ({ network }: { network: string }) => {
+  const refetch = () => {
     if (!isLoading) {
       setIsLoading(true);
       timer.current = window.setTimeout(() => {
@@ -93,9 +116,9 @@ const NetworkListItem = ({ network, index }: { network: any; index: number }) =>
         onClick={() => handleSelectNetwork(index)}
       >
         <ListItemAvatar>
-          <Avatar>
+          <Avatar color="warning">
             {anyStatus.status === 'ready' ? (
-              <SafeSuspense fallback={<CircularProgress />}>
+              <SafeSuspense fallback={<NetworkStatusCircularProgress color={color} />}>
                 {currentNetworkIndex === index ? (
                   <CheckIcon color={color} />
                 ) : (
@@ -103,44 +126,35 @@ const NetworkListItem = ({ network, index }: { network: any; index: number }) =>
                 )}
               </SafeSuspense>
             ) : (
-              <SafeSuspense fallback={<CircularProgress />}>
+              <SafeSuspense fallback={<NetworkStatusCircularProgress color={color} />}>
                 <IconButton sx={{ zIndex: 1600 }} size="medium" color={color}>
                   <CloudOffOutlinedIcon />
-                  {isLoading && (
-                    <CircularProgress
-                      size={40}
-                      sx={{
-                        color: 'inherit',
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        zIndex: 1,
-                        width: 0,
-                      }}
-                    />
-                  )}
                 </IconButton>
               </SafeSuspense>
             )}
+            {isLoading && <NetworkStatusCircularProgress color={color} />}
           </Avatar>
         </ListItemAvatar>
         <ListItemText
-          primary={<React.Fragment>{network.name}</React.Fragment>}
+          primary={<React.Fragment>{network.name}<Chip sx={{ml:1}} size="small" label={network.chain} /></React.Fragment>}
           secondary={<React.Fragment>{network.label}</React.Fragment>}
         />
+
       </ListItemButton>
-      <ListItemIcon>
-        <IconButton onClick={() => refetch(network.name)} edge="end" aria-label="delete">
-          <AutorenewOutlinedIcon />
-        </IconButton>
-      </ListItemIcon>
+      {isCustom && (
+        <ListItemIcon>
+          <IconButton
+            onClick={() => network.url && handleRemoveNetwork(network as Network)}
+            edge="end"
+            aria-label="delete"
+          >
+            <DeleteIcon />
+          </IconButton>
+        </ListItemIcon>
+      )}
       <ListItemSecondaryAction>
-        <IconButton
-          onClick={() => network.url && handleRemoveNetwork(network as Network)}
-          edge="end"
-          aria-label="delete"
-        >
-          <DeleteIcon />
+        <IconButton onClick={() => refetch()} edge="end" aria-label="delete">
+          <AutorenewOutlinedIcon />
         </IconButton>
       </ListItemSecondaryAction>
     </ListItem>
@@ -172,7 +186,7 @@ const SelectNetworkDialog = () => {
         <DialogTitle>Select network</DialogTitle>
         <List sx={{ pt: 0 }}>
           {networks.map((network, key) => (
-            <SafeSuspense key={key} fallback={<CircularProgress />}>
+            <SafeSuspense key={key} fallback={<NetworkStatusCircularProgress color="success" />}>
               <NetworkListItem key={key} index={key} network={network} />
             </SafeSuspense>
           ))}
@@ -197,18 +211,3 @@ const SelectNetworkDialog = () => {
 };
 
 export default SelectNetworkDialog;
-
-// const AddNetworkDialog = () => {
-//   const [addIsOpen, setAddIsOpen] = useAtom(addNetworkDialogIsOpenAtom);
-
-//   const handleClose = () => {
-//     setAddIsOpen(false);
-//   };
-
-//   return (
-//     <Dialog fullWidth={true} maxWidth="xs" onClose={handleClose} open={addIsOpen}>
-//       <DialogTitle>Add network</DialogTitle>
-//       Foo
-//     </Dialog>
-//   );
-// };

@@ -7,6 +7,9 @@ import {
   Network,
   anyNetworkStatusAtom,
 } from '@store/networks';
+import { useNetwork } from '@micro-stacks/react';
+import { StacksMainnet } from 'micro-stacks/network';
+
 import { useAtomCallback, useAtomValue } from 'jotai/utils';
 import { useAtom } from 'jotai';
 
@@ -14,7 +17,10 @@ export const useNetworks = () => {
   const [customNetworks, setCustomNetworks] = useAtom(customNetworksAtom);
   const networks = useAtomValue(networksAtom);
   const [currentNetworkIndex, setCurrentNetworkIndex] = useAtom(currentNetworkIndexAtom);
-  const [currentNetworkIsSwitching, setCurrentNetworkIsSwitching] = useAtom(currentNetworkIsSwitchingAtom);
+  const [currentNetworkIsSwitching, setCurrentNetworkIsSwitching] = useAtom(
+    currentNetworkIsSwitchingAtom
+  );
+  const { handleSetNetwork } = useNetwork();
 
   // const handleSetPendingChange = () => {
   //   console.log('set pending');
@@ -46,10 +52,9 @@ export const useNetworks = () => {
       Array.from(networksSet);
       void set(customNetworksAtom, Array.from(networksSet));
       void handleUpdateNetworkIndex(0);
+      handleSetNetwork(new StacksMainnet({ url: networks[0].url }));
     }, [])
   );
-
-  //const isSwitching = networkSwitching === 'pending';
 
   return {
     networks,

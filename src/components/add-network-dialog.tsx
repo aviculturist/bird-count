@@ -60,9 +60,10 @@ export default function AddNetworkDialog() {
             onSubmit={(values, { setSubmitting }) => {
               const url = new URL(values.url);
               //await setChainMode(networkMode);
+              // TODO: handle localhost http://
               void handleAddNetwork({
                 name: values.name.trim(),
-                label: values.name.trim(),
+                label: url.host,
                 url: `https://${url.host}`,
                 chain: 'testnet',
               });
