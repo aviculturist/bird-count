@@ -68,8 +68,8 @@ export const currentChainState = atom(get => {
   return defaultChain;
 });
 
-// defaulting to mainnet, but not sure that's operative here
-export const currentNetworkAtom = atomWithStorage<Network>(
-  'network',
-  DEFAULT_NETWORK_LIST[DEFAULT_NETWORK_INDEX]
-);
+// deprecated, refactored and moved to store/networks
+// export const currentNetworkAtom = atomWithStorage<Network>(
+//   'network',
+//   DEFAULT_NETWORK_LIST[DEFAULT_NETWORK_INDEX]
+// );

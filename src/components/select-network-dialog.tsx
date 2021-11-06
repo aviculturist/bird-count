@@ -24,7 +24,6 @@ import AutorenewOutlinedIcon from '@mui/icons-material/AutorenewOutlined';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 
 import AddNetworkDialog from '@components/add-network-dialog';
-import { currentNetworkAtom } from '@store/current-network-state';
 import { useNetworks } from '@hooks/use-networks';
 import { Network } from '@store/networks';
 import {
@@ -66,7 +65,6 @@ const NetworkListItem = ({ network, index }: { network: any; index: number }) =>
     handleAddNetwork,
     handleRemoveNetwork,
   } = useNetworks();
-  const [currentNetwork, setCurrentNetwork] = useAtom(currentNetworkAtom);
   const { handleSetNetwork } = useNetwork();
   const [open, setOpen] = useAtom(networkDialogIsOpenAtom);
   const [anyStatus, dispatchAnyStatus] = useAtom(anyNetworkStatusAtom(network.name));
@@ -76,7 +74,6 @@ const NetworkListItem = ({ network, index }: { network: any; index: number }) =>
 
   const handleSelectNetwork = (index: number) => {
     // used to select and display user selections
-    //setCurrentNetwork(networks[index]);
     handleUpdateNetworkIndex(index);
     // sets the currently active network used by the wallet
     handleSetNetwork(

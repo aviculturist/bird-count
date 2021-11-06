@@ -2,7 +2,6 @@ import { useCallback } from 'react';
 import {
   customNetworksAtom,
   currentNetworkIndexAtom,
-  currentNetworkIsSwitchingAtom,
   networksAtom,
   Network,
   anyNetworkStatusAtom,
@@ -17,23 +16,12 @@ export const useNetworks = () => {
   const [customNetworks, setCustomNetworks] = useAtom(customNetworksAtom);
   const networks = useAtomValue(networksAtom);
   const [currentNetworkIndex, setCurrentNetworkIndex] = useAtom(currentNetworkIndexAtom);
-  const [currentNetworkIsSwitching, setCurrentNetworkIsSwitching] = useAtom(
-    currentNetworkIsSwitchingAtom
-  );
-  const { handleSetNetwork } = useNetwork();
 
-  // const handleSetPendingChange = () => {
-  //   console.log('set pending');
-  //   void setNetworkSwitching('pending');
-  // };
+  const { handleSetNetwork } = useNetwork();
 
   const handleUpdateNetworkIndex = useAtomCallback<void, number>(
     useCallback((get, set, arg) => {
-      //void set(networkSwitchingState, 'pending');
       void set(currentNetworkIndexAtom, arg);
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 1000);
     }, [])
   );
 
@@ -61,8 +49,6 @@ export const useNetworks = () => {
     setCustomNetworks,
     currentNetworkIndex,
     setCurrentNetworkIndex,
-    currentNetworkIsSwitching,
-    setCurrentNetworkIsSwitching,
     handleUpdateNetworkIndex,
     handleAddNetwork,
     handleRemoveNetwork,

@@ -6,7 +6,6 @@ import { atomFamilyWithQuery } from 'jotai-query-toolkit';
 import { DEFAULT_NETWORK_LIST, DEFAULT_NETWORK_INDEX } from '@utils/constants';
 
 export interface Network {
-  //index: number;
   name: string;
   label: string;
   chain: string;
@@ -29,22 +28,23 @@ export const networksAtom = atom<Network[]>(get => {
   return [...DEFAULT_NETWORK_LIST, ...customItems];
 });
 
-export const currentNetworkIndexAtom = atom(DEFAULT_NETWORK_INDEX);
+export const currentNetworkIndexAtom = atomWithStorage('currentNetworkIndex', DEFAULT_NETWORK_INDEX);
 
-export const currentNetworkAtom = atom<Network>(get => {
-  const networks = get(networksAtom);
-  const index = get(currentNetworkIndexAtom);
-  return networks[index];
-});
+export const currentNetworkAtom = atom<Network>(
+  get => {
+    const networks = get(networksAtom);
+    const index = get(currentNetworkIndexAtom);
+    return networks[index];
+  }
+);
 
 export const anyNetworkInfoAtom = atomFamilyWithQuery<string, CoreNodeInfoResponse>(
   'any-network-info',
   async (get, networkName) => {
     const networks = get(networksAtom);
-
     const network = networks.find(function (net) {
       return net['name'] === networkName;
-    }) || { url: '' }; // TODO default values
+    }) || { url: '' }; // TODO implement better default values
     const networkUrl = network.url || '';
     try {
       const res = await fetchCoreApiInfo({ url: networkUrl });
@@ -61,10 +61,9 @@ export const anyNetworkStatusAtom = atomFamilyWithQuery<string, ServerStatusResp
   'any-network-status',
   async (get, networkName) => {
     const networks = get(networksAtom);
-
     const network = networks.find(function (net) {
       return net['name'] === networkName;
-    }) || { url: '' }; // TODO default values
+    }) || { url: '' }; // TODO implement better default values
     const networkUrl = network.url || '';
     try {
       const res = await fetchStatus({ url: networkUrl });
