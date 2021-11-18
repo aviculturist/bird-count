@@ -8,7 +8,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Snackbar from '@mui/material/Snackbar';
 import CloseIcon from '@mui/icons-material/Close';
 import Alert from '@mui/material/Alert';
-import { t, Trans } from '@lingui/macro';
+import { t } from '@lingui/macro';
 
 function ClearApplicationDataMenuItem() {
   const [open, setOpen] = React.useState(false);
@@ -51,7 +51,7 @@ function ClearApplicationDataMenuItem() {
 
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} action={action}>
         <Alert severity="success">
-          <Trans>Browser localStorage and sessionStorage Cleared</Trans>
+          {`Browser localStorage and sessionStorage Cleared`}
         </Alert>
       </Snackbar>
     </>
