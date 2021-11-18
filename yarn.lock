@@ -889,38 +889,38 @@
   resolved "https://registry.yarnpkg.com/@ltd/j-toml/-/j-toml-1.12.2.tgz#994c1792d07ca21421d4a75fef0dd0b60f7a1c8b"
   integrity sha512-mGbbuiYwnBBBfkupwGbRH9qkOuT40RoPvzbSStAy57PfTWG6nRYOLAB6lplOafIIqBM3wzDPF9/64n3tfO0how==
 
-"@micro-stacks/nextjs@0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@micro-stacks/nextjs/-/nextjs-0.0.7.tgz#d132a01910daa8bab66cfceaa33808a7cf04d913"
-  integrity sha512-jdPOeC6Qc3STVScn2ilHy8cq7VccB+nqjGPcNvvE2PlUujPU7gWy0t4qY22GOm53UVr+GM2Kgt6zHcx95+VBlA==
+"@micro-stacks/nextjs@0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@micro-stacks/nextjs/-/nextjs-0.0.10.tgz#31270b78f5da55ee2ca5410535d262662132c2c0"
+  integrity sha512-ZCzrMCDu9j5dg015M60SNBQvP1dQNkQryG0LMuK6L/ZikrYQrKPhKS/JEnt61prwOMQKyglrU/md2iJHNZ4Kiw==
   dependencies:
-    "@micro-stacks/query" "0.0.7"
-    "@micro-stacks/react" "0.0.7"
-    jotai latest
+    "@micro-stacks/query" "0.0.8"
+    "@micro-stacks/react" "0.0.8"
+    jotai "1.4.3"
     jotai-query-toolkit latest
     micro-stacks latest
     next latest
     nookies latest
 
-"@micro-stacks/query@0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@micro-stacks/query/-/query-0.0.7.tgz#a0a00fe88e255f14832d5839d9552a292ad321fa"
-  integrity sha512-dCUhmqrjDJ0uWpTFWc25prFa/ge+sEVVVGJBVjjvfmwVJzRCmOSAIW63+ijIsfABDTbVFYBiy8NFa+x5ILEBow==
+"@micro-stacks/query@0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@micro-stacks/query/-/query-0.0.8.tgz#f4e8f9b31860b8779faaf31835bf75ab05c18348"
+  integrity sha512-dGI32RTlRRU4JgC5lGTHou0U6/DYKPSoS0gU0w8VsdOreuoaPsENF1jjtN2UAPIvP5XXzb762beHz/SXT4ApVg==
   dependencies:
-    "@micro-stacks/react" "0.0.7"
-    jotai latest
+    "@micro-stacks/react" "0.0.8"
+    jotai "1.4.3"
     jotai-query-toolkit latest
     micro-stacks latest
     next latest
     nookies latest
 
-"@micro-stacks/react@0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@micro-stacks/react/-/react-0.0.7.tgz#e42386a2124ae76b7c990cc1d702fad00ef946f8"
-  integrity sha512-vCc9s8gsNIMBoOhwb1q/Z+lRFbI4El6Q61K6dSuozdvdQ4tCTD3y1jreu7rL+v5kdCHk7XvjvWrDXLccBFRP/w==
+"@micro-stacks/react@0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@micro-stacks/react/-/react-0.0.8.tgz#8767faab571a1fb990da7049d1ac81af433d0dfc"
+  integrity sha512-B35N61lgrDcBB4RJlhDWW0KtQQAjLRr7vuvflUsrMD7+OH/sciz0UXPHZuqH+kPpcrApT7je27yWg3yEhgp6ow==
   dependencies:
     broadcast-channel "4.4.0"
-    jotai latest
+    jotai "1.4.3"
     micro-stacks latest
     stable-hash "0.0.2"
 
