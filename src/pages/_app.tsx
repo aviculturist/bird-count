@@ -16,7 +16,7 @@ import * as plurals from 'make-plural/plurals';
 import { useAtom } from 'jotai';
 import { userLocaleAtom, DEFAULT_MESSAGES, DEFAULT_LOCALE, Locale } from '@store/user-locale';
 import { useActiveLocale, queryLocale, navigatorLocale } from '@hooks/use-active-locale';
-import { NoSsr } from '@mui/core';
+import NoSsr from '@mui/material/NoSsr';
 import { StyleSheetManager } from 'styled-components';
 import rtlPlugin from 'stylis-plugin-rtl';
 import { StylisPlugin } from 'styled-components';
